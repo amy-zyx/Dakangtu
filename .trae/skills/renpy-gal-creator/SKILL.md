@@ -1,6 +1,6 @@
 ---
 name: "renpy-gal-creator"
-description: "Helps create anime-style visual novels (gal games) with Ren'Py. Invoke when user asks to write Ren'Py scripts, add characters, create scenes, design choices, customize UI, or develop gal game content."
+description: "Helps create anime-style visual novels (gal games) with Ren'Py. Invoke when user asks to write Ren'Py scripts, add characters, create scenes, design choices, customize UI, or develop gal game content. Includes strict image naming rules and lint validation to prevent common errors."
 ---
 
 # Ren'Py Gal 游戏开发助手
@@ -27,22 +27,24 @@ game/
 ├── gui.rpy             # GUI 样式配置（颜色、字体、尺寸等）
 ├── screens.rpy         # 自定义屏幕（菜单、对话框等）
 ├── tl/                 # 翻译文件目录
-├── gui/                # GUI 图片资源
+├── gui/                # GUI 图片资源（Ren'Py 保留目录）
 │   ├── button/
 │   ├── bar/
 │   ├── frame.png
 │   ├── textbox.png
 │   └── window_icon.png
-├── images/             # 游戏图片资源（如未创建需新建）
-│   ├── bg/             # 背景图 bg_xxx.png/jpg
-│   ├── characters/     # 角色立绘（命名：角色_表情.png）
-│   └── cg/             # 事件 CG 图
-├── audio/              # 音频资源（如未创建需新建）
+├── images/             # ⭐ 所有游戏图片放这里（根目录，不分子目录！）
+│   ├── airport_terminal.png     # 背景：scene bg airport_terminal
+│   ├── kaon happy.png           # 角色：show kaon happy
+│   └── ending act1.png          # CG：scene cg ending_act1
+├── audio/              # 音频资源
 │   ├── music/          # BGM .ogg
 │   ├── sound/          # 音效 .ogg
 │   └── voice/          # 语音 .ogg
 └── saves/              # 自动生成的存档目录
 ```
+
+> ⚠️ **关键规则**：所有游戏图片必须放在 `game/images/` 根目录！Ren'Py 8 **不递归**子目录。如果放在 `images/bg/`、`images/characters/` 等子目录，Ren'Py 找不到，会报 `'xxx' is not an image` 错误。
 
 ## 核心语法速查
 
@@ -72,17 +74,17 @@ define narrator = Character(None)
 # 命名规则：bg room.png → scene bg room
 # 命名规则：eileen happy.png → show eileen happy
 
-# 显式定义（高级用法）
-image bg school = "images/bg/school_day.jpg"
-image bg school sunset = "images/bg/school_sunset.jpg"
+# 显式定义（高级用法，强烈推荐用于带空格或下划线的复杂名字）
+image bg school = "images/school_day.jpg"
+image bg school_sunset = "images/school_sunset.jpg"
 
 # 角色立绘
-image kaon happy = "images/characters/kaon_happy.png"
-image kaon sad = "images/characters/kaon_sad.png"
+image kaon happy = "images/kaon happy.png"
+image kaon sad = "images/kaon sad.png"
 image kaon blush:
-    "images/characters/kaon_blush1.png"
+    "images/kaon blush1.png"
     pause 0.2
-    "images/characters/kaon_blush2.png"
+    "images/kaon blush2.png"
     pause 0.2
     repeat
 ```
@@ -336,14 +338,115 @@ screen main_menu():
 - 按 `Shift+O` 打开控制台（可输入 Python 表达式）
 - 变量值可用 `[variable_name]` 在对话中查看
 
+## ⚠️ 图片命名完整规则（必读，避免常见错误）
+
+### 黄金法则
+
+> **代码里的图片名 = 文件名（不含扩展名）**
+>
+> 也就是说：`show ami smile` → 必须有 `ami smile.png` 这个文件
+
+### 三种命名风格对比
+
+| 风格 | 代码示例 | 文件名 | 优缺点 |
+|------|---------|--------|--------|
+| **下划线风格** | `show kaon_happy` | `kaon_happy.png` | ✅ lint 自动识别 / ❌ 不符合英文习惯 |
+| **空格风格** | `show kaon happy` | `kaon happy.png` | ✅ 英文习惯 / ❌ lint 难识别，**必须显式声明** |
+| **混合风格** | `show kaon normal_smile` | `kaon normal_smile.png` | 可用 / 但建议统一 |
+
+### ⭐ 强烈推荐：显式 image 声明
+
+不管用什么风格，**都建议在脚本顶部显式声明**所有用到的图片，这样 lint 不会报错：
+
+```renpy
+# 在 .rpy 文件最顶部、第一个 label 之前
+image bg airport_terminal = "images/airport_terminal.png"
+image bg airport_cafe = "images/airport_cafe.png"
+
+image ami normal = "images/ami normal.png"
+image ami smile = "images/ami smile.png"
+
+image cg ending_act1 = "images/ending_act1.png"
+```
+
+**优点**：
+- 一次声明，永久生效
+- lint 100% 识别（带空格也能识别）
+- 图片路径清晰，方便查找
+- 避免手抖打错字
+
+### 文件存放位置（最容易踩的坑）
+
+```bash
+# ✅ 正确：所有图片放 game/images/ 根目录
+game/images/airport_terminal.png
+game/images/ami smile.png
+game/images/ending_act1.png
+
+# ❌ 错误：放子目录，Ren'Py 找不到！
+game/images/bg/airport_terminal.png          # ❌ 不递归
+game/images/characters/ami smile.png         # ❌ 不递归
+game/images/cg/ending_act1.png               # ❌ 不递归
+```
+
+**为什么会这样？** Ren'Py 8 的图片发现机制只扫描 `game/images/` 根目录，不进入子目录。**这是 Ren'Py 8 的设计，不是 bug**。
+
+### 常见错误速查表
+
+| 错误信息 | 原因 | 修复方法 |
+|---------|------|---------|
+| `'xxx' is not an image` | 文件不在 `images/` 根目录 | 把文件移出来 |
+| `'xxx' is not an image` | 代码名和文件名不一致 | 检查空格/下划线 |
+| `'xxx' is not an image`（带空格） | lint 找不到带空格的图片 | 加显式 `image` 声明 |
+| `audio is not loadable` | 路径多写或少写 `audio/` | 检查路径 |
+| `'xxx' is not defined` | 角色名打错 | 检查 `define` 语句 |
+
+### 命名最佳实践
+
+1. **角色立绘用空格**（更自然）：
+   - 文件：`kaon normal.png`、`kaon happy.png`、`kaon sad.png`
+   - 代码：`show kaon normal`
+
+2. **背景用下划线**（无歧义）：
+   - 文件：`school_day.png`、`school_night.png`
+   - 代码：`scene bg school_day` 或 `scene bg school night`
+
+3. **CG 用动作/场景描述**：
+   - 文件：`proposal.png`、`first kiss.png`
+   - 代码：`scene cg proposal`
+
+4. **禁止的命名**：
+   - ❌ `image_xxx`（`image` 是关键字）
+   - ❌ `bg_xxx.png`（虽然能识别，但容易和 `bg` 前缀混淆）
+   - ❌ 中文文件名（可能编码问题）
+   - ❌ 空格 + 下划线混用（`ami_happy smile.png`）
+
+### 工具脚本
+
+执行 lint 检查：
+```bash
+# Ren'Py 官方 lint
+"<SDK路径>/lib/py3-windows-x86_64/python.exe" "<SDK路径>/renpy.py" "<项目路径>" lint
+```
+
+输出格式：
+```
+The game contains X dialogue blocks, X words and X characters
+The game contains X menus, X images, and X screens
+```
+- 如果 `X images` 是 0 或远少于预期，说明有图片未识别
+- 应等于 `image` 声明的数量 + 显式引用的图片数
+
 ## 注意事项
 
-1. 图片命名务必一致：`bg school.jpg` → `scene bg school`
+1. **图片命名务必一致**：代码 → 文件，**完全相同**（空格也要一样）
 2. 所有 .rpy 文件缩进必须使用 4 个空格
 3. `default` 声明的变量可被存档保存；`define` 是常量
 4. 音频推荐使用 OGG 格式（兼容性最佳）
 5. 大项目建议拆分多个 .rpy 文件：`characters.rpy`、`chapter1.rpy`、`chapter2.rpy` 等
 6. 修改 `gui.rpy` 后需在游戏中选择「重新生成 GUI」图片或手动生成
+7. **图片必须放 `images/` 根目录**，不要建子目录
+8. **带空格或复杂命名**，务必加显式 `image` 声明
 
 ## 常用资源网站（可选）
 

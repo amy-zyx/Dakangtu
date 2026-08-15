@@ -1,5 +1,9 @@
-# 一键生成 1x1 透明 PNG 占位文件的脚本
-# 用于占位缺失的图片和音频资源
+# -*- coding: utf-8 -*-
+# 一键生成 1x1 透明 PNG 占位文件
+# 重要规则（2026-08-15 踩坑总结）：
+#   1. 所有图片必须放在 game/images/ 根目录，不要建子目录！
+#   2. 图片名带空格时，必须在 .rpy 中显式声明：image xxx = "images/xxx.png"
+#   3. 文件名和代码标签必须完全一致（包括空格、下划线、连字符）
 
 import os
 import struct
@@ -34,76 +38,102 @@ def create_transparent_png(path):
 
 
 def create_silent_ogg(path):
-    """生成一个静音 OGG 占位文件（使用最小化的 OGG 格式）"""
-    # 这里我们使用 Python 创建一个空文件
-    # Ren'Py 会忽略无法播放的音频
+    """生成一个静音 OGG 占位文件（Ren'Py 会忽略无法播放的音频）"""
     with open(path, 'wb') as f:
         f.write(b'')
 
 
 # 资源清单
-# 格式: (相对路径, 类型)
+# 注意：所有 PNG 都直接放在 game/images/ 根目录，不建子目录！
+# 格式: (图片标签名, 文件名, 类型)
 resources = [
     # 背景图
-    ("game/images/bg/airport_terminal.png", "png"),
-    ("game/images/bg/airport_arrival.png", "png"),
-    ("game/images/bg/airport_cafe.png", "png"),
-    ("game/images/bg/airport_window.png", "png"),
-    ("game/images/bg/wellington_city.png", "png"),
+    ("bg airport_terminal", "airport_terminal.png", "png"),
+    ("bg airport_arrival", "airport_arrival.png", "png"),
+    ("bg airport_cafe", "airport_cafe.png", "png"),
+    ("bg airport_window", "airport_window.png", "png"),
+    ("bg wellington_city", "wellington_city.png", "png"),
 
-    # 角色立绘 - 阿米
-    ("game/images/characters/ami_normal.png", "png"),
-    ("game/images/characters/ami_smile.png", "png"),
-    ("game/images/characters/ami_surprised.png", "png"),
-    ("game/images/characters/ami_blush.png", "png"),
-    ("game/images/characters/ami_thinking.png", "png"),
-    ("game/images/characters/ami_sad.png", "png"),
+    # 角色立绘 - 阿米（命名带空格，需要显式声明）
+    ("ami normal", "ami normal.png", "png"),
+    ("ami smile", "ami smile.png", "png"),
+    ("ami surprised", "ami surprised.png", "png"),
+    ("ami blush", "ami blush.png", "png"),
+    ("ami thinking", "ami thinking.png", "png"),
+    ("ami sad", "ami sad.png", "png"),
 
     # 角色立绘 - 杰克
-    ("game/images/characters/jack_normal.png", "png"),
-    ("game/images/characters/jack_smile.png", "png"),
-    ("game/images/characters/jack_surprised.png", "png"),
-    ("game/images/characters/jack_apologize.png", "png"),
-    ("game/images/characters/jack_thinking.png", "png"),
-    ("game/images/characters/jack_wave.png", "png"),
+    ("jack normal", "jack normal.png", "png"),
+    ("jack smile", "jack smile.png", "png"),
+    ("jack surprised", "jack surprised.png", "png"),
+    ("jack apologize", "jack apologize.png", "png"),
+    ("jack thinking", "jack thinking.png", "png"),
+    ("jack wave", "jack wave.png", "png"),
 
     # CG 图
-    ("game/images/cg/cg_airport_meet.png", "png"),
-    ("game/images/cg/cg_first_coffee.png", "png"),
-    ("game/images/cg/cg_ending_act1.png", "png"),
-
-    # 音频 - BGM
-    ("game/audio/music/bgm_airport.ogg", "ogg"),
-    ("game/audio/music/bgm_daily.ogg", "ogg"),
-    ("game/audio/music/bgm_romantic.ogg", "ogg"),
-    ("game/audio/music/bgm_dramatic.ogg", "ogg"),
-
-    # 音频 - 音效
-    ("game/audio/sound/sfx_airport_announce.ogg", "ogg"),
-    ("game/audio/sound/sfx_luggage_drop.ogg", "ogg"),
-    ("game/audio/sound/sfx_footsteps.ogg", "ogg"),
-    ("game/audio/sound/sfx_cup.ogg", "ogg"),
-    ("game/audio/sound/sfx_camera.ogg", "ogg"),
-    ("game/audio/sound/sfx_wind.ogg", "ogg"),
+    ("cg airport_meet", "airport_meet.png", "png"),
+    ("cg first_coffee", "first_coffee.png", "png"),
+    ("cg ending_act1", "ending_act1.png", "png"),
 ]
+
+# 音频资源（按类型分组）
+audio_resources = {
+    "music": [
+        "bgm_airport.ogg",
+        "bgm_daily.ogg",
+        "bgm_romantic.ogg",
+        "bgm_dramatic.ogg",
+    ],
+    "sound": [
+        "sfx_airport_announce.ogg",
+        "sfx_luggage_drop.ogg",
+        "sfx_footsteps.ogg",
+        "sfx_cup.ogg",
+        "sfx_camera.ogg",
+        "sfx_wind.ogg",
+    ],
+    "voice": [],
+}
 
 
 def main():
     base_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(base_dir)
 
-    for rel_path, file_type in resources:
-        full_path = os.path.join(project_root, rel_path)
-        os.makedirs(os.path.dirname(full_path), exist_ok=True)
+    # 生成 PNG 图片（直接放 game/images/ 根目录）
+    images_dir = os.path.join(project_root, "game", "images")
+    os.makedirs(images_dir, exist_ok=True)
 
-        if file_type == "png":
-            create_transparent_png(full_path)
-            print(f"[PNG] Created: {rel_path}")
-        elif file_type == "ogg":
+    print(f"图片输出目录: {images_dir}")
+    print()
+
+    for label, filename, _ in resources:
+        full_path = os.path.join(images_dir, filename)
+        create_transparent_png(full_path)
+        print(f"  [PNG] {filename}  (label: '{label}')")
+
+    # 生成 OGG 音频
+    print()
+    for subdir, files in audio_resources.items():
+        audio_dir = os.path.join(project_root, "game", "audio", subdir)
+        os.makedirs(audio_dir, exist_ok=True)
+        for filename in files:
+            full_path = os.path.join(audio_dir, filename)
             create_silent_ogg(full_path)
-            print(f"[OGG] Created: {rel_path}")
+            print(f"  [OGG] audio/{subdir}/{filename}")
 
-    print(f"\nDone! Generated {len(resources)} placeholder files.")
+    # 生成 image 声明脚本（直接复制到 .rpy 文件顶部）
+    print()
+    print("=" * 60)
+    print("建议在每个 .rpy 文件顶部加入以下 image 声明：")
+    print("=" * 60)
+    print()
+    print("# ====== 图片显式声明（防 lint 报错） ======")
+    for label, filename, _ in resources:
+        print(f'image {label} = "images/{filename}"')
+
+    print()
+    print(f"完成！生成了 {len(resources)} 张图片和 {sum(len(f) for f in audio_resources.values())} 个音频。")
 
 
 if __name__ == "__main__":
