@@ -1,30 +1,41 @@
-﻿# 游戏的脚本可置于此文件中。
+# 《大康兔》主脚本
+# Dakangtu - Main Script
 
-# 声明此游戏使用的角色。颜色参数可使角色姓名着色。
+# ====== 角色定义 ======
+# 详细定义见 characters.rpy
+# 阿米 = am
+# 杰克 = jk
+# 旁白 = narrator
 
-define e = Character("艾琳")
+# ====== 包含其他脚本文件 ======
+# 这些文件会在游戏启动时被自动加载
+# characters.rpy - 角色定义
+# variables.rpy - 变量定义
+# act1.rpy - 第一幕剧情
 
-
-# 游戏在此开始。
-
+# ====== 游戏入口 ======
 label start:
+    # 显示游戏开场画面
+    scene black
+    with Pause(1.0)
 
-    # 显示一个背景。此处默认显示占位图，但您也可以在图片目录添加一个文件
-    # （命名为 bg room.png 或 bg room.jpg）来显示。
+    "——《大康兔》——"
+    "一个发生在惠灵顿的爱情故事"
+    with Pause(2.0)
 
-    scene bg room
+    # 跳转到第一幕
+    jump act1_meeting
 
-    # 显示角色立绘。此处使用了占位图，但您也可以在图片目录添加命名为
-    # eileen happy.png 的文件来将其替换掉。
 
-    show eileen happy
+# ====== 调试用：快速跳转到第一幕 ======
+label debug_act1:
+    jump act1_meeting
 
-    # 此处显示各行对话。
-
-    e "您已创建一个新的 Ren'Py 游戏。"
-
-    e "当您完善了故事、图片和音乐之后，您就可以向全世界发布了！"
-
-    # 此处为游戏结尾。
-
-    return
+# ====== 调试用：跳转到第一幕末尾 ======
+label debug_act1_end:
+    $ ami_love = 5
+    $ jack_love = 3
+    $ met_at_airport = True
+    $ helped_with_luggage = True
+    $ shared_coffee = True
+    jump act1_pick_luggage
