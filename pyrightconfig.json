@@ -1,0 +1,13 @@
+{
+    "include": ["game/**/*.py", "game/**/*.rpy"],
+    "exclude": ["**/cache", "**/saves", "**/*.rpyc", "**/*.rpymc"],
+    "venvPath": "C:\\Users\\jwu40\\Downloads\\renpy-8.5.3-sdk\\lib",
+    "pythonVersion": "3.12",
+    "pythonPlatform": "Windows",
+    "extraPaths": [
+        "C:\\Users\\jwu40\\Downloads\\renpy-8.5.3-sdk"
+    ],
+    "typeCheckingMode": "basic",
+    "reportMissingImports": true,
+    "reportMissingModuleSource": true
+}
