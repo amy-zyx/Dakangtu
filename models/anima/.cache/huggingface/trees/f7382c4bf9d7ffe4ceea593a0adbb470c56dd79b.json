@@ -1,0 +1,105 @@
+{
+ "format_version": 1,
+ "files": {
+  ".gitattributes": {
+   "size": 1615,
+   "blob_id": "b6f01ae286907ee4ab41108b66e9b214fef9fb95"
+  },
+  "LICENSE.md": {
+   "size": 18259,
+   "blob_id": "ddc003aea936fd1a45ec0294d5833beaa4dab96a"
+  },
+  "README.md": {
+   "size": 11846,
+   "blob_id": "0198928be894a45a249fdf46ea8583accadaf04e"
+  },
+  "anima_comparison.json": {
+   "size": 41058,
+   "blob_id": "2092d265acab43ff5073ebfb2ddc62f7327f6320"
+  },
+  "example.png": {
+   "size": 1185344,
+   "blob_id": "edf6613266fdd59f4e55e3b307a7d00d18147583",
+   "lfs_sha256": "eb08bb3259b6f4307ba1a89687e5b65fb2ca3c2ee2fef688a02bce194e40d977",
+   "lfs_size": 1185344,
+   "xet_hash": "9fbab30adcf42b92a29d27225dd415b6a15a2ee26dc81e49792362d14ff1ac9f"
+  },
+  "montage.jpg": {
+   "size": 1940619,
+   "blob_id": "769afbdbc79f9a1e920fe13fb7223c8bf28253ea",
+   "lfs_sha256": "f5be1853f34305c051ece429b08f9f29451e1abaa3bc12474daf45a7309f97c9",
+   "lfs_size": 1940619,
+   "xet_hash": "a21d0153441aea9c7dc055ca6d1e165429138234c6d825da7e105f20fdeb5d5a"
+  },
+  "split_files/diffusion_models/anima-aesthetic-v1.0.safetensors": {
+   "size": 4182230656,
+   "blob_id": "f34319f235426e7255ad097921e7957126e23f49",
+   "lfs_sha256": "368aad0a7bdf33ed1571f4664466e0f25768ed8dc7d706697af46ab8c183bf41",
+   "lfs_size": 4182230656,
+   "xet_hash": "9508ca17e0f4420300edf1aa12f8e69825179702ce83a6736cb36560866b67b4"
+  },
+  "split_files/diffusion_models/anima-aesthetic-v1.0b.safetensors": {
+   "size": 4182230656,
+   "blob_id": "0b81c001da337776465cdc3afa42685811e3940c",
+   "lfs_sha256": "49d1e23b9a7415ac56f4719017570a5f8d295184faba578e07fe76f41bee0fcc",
+   "lfs_size": 4182230656,
+   "xet_hash": "f5d8bb7ece37901f24b627bbf29bacf01372c1819f29e9fb48264b7fc4408f93"
+  },
+  "split_files/diffusion_models/anima-aesthetic-v1.1.safetensors": {
+   "size": 4182230656,
+   "blob_id": "ec55eef7322671c981bdf170fc84cddaf2f931d1",
+   "lfs_sha256": "3c1868387a3a1ff504bbb87c33678321965ead381fcf87afbd0264daa600c082",
+   "lfs_size": 4182230656,
+   "xet_hash": "11414fd42e1745bf945c977bf0f33316bf8b2704847017b40fd3b122f0bd23d8"
+  },
+  "split_files/diffusion_models/anima-base-v1.0.safetensors": {
+   "size": 4182218328,
+   "blob_id": "4e0f097061400c7999874c31eae4598e7a368768",
+   "lfs_sha256": "bd43b7cffe1ed1153d9c41e7beb2f18cb1273eafbaa3af3edd6a173dc90a006e",
+   "lfs_size": 4182218328,
+   "xet_hash": "4382bf9d5d21eb34262f5136ea9c6de49b3209b71a6fc9581e20460934dcddec"
+  },
+  "split_files/diffusion_models/anima-preview.safetensors": {
+   "size": 4182218360,
+   "blob_id": "5e09b7a7d514c5202bc6d015fce68242cfe83a76",
+   "lfs_sha256": "41fa7b78613dfe0d888b3647f70c7fb8cdfda2ff177e78d2e16e06dc810d9dcc",
+   "lfs_size": 4182218360,
+   "xet_hash": "7b5f82c130fd06400951ee77bbfc6cfb8e12b4f62602ae925880926c0f1ddb19"
+  },
+  "split_files/diffusion_models/anima-preview2.safetensors": {
+   "size": 4182218360,
+   "blob_id": "90f42319b450cc27c1a6a2d5f7f62d518715b0bf",
+   "lfs_sha256": "a21ff6807e31cbd2e6e7f24de07921b3190cd832819389f6b6b27e3a04e82f57",
+   "lfs_size": 4182218360,
+   "xet_hash": "0ff73862fc30ae5cba5724f9fb9802345276bd57dcf1008e6fa46b41ac56c2a2"
+  },
+  "split_files/diffusion_models/anima-preview3-base.safetensors": {
+   "size": 4182218360,
+   "blob_id": "08be379f47dd9985661853c1d6851615ab7b4e17",
+   "lfs_sha256": "14fffe8ad5116cd73b9a4696f6a89d7e5f6efdd24b2e4785603aa891a9b2295b",
+   "lfs_size": 4182218360,
+   "xet_hash": "77d11a095c65fa57e869056f95835b2b2b7d6fdd40720f581897db33daca9072"
+  },
+  "split_files/diffusion_models/anima-turbo-v1.0.safetensors": {
+   "size": 4182230656,
+   "blob_id": "a089844f154557ebd0a2610a8472315d0cba003f",
+   "lfs_sha256": "c0b905034510750a505d21aa96c81718f4ffcc500777318421f58a88636e2174",
+   "lfs_size": 4182230656,
+   "xet_hash": "001d45c60bc20f3c154709c2c98493b99d14242070a9d414f44d5a9f42efc712"
+  },
+  "split_files/text_encoders/qwen_3_06b_base.safetensors": {
+   "size": 1192135096,
+   "blob_id": "a3d64c4f6cf2400d4fd37953c3bc8ade675fe97b",
+   "lfs_sha256": "cd2a512003e2f9f3cd3c32a9c3573f820bb28c940f73c57b1ddaa983d9223eba",
+   "lfs_size": 1192135096,
+   "xet_hash": "1e48a7f3dfbc9a887e0ec71eef7c3dadd9c5109c6d9b10881f82ade063dbb8c4"
+  },
+  "split_files/vae/qwen_image_vae.safetensors": {
+   "size": 253806246,
+   "blob_id": "0e2c65956cb47e2be7d1def5a08ddd58a0d5beb5",
+   "lfs_sha256": "a70580f0213e67967ee9c95f05bb400e8fb08307e017a924bf3441223e023d1f",
+   "lfs_size": 253806246,
+   "xet_hash": "b4020d780417b174bc6bb0025b3cc9cce7db9bb51f9fe23718691dfffdb65aea"
+  }
+ }
+}

@@ -1,0 +1,211 @@
+{
+  "last_node_id": 18,
+  "last_link_id": 17,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "pos": [80, 100],
+      "size": [280, 80],
+      "properties": {
+        "Model": "diffusion_models/anima-turbo-v1.0.safetensors"
+      },
+      "widgets_values": ["anima-turbo-v1.0.safetensors"]
+    },
+    {
+      "id": 2,
+      "type": "CLIPLoader",
+      "pos": [80, 220],
+      "size": [280, 80],
+      "properties": {},
+      "widgets_values": ["qwen_3_06b_base.safetensors", "qwen_image"]
+    },
+    {
+      "id": 3,
+      "type": "VAELoader",
+      "pos": [80, 340],
+      "size": [280, 60],
+      "properties": {},
+      "widgets_values": ["qwen_image_vae.safetensors"]
+    },
+    {
+      "id": 4,
+      "type": "CLIPTextEncode",
+      "pos": [400, 100],
+      "size": [400, 200],
+      "properties": {},
+      "title": "Positive Prompt",
+      "widgets_values": [
+        "masterpiece, best quality, score_7, safe, 1girl, chinese, petite, short_slim_figure, age_20, long_straight_black_hair, brown_eyes, alluring_face, revealing_outfit, crop_top, midriff, low_cut_shirt, short_skirt, high_heels, stylish_fashion, seductive, neutral_expression, calm, soft_smile, light_makeup, white_background, simple_background, looking_at_viewer, upper_body, portrait"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncode",
+      "pos": [400, 340],
+      "size": [400, 100],
+      "properties": {},
+      "title": "Negative Prompt",
+      "widgets_values": [
+        "worst quality, low quality, score_1, score_2, score_3, bad_anatomy, bad_hands, text, error, missing_fingers, extra_digit, fewer_digits, cropped, jpeg_artifacts, signature, watermark, username, blurry, 3d, realistic, deformed, extra_limbs, mutated, poorly_drawn_hands, poorly_drawn_face, mutation, extra_fingers, bad_proportions, disfigured, malformed, missing_arms, missing_legs, fused_fingers, long_neck"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "EmptyLatentImage",
+      "pos": [400, 480],
+      "size": [280, 100],
+      "properties": {},
+      "title": "Latent Image",
+      "widgets_values": [832, 1216, 1]
+    },
+    {
+      "id": 7,
+      "type": "KSamplerAdvanced",
+      "pos": [840, 100],
+      "size": [280, 240],
+      "properties": {
+        "noise": true
+      },
+      "title": "KSampler (Anima-Turbo)",
+      "widgets_values": [
+        12345,
+        "randomize",
+        10,
+        1.0,
+        "euler",
+        "simple",
+        0.85
+      ]
+    },
+    {
+      "id": 8,
+      "type": "VAEDecode",
+      "pos": [1160, 100],
+      "size": [180, 80],
+      "properties": {},
+      "widgets_values": []
+    },
+    {
+      "id": 9,
+      "type": "ImageUpscaleWithModel",
+      "pos": [1160, 220],
+      "size": [240, 80],
+      "properties": {},
+      "widgets_values": ["4x-AnimeSharp.pth"]
+    },
+    {
+      "id": 10,
+      "type": "VAEEncode",
+      "pos": [1160, 340],
+      "size": [180, 80],
+      "properties": {},
+      "widgets_values": []
+    },
+    {
+      "id": 11,
+      "type": "KSampler",
+      "pos": [1400, 220],
+      "size": [280, 240],
+      "properties": {},
+      "title": "KSampler Upscale Pass",
+      "widgets_values": [
+        12345,
+        "fixed",
+        8,
+        1.0,
+        "euler",
+        "simple",
+        0.6
+      ]
+    },
+    {
+      "id": 12,
+      "type": "VAEDecode",
+      "pos": [1700, 220],
+      "size": [180, 80],
+      "properties": {},
+      "widgets_values": []
+    },
+    {
+      "id": 13,
+      "type": "ImageResize",
+      "pos": [1700, 340],
+      "size": [220, 100],
+      "properties": {},
+      "title": "Resize to 768x1024",
+      "widgets_values": [
+        "lanczos",
+        768,
+        1024,
+        "disabled"
+      ]
+    },
+    {
+      "id": 14,
+      "type": "SaveImage",
+      "pos": [1980, 220],
+      "size": [280, 100],
+      "properties": {},
+      "title": "Save Image",
+      "widgets_values": ["AnimaTurbo_Output"]
+    },
+    {
+      "id": 15,
+      "type": "PreviewImage",
+      "pos": [1980, 360],
+      "size": [280, 100],
+      "properties": {},
+      "widgets_values": []
+    },
+    {
+      "id": 16,
+      "type": "Note",
+      "pos": [80, 460],
+      "size": [280, 200],
+      "properties": {
+        "text": "# Anima-Turbo v1.0\n\nModel: circlestone-labs/Anima (Turbo variant)\nEncoder: qwen_3_06b_base\nVAE: qwen_image_vae\n\nSampling: 8-12 steps, CFG 1, euler\nWorks 512-1536px\n\nLicense: Non-commercial only"
+      }
+    }
+  ],
+  "links": [
+    [1, 1, 0, 7, 0, "MODEL"],
+    [2, 2, 0, 4, 0, "CLIP"],
+    [3, 2, 0, 5, 0, "CLIP"],
+    [4, 4, 0, 7, 1, "POSITIVE"],
+    [5, 5, 0, 7, 2, "NEGATIVE"],
+    [6, 6, 0, 7, 3, "LATENT"],
+    [7, 7, 0, 8, 0, "LATENT"],
+    [8, 3, 0, 8, 1, "VAE"],
+    [9, 8, 0, 9, 0, "IMAGE"],
+    [10, 9, 1, 10, 0, "IMAGE"],
+    [11, 3, 0, 10, 1, "VAE"],
+    [12, 10, 0, 11, 3, "LATENT"],
+    [13, 11, 0, 12, 0, "LATENT"],
+    [14, 3, 0, 12, 1, "VAE"],
+    [15, 12, 0, 13, 0, "IMAGE"],
+    [16, 13, 0, 14, 0, "IMAGE"],
+    [17, 13, 0, 15, 0, "IMAGE"]
+  ],
+  "groups": [
+    {
+      "title": "Anima-Turbo Generation Pipeline",
+      "bounding": [40, 40, 2280, 460],
+      "color": "#3f789e"
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1.0,
+      "offset": [0, 0]
+    },
+    "info": {
+      "name": "Anima-Turbo Character Generator",
+      "author": "Dakangtu Project",
+      "description": "ComfyUI workflow for generating anime-style character sprites and backgrounds using Anima-Turbo v1.0",
+      "version": "1.0"
+    }
+  },
+  "version": 0.4
+}
