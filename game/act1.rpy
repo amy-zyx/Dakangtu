@@ -63,7 +63,7 @@ label act1_meeting:
     "下午三点，我站在接机口的电子屏前，反复确认着航班信息。"
 
     # 显示杰克立绘
-    # image: 杰克-普通表情，金发碧眼的本地大学生
+    # image: 杰克-普通表情，中国男生，175cm，短发
     show jack normal at left
     with dissolve
 
@@ -79,7 +79,7 @@ label act1_meeting:
     play sound "audio/sound/sfx_footsteps.ogg"
 
     # 阿米推着行李车出现
-    # image: 阿米-困惑表情，东亚面孔，疲惫但可爱
+    # image: 阿米-困惑表情，160cm 中国女生，穿着暴露，疲惫但可爱
     show ami surprised at right
     with moveinright
 
