@@ -24,6 +24,11 @@ define gui.show_name = True
 define config.version = "1.0"
 
 
+## 屏幕尺寸 - 强制 16:9 全屏 1920x1080
+define config.screen_width = 1920
+define config.screen_height = 1080
+
+
 ## 放置在游戏内“关于”屏幕上的文本。将文本放在三个引号之间，并在段落之间留出空
 ## 行。
 

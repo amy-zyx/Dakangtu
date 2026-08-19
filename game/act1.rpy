@@ -5,33 +5,45 @@
 # 这些声明确保 lint 工具能识别所有用到的图片
 # 实际图片文件位于 game/images/ 目录
 
-# 背景图
-image bg airport_terminal = "images/airport_terminal.png"
-image bg airport_arrival = "images/airport_arrival.png"
-image bg airport_cafe = "images/airport_cafe.png"
-image bg airport_window = "images/airport_window.png"
-image bg wellington_city = "images/wellington_city.png"
+# 背景图 (用 2D GalGame 风格 - 全部已生成 / 标记)
+# 1920x1080 全屏尺寸, 适配 Ren'Py 默认 16:9 窗口
+image bg wellington_airport = "images/backgrounds/wellington_airport.png"  # ✅ 旧 (建筑外观, 不用)
+image bg airport_hall = "images/backgrounds/airport_hall.png"  # ✅ 候机大厅 (待选)
+
+# 以下背景为占位 - 后续生成
+# image bg airport_cafe = "images/backgrounds/airport_cafe.png"  # ❌ 未生成 - 用 wellington_airport 临时替代
+# image bg airport_window = "images/backgrounds/airport_window.png"  # ❌ 未生成
+# image bg wellington_city = "images/backgrounds/wellington_city.png"  # ❌ 未生成
+
+# 兼容别名 - 让旧 scene bg xxx 仍能工作
+image bg airport_terminal = "images/backgrounds/wellington_airport.png"  # 别名指向 wellington
+image bg airport_cafe = "images/backgrounds/wellington_airport.png"  # 临时用 wellington
+image bg airport_window = "images/backgrounds/wellington_airport.png"  # 临时用 wellington
+image bg wellington_city = "images/backgrounds/wellington_airport.png"  # 临时用 wellington
 
 # 角色立绘 - 阿米
-image ami normal = "images/ami normal.png"
-image ami smile = "images/ami smile.png"
-image ami surprised = "images/ami surprised.png"
-image ami blush = "images/ami blush.png"
-image ami thinking = "images/ami thinking.png"
-image ami sad = "images/ami sad.png"
+image ami normal = "images/characters/ami_smile.png"  # 临时用 smile
+image ami smile = "images/characters/ami_smile.png"  # ✅
+image ami surprised = "images/characters/ami_surprised.png"  # ✅
+image ami blush = "images/characters/ami_blush.png"  # ✅
+image ami thinking = "images/characters/ami_thinking.png"  # ✅
+image ami sad = "images/characters/ami_sad.png"  # ✅
 
-# 角色立绘 - 杰克
-image jack normal = "images/jack normal.png"
-image jack smile = "images/jack smile.png"
-image jack surprised = "images/jack surprised.png"
-image jack apologize = "images/jack apologize.png"
-image jack thinking = "images/jack thinking.png"
-image jack wave = "images/jack wave.png"
+# 角色立绘 - 杰克 (用 V6 修正版)
+image jack normal = "images/characters/jack_smile.png"  # 临时用 smile
+image jack smile = "images/characters/jack_smile.png"  # ✅
+image jack surprised = "images/characters/jack_surprised.png"  # ✅
+image jack thinking = "images/characters/jack_thinking.png"  # ✅
+image jack happy = "images/characters/jack_happy.png"  # ✅ 新增
+image jack worried = "images/characters/jack_worried.png"  # ✅ 新增
+image jack sad = "images/characters/jack_sad.png"  # ✅ 新增
+image jack apologize = "images/characters/jack_sad.png"  # 别名 - 临时用 sad
+image jack wave = "images/characters/jack_happy.png"  # 别名 - 临时用 happy
 
-# CG 图
-image cg airport_meet = "images/airport_meet.png"
-image cg first_coffee = "images/first_coffee.png"
-image cg ending_act1 = "images/ending_act1.png"
+# CG 图 (暂用已生成的背景作为占位)
+image cg airport_meet = "images/backgrounds/wellington_airport.png"
+image cg first_coffee = "images/backgrounds/wellington_airport.png"
+image cg ending_act1 = "images/backgrounds/wellington_airport.png"
 
 label act1_meeting:
     # 标记剧情进度
@@ -50,8 +62,7 @@ label act1_meeting:
 
     # ========== 场景2：杰克视角的机场到达大厅 ==========
     # 背景：惠灵顿机场到达大厅
-    # image: 机场到达大厅全景，落地窗外是阴天的惠灵顿
-    scene bg airport_terminal
+    scene bg airport_hall
     with fade
 
     # 播放机场环境音
@@ -62,9 +73,8 @@ label act1_meeting:
     "窗外是新西兰典型的灰色天空，海风从远处的库克海峡吹来。"
     "下午三点，我站在接机口的电子屏前，反复确认着航班信息。"
 
-    # 显示杰克立绘
-    # image: 杰克-普通表情，中国男生，175cm，短发
-    show jack normal at left
+    # 显示杰克立绘 (缩小到 0.7, 居中底部)
+    show jack normal at truecenter zorder 2
     with dissolve
 
     "我是杰克。维多利亚大学的学生，今天来机场是来接一个老朋友。"
@@ -79,8 +89,7 @@ label act1_meeting:
     play sound "audio/sound/sfx_footsteps.ogg"
 
     # 阿米推着行李车出现
-    # image: 阿米-困惑表情，160cm 中国女生，穿着暴露，疲惫但可爱
-    show ami surprised at right
+    show ami surprised at truecenter zorder 2
     with moveinright
 
     "我抬起头，看见一个亚洲面孔的女孩从出口走来。"
@@ -108,7 +117,7 @@ label act1_meeting:
         "热情地告诉她路线":
             $ ami_love += 2
             jk "当然可以！你要去哪里？我可以告诉你怎么坐车。"
-            show ami smile at right
+            show ami smile at truecenter zorder 2
             with dissolve
             am "真的？太感谢了！我是第一次来惠灵顿……"
             jump act1_help_route
@@ -116,7 +125,7 @@ label act1_meeting:
         "问她是不是也在等人":
             $ ami_love += 1
             jk "你好！你是……也在等人吗？"
-            show ami thinking at right
+            show ami thinking at truecenter zorder 2
             with dissolve
             am "啊？我、我在找路……"
             jump act1_help_route
@@ -124,7 +133,7 @@ label act1_meeting:
         "直接带她去机场咨询台":
             $ jack_love += 1
             jk "我带你去那边的咨询台吧，他们有详细地图。"
-            show ami normal at right
+            show ami normal at truecenter zorder 2
             with dissolve
             am "好、好的！谢谢你！"
             jump act1_help_luggage
@@ -135,7 +144,7 @@ label act1_meeting:
         "我正要回答，一个行李箱从行李车上滑了下来。"
         play sound "audio/sound/sfx_luggage_drop.ogg"
 
-        show ami surprised at right
+        show ami surprised at truecenter zorder 2
         with hpunch
 
         am "啊——！"
@@ -160,7 +169,7 @@ label act1_meeting:
     label act1_help_luggage:
         "我们刚要转身，她的行李箱滑了一下。"
         play sound "audio/sound/sfx_luggage_drop.ogg"
-        show ami surprised at right
+        show ami surprised at truecenter zorder 2
         with hpunch
 
         am "啊——！我的行李……！"
@@ -183,7 +192,7 @@ label act1_meeting:
         "我蹲下身，开始帮她捡散落的物品。"
         "一盒新加坡的肉骨茶调料、一本英文小说、一件毛衣……"
 
-        show ami blush at right
+        show ami blush at truecenter zorder 2
         with dissolve
 
         am "真、真的很抱歉！给你添麻烦了……"
@@ -203,7 +212,7 @@ label act1_meeting:
 
         am "真、真的吗？！"
 
-        show ami smile at right
+        show ami smile at truecenter zorder 2
         with dissolve
 
         am "我叫阿米，Ami。研究生新生。"
@@ -218,7 +227,7 @@ label act1_meeting:
     jk "要不要先去机场的咖啡店坐一下？"
     jk "我朋友还要一会儿才到，我可以陪你等。"
 
-    show ami thinking at right
+    show ami thinking at truecenter zorder 2
     with dissolve
 
     am "这样……不会打扰你吗？"
@@ -228,9 +237,8 @@ label act1_meeting:
     am "那……那好吧。谢谢你，杰克。"
 
     # 切换背景：机场咖啡店
-    # image: 机场咖啡店，落地窗，海景
     scene bg airport_cafe
-    show ami smile at right
+    show ami smile at truecenter zorder 2
     with fade
 
     play music "audio/music/bgm_daily.ogg" fadein 1.5
@@ -244,7 +252,7 @@ label act1_meeting:
 
     jk "当然。"
 
-    show ami thinking at right
+    show ami thinking at truecenter zorder 2
     with dissolve
 
     am "你……为什么一开始会注意到我？"
@@ -259,7 +267,7 @@ label act1_meeting:
             $ ami_love += 1
             jk "说真的，因为我看到你的行李快倒了。"
             jk "总不能看着它砸到你脚上吧？"
-            show ami blush at right
+            show ami blush at truecenter zorder 2
             with dissolve
             am "原、原来是这样……"
             am "（脸有点红）"
@@ -268,7 +276,7 @@ label act1_meeting:
             $ jack_love += 1
             jk "可能因为……看到亚洲面孔比较亲切？"
             jk "我也认识一些亚裔朋友。"
-            show ami normal at right
+            show ami normal at truecenter zorder 2
             with dissolve
             am "这样啊……"
 
@@ -277,7 +285,7 @@ label act1_meeting:
             jk "嗯……可能是因为你的眼神？"
             jk "看起来有点迷茫，又有点坚定。"
             jk "有点像……嗯，我也说不清。"
-            show ami blush at right
+            show ami blush at truecenter zorder 2
             with dissolve
             am "（低下头）你、你真会说话……"
 
@@ -286,7 +294,7 @@ label act1_meeting:
     # ========== 场景6：命运的巧合 ==========
     "我们聊了聊各自的家乡、喜欢的音乐、还有对新西兰的期待。"
 
-    show ami smile at right
+    show ami smile at truecenter zorder 2
     with dissolve
 
     am "说起来，我来之前查了很多惠灵顿的资料。"
@@ -309,7 +317,7 @@ label act1_meeting:
 
     jk "啊，我的朋友到了！抱歉，我要去接他一下。"
 
-    show ami sad at right
+    show ami sad at truecenter zorder 2
     with dissolve
 
     am "嗯，没关系……"
@@ -329,7 +337,7 @@ label act1_meeting:
     "我带着朋友 Mike 回到咖啡店。"
     "阿米还在窗边坐着，阳光打在她的侧脸上。"
 
-    show ami smile at right
+    show ami smile at truecenter zorder 2
     with dissolve
 
     am "杰克！这边！"
@@ -338,7 +346,7 @@ label act1_meeting:
 
     "Mike 坏笑了一下：'哦？刚才还说要我快点过来，原来是急着见人呢。'"
 
-    show ami blush at right
+    show ami blush at truecenter zorder 2
     with dissolve
 
     am "（脸红）你、你别乱说……"
@@ -352,7 +360,7 @@ label act1_meeting:
     "我们一起送阿米去了机场大巴站。"
     "临别时，她从包里拿出一盒肉骨茶调料。"
 
-    show ami smile at right
+    show ami smile at truecenter zorder 2
     with dissolve
 
     am "这个……送给你。"
@@ -373,7 +381,6 @@ label act1_meeting:
     "（这不是最后一次见面。）"
 
     # 显示第一幕结束画面
-    # image: 第一幕结束CG
     scene cg ending_act1
     with Dissolve(2.0)
 

@@ -58,10 +58,10 @@ def download_image(filename, output_path):
             f.write(resp.read())
 
 
-# ===== 角色标签（已验证） =====
-AMI = "1girl, chinese, petite, slim_body, age_20, long_straight_hair, black_hair, very_long_hair, brown_eyes, navel, crop_top, midriff, low_cut_shirt, short_skirt, high_heels"
+# ===== 角色标签（v3 已验证：2D 卡通萝莉） =====
+AMI = "1girl, asian, loli, petite, slim_body, small_chest, age_18, long_straight_hair, black_hair, very_long_hair, brown_eyes, cute_face, childlike_face, big_eyes, small_nose, flat_chest, casual, modern, denim_shorts, sneakers, cute_animal_print_t_shirt, 2d_anime_style, cartoon_style, cel_shading, anime_screenshot, beautiful_detailed_eyes"
 
-JACK = "1boy, chinese, average_build, age_22, short_black_hair, brown_eyes, handsome, friendly_smile, casual, t_shirt, jeans, sneakers"
+JACK = "1boy, asian, average_build, age_22, short_black_hair, brown_eyes, handsome, friendly_smile, casual, t_shirt, jeans, sneakers, modern, young_man, student, 2d_anime_style, cartoon_style, cel_shading, anime_screenshot"
 
 # ===== 通用参数 =====
 COMMON_PARAMS = {
@@ -76,7 +76,7 @@ COMMON_PARAMS = {
     "denoise": 1.0,
 }
 
-NEGATIVE = "low quality, worst quality, score_1, score_2, score_3, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, jpeg artifacts, signature, watermark, username, blurry, 3d, realistic, deformed, extra limbs, mutated"
+NEGATIVE = "low quality, worst quality, score_1, score_2, score_3, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, jpeg artifacts, signature, watermark, username, blurry, 3d, realistic, photorealistic, deformed, extra limbs, mutated, ugly, large_breasts, mature, chinese_clothing, cheongsam, qipao, hanfu, high_heels, navel, midriff, crop_top, sexy, seductive, revealing, large_hips, plump"
 
 
 def build_prompt(positive, width, height, seed):

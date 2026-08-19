@@ -112,14 +112,14 @@ basic_prompt = {
         "class_type": "CLIPTextEncode",
         "inputs": {
             "clip": ["2", 0],
-            "text": "masterpiece, best quality, score_7, safe, 1girl, chinese, petite, slim_body, age_20, long_straight_hair, black_hair, very_long_hair, brown_eyes, upper_body, portrait, looking_at_viewer, face_focus, white_background, simple_background, neutral_expression, calm, soft_smile, light_makeup, navel, crop_top, midriff, low_cut_shirt, short_skirt, high_heels"
+            "text": "masterpiece, best quality, score_7, safe, 1girl, asian, loli, petite, slim_body, small_chest, age_18, long_straight_hair, black_hair, very_long_hair, brown_eyes, cute_face, childlike_face, big_eyes, small_nose, full_body, looking_at_viewer, white_background, simple_background, neutral_expression, calm, soft_smile, flat_chest, cute_animal_print_t_shirt, denim_shorts, sneakers, casual, modern, 2d_anime_style, cartoon_style, cel_shading, anime_screenshot, beautiful_detailed_eyes"
         }
     },
     "5": {
         "class_type": "CLIPTextEncode",
         "inputs": {
             "clip": ["2", 0],
-            "text": "low quality, worst quality, score_1, score_2, bad anatomy, bad hands, missing fingers, extra digit, cropped, jpeg artifacts, signature, watermark, blurry, 3d, realistic, deformed, extra limbs"
+            "text": "low quality, worst quality, score_1, score_2, bad anatomy, bad hands, missing fingers, extra digit, cropped, jpeg artifacts, signature, watermark, blurry, 3d, realistic, photorealistic, deformed, extra limbs, ugly, large_breasts, mature, chinese_clothing, cheongsam, qipao, hanfu, high_heels, navel, midriff, crop_top, sexy, seductive, revealing"
         }
     },
     "6": {
