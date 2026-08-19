@@ -202,11 +202,11 @@ intimate_conversation, romantic_mood, key_visual"
 # 用途：第一幕结束 CG
 tags = "{RATING_QUESTIONABLE}, {QUALITY}, {CG_SIZE},
 {AMI_TAGS}, {JACK_TAGS},
-{AMI_TAGS_subtype} waving from airport_shuttle_bus_window,
-bus_driving_away, {JACK_TAGS_subtype} standing_on_platform,
-sunset, golden_light, dramatic_silhouette,
-emotional_farewell, wellington_city_background,
-romantic_ending, lens_flare, bokeh, key_visual"
+waving, from_bus_window, bus_driving_away,
+standing_on_platform, sunset, golden_light,
+dramatic_silhouette, emotional_farewell,
+wellington_city_background, romantic_ending,
+lens_flare, bokeh, key_visual"
 
 
 ## ========================================
