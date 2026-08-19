@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 将 ComfyUI prompt 格式 转为 workflow (UI) 格式
+支持普通节点和 IPAdapter 节点
 prompt 格式: {node_id: {class_type, inputs}}  -> 用于 API
 workflow 格式: {nodes: [...], links: [...]}  -> 用于 UI 拖入
 """
@@ -13,11 +14,15 @@ LAYOUTS = {
     "CLIPTextEncode": ([440, 60], [420, 220]),
     "CLIPTextEncode_2": ([440, 320], [420, 120]),  # negative
     "EmptyLatentImage": ([440, 480], [315, 106]),
-    "KSampler": ([920, 200], [315, 222]),
-    "VAEDecode": ([1280, 200], [210, 46]),
-    "SaveImage": ([1560, 200], [315, 100]),
-    "PreviewImage": ([1560, 340], [315, 100]),
-    "ImageResize": ([1280, 320], [210, 86]),
+    "KSampler": ([1280, 200], [315, 222]),
+    "VAEDecode": ([1640, 200], [210, 46]),
+    "SaveImage": ([1900, 200], [315, 100]),
+    "PreviewImage": ([1900, 340], [315, 100]),
+    "ImageResize": ([1640, 320], [210, 86]),
+    # IPAdapter 节点
+    "IPAdapterUnifiedLoader": ([60, 380], [315, 80]),
+    "IPAdapter": ([920, 380], [315, 200]),
+    "LoadImage": ([600, 480], [315, 200]),
 }
 
 # 每个节点类的输出定义 (name, type)
@@ -34,23 +39,42 @@ OUTPUT_DEFS = {
     "SaveImage": [],
     "PreviewImage": [],
     "ImageResize": [("IMAGE", "IMAGE")],
+    # IPAdapter
+    "IPAdapterUnifiedLoader": [
+        ("model", "MODEL"),
+        ("ipadapter", "IPADAPTER"),
+    ],
+    "IPAdapter": [("MODEL", "MODEL")],
+    "LoadImage": [("IMAGE", "IMAGE")],
 }
 
-# 根据输入名推断输入类型
+
 def infer_input_type(class_type, input_name):
-    if input_name == "model":
-        return "MODEL"
-    if input_name == "clip":
-        return "CLIP"
-    if input_name in ("positive", "negative"):
-        return "CONDITIONING"
-    if input_name == "latent_image" or input_name == "samples":
-        return "LATENT"
-    if input_name == "vae":
-        return "VAE"
-    if input_name in ("images", "image"):
-        return "IMAGE"
-    return "*"
+    """根据输入名推断类型"""
+    type_map = {
+        "model": "MODEL",
+        "clip": "CLIP",
+        "positive": "CONDITIONING",
+        "negative": "CONDITIONING",
+        "latent_image": "LATENT",
+        "samples": "LATENT",
+        "vae": "VAE",
+        "images": "IMAGE",
+        "image": "IMAGE",
+        "ipadapter": "IPADAPTER",
+        "weight": "FLOAT",
+        "weight_type": "COMBO",
+        "start_at": "FLOAT",
+        "end_at": "FLOAT",
+        "combine_embeds": "COMBO",
+        "embeds_scaling": "COMBO",
+        "noise": "FLOAT",
+        "image_noise": "FLOAT",
+        "fold": "FLOAT",
+        "attn_mask": "MASK",
+        "ipadapter_params": "IPADAPTER_PARAMS",
+    }
+    return type_map.get(input_name, "*")
 
 
 def convert_prompt_to_workflow(prompt):
@@ -69,10 +93,9 @@ def convert_prompt_to_workflow(prompt):
         class_type = info["class_type"]
         inputs = info["inputs"]
 
-        # 选择位置（CLIPTextEncode 第二个用 _2 位置）
+        # 选择位置
         if class_type == "CLIPTextEncode":
-            # 启发式：如果 text 包含 "low quality"，认为是 negative
-            text = inputs.get("text", "").lower()
+            text = str(inputs.get("text", "")).lower()
             if "low quality" in text or "worst quality" in text:
                 pos, size = LAYOUTS["CLIPTextEncode_2"]
                 title = "Negative Prompt"
@@ -85,21 +108,17 @@ def convert_prompt_to_workflow(prompt):
 
         # 构造 inputs (UI 格式)
         ui_inputs = []
-        input_order = []
         widget_values = []
         for inp_name, inp_val in inputs.items():
-            input_order.append(inp_name)
             if isinstance(inp_val, list) and len(inp_val) == 2:
-                # 来自其他节点的连接
                 inp_type = infer_input_type(class_type, inp_name)
                 ui_inputs.append({
                     "name": inp_name,
                     "type": inp_type,
-                    "link": None,  # 稍后填充
+                    "link": None,
                     "slot_index": len(ui_inputs)
                 })
             else:
-                # widget value
                 ui_inputs.append({
                     "name": inp_name,
                     "type": "WIDGET",
@@ -138,7 +157,6 @@ def convert_prompt_to_workflow(prompt):
         last_node_id = max(last_node_id, nid)
 
     # 第二遍：创建 link 并填充引用
-    # 先构建 node_id -> node 映射
     node_map = {n["id"]: n for n in nodes}
 
     for nid_str, info in prompt.items():
@@ -152,7 +170,6 @@ def convert_prompt_to_workflow(prompt):
                 src_node_id, src_slot = inp_val
                 inp_type = infer_input_type(class_type, inp_name)
 
-                # 找到对应的 input（按 name 匹配）
                 target_input = None
                 for inp in node["inputs"]:
                     if inp["name"] == inp_name:
@@ -163,20 +180,26 @@ def convert_prompt_to_workflow(prompt):
                     print(f"  WARN: 节点 {nid} 没有 input {inp_name}")
                     continue
 
-                # 填充 link id
                 target_input["link"] = link_id
-
-                # 添加到全局 links
                 actual_inp_idx = node["inputs"].index(target_input)
                 links.append([link_id, src_node_id, src_slot, nid, actual_inp_idx, inp_type])
 
-                # 填充 src node 的 outputs.links
                 if src_node_id in node_map:
                     src_node = node_map[src_node_id]
                     if src_slot < len(src_node["outputs"]):
                         src_node["outputs"][src_slot]["links"].append(link_id)
 
                 link_id += 1
+
+    # 计算节点实际占据的边界
+    if nodes:
+        min_x = min(n["pos"][0] for n in nodes)
+        min_y = min(n["pos"][1] for n in nodes)
+        max_x = max(n["pos"][0] + n["size"][0] for n in nodes)
+        max_y = max(n["pos"][1] + n["size"][1] for n in nodes)
+        bounding = [min_x - 40, min_y - 40, max_x - min_x + 80, max_y - min_y + 80]
+    else:
+        bounding = [40, 40, 1880, 580]
 
     workflow = {
         "last_node_id": last_node_id,
@@ -185,8 +208,8 @@ def convert_prompt_to_workflow(prompt):
         "links": links,
         "groups": [
             {
-                "title": "Anima-Turbo v1.0 Pipeline",
-                "bounding": [40, 40, 1880, 580],
+                "title": "Anima-Turbo + IPAdapter Pipeline",
+                "bounding": bounding,
                 "color": "#3f789e"
             }
         ],
@@ -194,10 +217,10 @@ def convert_prompt_to_workflow(prompt):
         "extra": {
             "ds": {"scale": 1.0, "offset": [0, 0]},
             "info": {
-                "name": "Anima-Turbo v1.0",
+                "name": "Anima-Turbo v1.0 + IPAdapter",
                 "author": "Dakangtu",
                 "description": "Auto-generated by convert_prompt.py",
-                "version": "4.0"
+                "version": "5.0"
             }
         },
         "version": 0.4
@@ -218,7 +241,7 @@ if __name__ == "__main__":
     workflow = convert_prompt_to_workflow(prompt)
 
     # 输出
-    out_file = "workflows/anima_turbo_workflow_v2.json"
+    out_file = sys.argv[2] if len(sys.argv) > 2 else "workflows/anima_turbo_workflow.json"
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump(workflow, f, indent=2, ensure_ascii=False)
 

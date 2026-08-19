@@ -1,0 +1,87 @@
+{
+  "1": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "anima-turbo-v1.0.safetensors"
+    }
+  },
+  "2": {
+    "class_type": "IPAdapterUnifiedLoader",
+    "inputs": {
+      "model": ["1", 0],
+      "preset": "PLUS (high strength)"
+    }
+  },
+  "3": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["1", 1],
+      "text": "masterpiece, best quality, score_7, safe, 1girl, chinese, petite, short_slim_figure, age_20, long_straight_black_hair, brown_eyes, alluring_face, revealing_outfit, crop_top, midriff, low_cut_shirt, short_skirt, high_heels, stylish_fashion, seductive, neutral_expression, calm, soft_smile, light_makeup, white_background, simple_background, looking_at_viewer, upper_body, portrait"
+    }
+  },
+  "4": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "clip": ["1", 1],
+      "text": "low quality, worst quality, score_1, score_2, score_3, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, jpeg artifacts, signature, watermark, username, blurry, 3d, realistic, deformed, extra limbs, mutated"
+    }
+  },
+  "5": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 832,
+      "height": 1216,
+      "batch_size": 1
+    }
+  },
+  "6": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "ami_reference.png"
+    }
+  },
+  "7": {
+    "class_type": "IPAdapter",
+    "inputs": {
+      "ipadapter": ["2", 1],
+      "model": ["2", 0],
+      "image": ["6", 0],
+      "weight": 0.8,
+      "weight_type": "linear",
+      "start_at": 0.0,
+      "end_at": 0.8,
+      "combine_embeds": "average",
+      "embeds_scaling": "V only"
+    }
+  },
+  "8": {
+    "class_type": "KSampler",
+    "inputs": {
+      "model": ["7", 0],
+      "positive": ["3", 0],
+      "negative": ["4", 0],
+      "latent_image": ["5", 0],
+      "seed": 12345,
+      "control_after_generate": "randomize",
+      "steps": 10,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1.0
+    }
+  },
+  "9": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["8", 0],
+      "vae": ["1", 2]
+    }
+  },
+  "10": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": ["9", 0],
+      "filename_prefix": "AnimaTurbo_IPAdapter"
+    }
+  }
+}
