@@ -1,0 +1,15 @@
+=== /system_stats ===
+  comfyui: 0.18.0
+  python : 3.12.11 | packaged by Anaconda, Inc. | (main, Jun  5 2025, 13:09:17) [GCC 11.2.0]
+  ram_total/free: 64.0 / 61.2 GB
+  GPU cuda:0 NVIDIA GeForce RTX 4090 : cudaMallocAsync: vram_total 23.5GB free 2.7GB
+
+=== /queue ===
+  running: 0
+  pending: 0
+
+=== /history ===
+  entries: 3
+  d2fda38b-28a7-4d6a-b240-db2128fdf5d6 status={'status_str': 'success', 'completed': True, 'messages': [['execution_start', {'prompt_id': 'd2fda38b-28a7-4d6a-b240-db2128fdf5d6', 'timestamp': 1787387471196}], ['execution_cached', {'nodes': [], 'prompt_id': 'd2fda38b-28a7-4d6a-b240-db2128fdf5d6', 'timestamp': 1787387471231}], ['execution_success', {'prompt_id': 'd2fda38b-28a7-4d6a-b240-db2128fdf5d6', 'timestamp': 1787387777868}]]} imgs=1
+  691ad42a-9ad3-40da-8c26-b327fbebf6cb status={'status_str': 'success', 'completed': True, 'messages': [['execution_start', {'prompt_id': '691ad42a-9ad3-40da-8c26-b327fbebf6cb', 'timestamp': 1787387778311}], ['execution_cached', {'nodes': ['1', '2', '3', '4', '5', '6', '7', '8', '9'], 'prompt_id': '691ad42a-9ad3-40da-8c26-b327fbebf6cb', 'timestamp': 1787387778313}], ['execution_success', {'prompt_id': '691ad42a-9ad3-40da-8c26-b327fbebf6cb', 'timestamp': 1787387785601}]]} imgs=1
+  574c0072-30c1-476a-8871-69721abc1208 status={'status_str': 'success', 'completed': True, 'messages': [['execution_start', {'prompt_id': '574c0072-30c1-476a-8871-69721abc1208', 'timestamp': 1787387785603}], ['execution_cached', {'nodes': ['1', '2', '3', '4', '5', '6', '7', '8', '9'], 'prompt_id': '574c0072-30c1-476a-8871-69721abc1208', 'timestamp': 1787387785605}], ['execution_success', {'prompt_id': '574c0072-30c1-476a-8871-69721abc1208', 'timestamp': 1787387791996}]]} imgs=1

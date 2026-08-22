@@ -1,0 +1,52 @@
+=== LoraLoader (SDXL/SD 链) ===
+  Anima/anima-turbo-lora-v0.1.safetensors
+  BoobPhysics_WAN_v7.safetensors
+  PanelPainter_v3_Qwen2511.safetensors
+  Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors
+  colorMangaKlein_9B.safetensors
+  ltx-2.3-22b-distilled-lora-384.safetensors
+  qwen/VNCCS/VNCCS_QIE2511_ClothesCore-RC3.7.safetensors
+  qwen/VNCCS/VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors
+  uncensorMangaKlein_Monochrome.safetensors
+
+=== LoraLoaderModelOnly ===
+  Anima/anima-turbo-lora-v0.1.safetensors
+  BoobPhysics_WAN_v7.safetensors
+  PanelPainter_v3_Qwen2511.safetensors
+  Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors
+  colorMangaKlein_9B.safetensors
+  ltx-2.3-22b-distilled-lora-384.safetensors
+  qwen/VNCCS/VNCCS_QIE2511_ClothesCore-RC3.7.safetensors
+  qwen/VNCCS/VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors
+  uncensorMangaKlein_Monochrome.safetensors
+
+=== CheckpointLoaderSimple ===
+  Qwen-Rapid-AIO-NSFW-v18.safetensors
+  ltx-2.3-22b-dev-fp8.safetensors
+  perfectdeliberate_v70.safetensors
+
+=== UNETLoader ===
+  DasiwaWAN22I2V14BLightspeed_synthseductionHighV9.safetensors
+  DasiwaWAN22I2V14BLightspeed_synthseductionLowV9.safetensors
+  FLUX.2-klein-9b-fp8/flux-2-klein-9b-fp8.safetensors
+  anima-base-v1.0.safetensors
+  model_2945208.safetensors
+  qwen_image_edit_2511_bf16.safetensors
+
+=== CLIPLoader ===
+  gemma_3_12B_it_fp4_mixed.safetensors
+  qwen_2.5_vl_7b_fp8_scaled.safetensors
+  qwen_3_06b_base.safetensors
+  qwen_3_8b_fp8mixed.safetensors
+  umt5-xxl-enc-bf16.safetensors
+
+=== VAELoader ===
+  Wan2_1_VAE_bf16.safetensors
+  flux2-vae.safetensors
+  qwen_image_vae.safetensors
+  wan21_flow_rvs_mask_vae_bf16.safetensors
+  pixel_space
+
+=== 含 yuzu/illust/anima 关键词 ===
+  [LoraLoader] Anima/anima-turbo-lora-v0.1.safetensors
+  [LoraLoaderModelOnly] Anima/anima-turbo-lora-v0.1.safetensors

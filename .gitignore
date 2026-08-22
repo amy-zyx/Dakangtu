@@ -24,3 +24,7 @@
 /dialogue.tab
 /dialogue.txt
 /strings.json
+.ssh_keys/id_rsa
+.ssh_keys/id_rsa.pub
+models/sam3/checkpoints/sam3.1_multiplex_fp16.safetensors
+models/sam3_dl/checkpoints/sam3.1_multiplex_fp16.safetensors

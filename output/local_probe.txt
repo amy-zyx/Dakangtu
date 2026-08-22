@@ -1,0 +1,26 @@
+/system_stats: 200
+  body: {"system": {"os": "win32", "ram_total": 16866852864, "ram_free": 314187776, "comfyui_version": "0.33.1", "required_frontend_version": "1.48.7", "installed_templates_version": "0.11.41", "required_templates_version": "0.11.41", "comfy_package_versions": [{"name": "comfyui-frontend-package", "installe
+
+LoraLoader 总数: 11, 含 yuzu: ['Yuzu Soft[style]-Illus.safetensors']
+
+Checkpoints: ['Illustrious\\ILFlatMix.safetensors']
+
+UNETLoader: ['anima-base-v1.0.safetensors', 'anima-turbo-v1.0.safetensors', 'z_image_turbo_bf16.safetensors']
+
+CLIPLoader.type: ['stable_diffusion', 'stable_cascade', 'sd3', 'stable_audio', 'mochi', 'ltxv', 'pixart', 'cosmos', 'lumina2', 'wan', 'hidream', 'chroma', 'ace', 'omnigen2', 'qwen_image', 'hunyuan_image', 'flux2', 'ovis', 'longcat_image', 'cogvideox', 'lens', 'pixeldit', 'ideogram4', 'boogu', 'krea2', 'joyimage', 'mage', 'minimax']
+
+TextEncode 类节点: ['CLIPTextEncode', 'CLIPTextEncodeSDXLRefiner', 'CLIPTextEncodeSDXL', 'CLIPTextEncodePixArtAlpha', 'CLIPTextEncodeControlnet', 'ModelMergeQwenImage', 'CLIPTextEncodeSD3', 'CLIPTextEncodeHunyuanDiT', 'TextEncodeHunyuanVideo_ImageToVideo', 'CLIPTextEncodeFlux', 'LTXAVTextEncoderLoader', 'MiniMaxMusic3TextEncode', 'CLIPTextEncodeLumina2', 'CLIPTextEncodeHiDream', 'TextEncodeAceStepAudio']
+
+匹配 "yuzu": ['Yuzu Soft[style]-Illus.safetensors']
+
+匹配 "sdxl": ['DMD2\\dmd2_sdxl_4step_lora_fp16.safetensors']
+
+匹配 "anima": ['Anima\\anima-turbo-lora-v0.1.safetensors', 'anima-base-v1.0.safetensors', 'anima-turbo-v1.0.safetensors']
+
+匹配 "qwen": ['qwen\\VNCCS\\VNCCS_QIE2511_ClothesCore-RC3.7.safetensors', 'qwen\\VNCCS\\VNCCS_QIE2511_PoseStudio_ART_V5.9.5.safetensors', 'qwen\\Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors']
+
+ControlNet (0): []
+
+IPAdapter 节点: ['IPAdapter', 'IPAdapterAdvanced', 'IPAdapterBatch', 'IPAdapterFaceID', 'IPAdapterTiled', 'IPAdapterTiledBatch', 'IPAdapterEmbeds', 'IPAdapterEmbedsBatch', 'IPAdapterStyleComposition', 'IPAdapterStyleCompositionBatch', 'IPAdapterMS', 'IPAdapterFromParams', 'IPAdapterUnifiedLoader', 'IPAdapterUnifiedLoaderFaceID', 'IPAdapterModelLoader', 'IPAdapterInsightFaceLoader', 'IPAdapterUnifiedLoaderCommunity', 'IPAdapterEncoder', 'IPAdapterCombineEmbeds', 'IPAdapterNoise', 'IPAdapterSaveEmbeds', 'IPAdapterLoadEmbeds', 'IPAdapterWeights', 'IPAdapterCombineWeights', 'IPAdapterWeightsFromStrategy', 'IPAdapterPromptScheduleFromWeightsStrategy', 'IPAdapterRegionalConditioning', 'IPAdapterCombineParams']
+
+FaceID/InsightFace 节点: ['IPAdapterInsightFaceLoader']
