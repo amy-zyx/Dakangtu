@@ -19,23 +19,18 @@ label start:
     scene black
     with Pause(1.0)
 
-    "——《大康兔》——"
-    "一个发生在惠灵顿的爱情故事"
+    "2009年北京的初冬"
     with Pause(2.0)
 
     # 跳转到第一幕
-    jump act1_meeting
+    jump act1
 
 
 # ====== 调试用：快速跳转到第一幕 ======
 label debug_act1:
-    jump act1_meeting
+    jump act1
 
 # ====== 调试用：跳转到第一幕末尾 ======
 label debug_act1_end:
-    $ ami_love = 5
-    $ jack_love = 3
-    $ met_at_airport = True
-    $ helped_with_luggage = True
-    $ shared_coffee = True
-    jump act1_pick_luggage
+    $ act1_complete = True
+    jump act1

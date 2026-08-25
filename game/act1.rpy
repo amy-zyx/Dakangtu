@@ -1,401 +1,256 @@
-# 第一幕：惠灵顿机场的相遇
-# Act 1: Meeting at Wellington Airport
+# ============================================================
+# 大康图 - Act 1：落日和明天
+# Dakangtu - Act 1: Sunset and Tomorrow
+# ============================================================
+# 剧本来源: plots/act1_script.md
+# 背景:     game/images/backgrounds/  (3 张 1920x1080 2D anime galgame)
+# 立绘:     game/images/characters/rita/  (暂用 Rita 角色图作为 LX 立绘)
+# 角色定义: characters.rpy  (lx 已在该文件定义)
+# ============================================================
 
-# ====== 图片显式声明 ======
-# 这些声明确保 lint 工具能识别所有用到的图片
-# 实际图片文件位于 game/images/ 目录
+# ============ 背景图声明 (1920x1080 全屏) ============
+# 主体场景
+image bg restaurant_interior  = "images/backgrounds/zimage_anime_bg_scene2_private_dining_room_00001_.png"
+image bg dining_table_window  = "images/backgrounds/zimage_anime_bg_scene3_dining_table_window_00001_.png"
+image bg bus_stop             = "images/backgrounds/zimage_anime_v5_bg_scene4_bus_stop_00001_.png"
 
-# 背景图 (用 2D GalGame 风格 - 全部已生成 / 标记)
-# 1920x1080 全屏尺寸, 适配 Ren'Py 默认 16:9 窗口
-image bg wellington_airport = "images/backgrounds/wellington_airport.png"  # ✅ 旧 (建筑外观, 不用)
-image bg airport_hall = "images/backgrounds/airport_hall.png"  # ✅ 候机大厅 (待选)
+# 兼容别名 (让旧 scene bg xxx 仍能工作 / 方便后续替换图)
+image bg private_dining_room  = "images/backgrounds/zimage_anime_bg_scene2_private_dining_room_00001_.png"
+image bg dining_table         = "images/backgrounds/zimage_anime_bg_scene3_dining_table_window_00001_.png"
+image bg street_corner        = "images/backgrounds/zimage_anime_v5_bg_scene4_bus_stop_00001_.png"
 
-# 以下背景为占位 - 后续生成
-# image bg airport_cafe = "images/backgrounds/airport_cafe.png"  # ❌ 未生成 - 用 wellington_airport 临时替代
-# image bg airport_window = "images/backgrounds/airport_window.png"  # ❌ 未生成
-# image bg wellington_city = "images/backgrounds/wellington_city.png"  # ❌ 未生成
+# ============ LX 立绘声明 ============
+# 注: 暂用 Rita 角色图作为 LX 立绘占位 (因 LX 角色立绘尚未生成)
+# 立绘选择依据剧本描述: 姜黄色大衣 → preview_coat_yellow.png 最贴合
+# 注意: image attribute 名不能用 Python 关键字, 故用 default_view 替代 default
+image lx default_view = "images/characters/rita/preview_coat_yellow.png"   # 默认: 姜黄大衣版
+image lx normal     = "images/characters/rita/face_neutral-emote_0001.png"
+image lx smile      = "images/characters/rita/face_content-smile_0001.png"
+image lx sweet_smile = "images/characters/rita/face_sweet-smile_0001.png"
+image lx shy        = "images/characters/rita/face_shy-smile_0001.png"
+image lx surprised  = "images/characters/rita/face_surprised_0001.png"
+image lx radiant    = "images/characters/rita/face_radiant-smile_0001.png"
+image lx laugh      = "images/characters/rita/face_laughing_0001.png"
+image lx glance     = "images/characters/rita/face_glare-of-judgment_0001.png"
 
-# 兼容别名 - 让旧 scene bg xxx 仍能工作
-image bg airport_terminal = "images/backgrounds/wellington_airport.png"  # 别名指向 wellington
-image bg airport_cafe = "images/backgrounds/wellington_airport.png"  # 临时用 wellington
-image bg airport_window = "images/backgrounds/wellington_airport.png"  # 临时用 wellington
-image bg wellington_city = "images/backgrounds/wellington_airport.png"  # 临时用 wellington
+# 兼容别名
+image lx coat_yellow = "images/characters/rita/preview_coat_yellow.png"
 
-# 角色立绘 - 阿米
-image ami normal = "images/characters/ami_smile.png"  # 临时用 smile
-image ami smile = "images/characters/ami_smile.png"  # ✅
-image ami surprised = "images/characters/ami_surprised.png"  # ✅
-image ami blush = "images/characters/ami_blush.png"  # ✅
-image ami thinking = "images/characters/ami_thinking.png"  # ✅
-image ami sad = "images/characters/ami_sad.png"  # ✅
+# ============================================================
+# Act 1: 落日和明天
+# ============================================================
+label act1:
 
-# 角色立绘 - 杰克 (用 V6 修正版)
-image jack normal = "images/characters/jack_smile.png"  # 临时用 smile
-image jack smile = "images/characters/jack_smile.png"  # ✅
-image jack surprised = "images/characters/jack_surprised.png"  # ✅
-image jack thinking = "images/characters/jack_thinking.png"  # ✅
-image jack happy = "images/characters/jack_happy.png"  # ✅ 新增
-image jack worried = "images/characters/jack_worried.png"  # ✅ 新增
-image jack sad = "images/characters/jack_sad.png"  # ✅ 新增
-image jack apologize = "images/characters/jack_sad.png"  # 别名 - 临时用 sad
-image jack wave = "images/characters/jack_happy.png"  # 别名 - 临时用 happy
-
-# CG 图 (暂用已生成的背景作为占位)
-image cg airport_meet = "images/backgrounds/wellington_airport.png"
-image cg first_coffee = "images/backgrounds/wellington_airport.png"
-image cg ending_act1 = "images/backgrounds/wellington_airport.png"
-
-label act1_meeting:
     # 标记剧情进度
-    $ act1_complete = True
-    $ current_location = "wellington_airport"
-    $ current_time = "afternoon"
+    $ act1_complete = False
+    $ current_location = "restaurant"
+    $ current_time = "night"
 
-    # ========== 场景1：黑屏开场 + 标题 ==========
+    # ----------------- 标题 -----------------
     scene black
     with Pause(1.0)
 
-    # 显示游戏标题
     "——《大康兔》——"
-    "Act 1：惠灵顿机场的相遇"
+    "Act 1：落日和明天"
     with Pause(2.0)
 
-    # ========== 场景2：杰克视角的机场到达大厅 ==========
-    # 背景：惠灵顿机场到达大厅
-    scene bg airport_hall
+    # ============================================================
+    # Scene 1: 推开 (包间远景)
+    # ============================================================
+    scene bg restaurant_interior
     with fade
 
-    # 播放机场环境音
-    play music "audio/music/bgm_airport.ogg" fadein 2.0
-
-    # 旁白描述环境
-    "惠灵顿国际机场，到达大厅。"
-    "窗外是新西兰典型的灰色天空，海风从远处的库克海峡吹来。"
-    "下午三点，我站在接机口的电子屏前，反复确认着航班信息。"
-
-    # 显示杰克立绘 (缩小到 0.7, 居中底部)
-    show jack normal at truecenter zorder 2
-    with dissolve
-
-    "我是杰克。维多利亚大学的学生，今天来机场是来接一个老朋友。"
-    "（航班应该快到了吧……我看着手里的接机牌，上面写着歪歪扭扭的中文。）"
-    "（希望他能看到……）"
-
-    play sound "audio/sound/sfx_airport_announce.ogg"
-    "广播里传来空乘的声音：'从新加坡经停奥克兰的航班SQ298已抵达……'"
+    # 旁白：开场诗 (一字不改)
+    "东风夜放花千树，更吹落、星如雨。"
+    "宝马雕车香满路。凤箫声动，玉壶光转，一夜鱼龙舞。"
+    "蛾儿雪柳黄金缕，笑语盈盈暗香去。"
+    "众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。"
     with Pause(1.5)
 
-    # ========== 场景3：阿米出场 ==========
-    play sound "audio/sound/sfx_footsteps.ogg"
+    "人的记忆是古怪的，很多感情最终只凝结成几个字，一幅画。"
+    with Pause(1.0)
 
-    # 阿米推着行李车出现
-    show ami surprised at truecenter zorder 2
-    with moveinright
+    "我推开门走了进去。"
+    with Pause(0.5)
 
-    "我抬起头，看见一个亚洲面孔的女孩从出口走来。"
-    "她推着一辆堆满行李的小车，正费力地张望着四周。"
-    "一只手还举着手机，似乎在查地图。"
+    # 旁白：环境描述
+    "天贵食府应该是这条街最高档的餐厅了。气派的大门，走入后一个小桥流水的布置。"
+    "空气里有淡淡的茉莉香，混着葱油和糖醋的气息。"
+    "我按着手机里那条短信找过去，推开了包间的门。"
+    with Pause(1.0)
 
-    "她看了我一眼，又看了看我手里的接机牌，眉头轻轻皱起。"
+    # 旁白：发现 LX
+    "我在那一桌子喧闹里一眼扫过去，然后目光被她吸引了。"
 
-    # 阿米说话
-    am "Excuse me..."
+    "是 LX。"
+    "但我差点没认出她来。"
+    "3年。整整3年。"
+    with Pause(0.5)
 
-    "（声音有点轻，像是怕打扰到别人。）"
+    "高中毕业那个暑假我去了南方的大学，毕业后没有听到过她的音讯。"
+    "我们本来就是不怎么说话的同学，高中三年都没怎么讲过话，"
+    "唯一的交集就是在一个教室里上课。"
+    "毕业那年我们没有说过再见，没有留过电话，连QQ号都没加过。"
+    with Pause(0.5)
 
-    am "...那个，请问这里到市中心怎么走？"
+    # 旁白：LX 远景视觉锚点
+    "可她现在就坐在那里，夺走了我的目光。"
+    "窗外是程庄路的车，尾灯拉成一条条红色的丝线；"
+    "她坐在那片红色光晕的边上，脸被窗外那道光勾了一道暖边。"
+    "她正侧着头跟旁边的人说话，嘴角弯着，笑得很淡很从容。"
+    with Pause(1.0)
 
-    # ========== 场景4：第一次选择 ==========
-    # 杰克的内心独白
-    "（等等，她是在问路吗？）"
-    "（可是我的接机牌写的是中文名字啊……）"
-    "（算了，反正航班也快到了，先帮帮她吧。）"
+    "她没有戴眼镜。"
+    "我站在原地，盯着她看了好几秒才确认。"
+    "高三那年她鼻梁上永远架着一副圆框眼镜，金色的细边。没有留意过她的眼睛。"
+    "此刻她坐在那里，鼻梁上干干净净的，什么都没架。"
+    "眼睛显得比以前大了整整一圈，深褐色的瞳仁里映着浅浅的光。"
+    with Pause(1.0)
 
-    menu:
-        "怎么帮她？"
+    "我大概没见过她不戴眼镜的样子。"
+    "LX 剪短了头发，戴着一个红色的发卡，穿了件姜黄色的大衣，里面是米白色的 V 领毛衣。"
+    "姜黄，像深秋里银杏叶还没落尽时那种颜色，带着一点暖调。"
+    "大衣的线条垂下来，把她的身形拉得很修长。"
+    "她偶尔动一下，大衣的下摆随着动作轻轻晃。"
+    with Pause(1.0)
 
-        "热情地告诉她路线":
-            $ ami_love += 2
-            jk "当然可以！你要去哪里？我可以告诉你怎么坐车。"
-            show ami smile at truecenter zorder 2
-            with dissolve
-            am "真的？太感谢了！我是第一次来惠灵顿……"
-            jump act1_help_route
-
-        "问她是不是也在等人":
-            $ ami_love += 1
-            jk "你好！你是……也在等人吗？"
-            show ami thinking at truecenter zorder 2
-            with dissolve
-            am "啊？我、我在找路……"
-            jump act1_help_route
-
-        "直接带她去机场咨询台":
-            $ jack_love += 1
-            jk "我带你去那边的咨询台吧，他们有详细地图。"
-            show ami normal at truecenter zorder 2
-            with dissolve
-            am "好、好的！谢谢你！"
-            jump act1_help_luggage
-
-
-    # ========== 分支A：帮她问路 / 寒暄后 ==========
-    label act1_help_route:
-        "我正要回答，一个行李箱从行李车上滑了下来。"
-        play sound "audio/sound/sfx_luggage_drop.ogg"
-
-        show ami surprised at truecenter zorder 2
-        with hpunch
-
-        am "啊——！"
-
-        "她的行李箱砸在地上，里面的东西散落了出来。"
-
-        menu:
-            "怎么办？"
-
-            "立刻蹲下来帮她捡":
-                $ ami_love += 3
-                $ helped_with_luggage = True
-                jk "别担心，我帮你！"
-                jump act1_pick_luggage
-
-            "先稳住她，再慢慢捡":
-                $ ami_love += 1
-                jk "没伤到吧？我来帮你。"
-                jump act1_pick_luggage
-
-    # ========== 分支B：直接带她去咨询台 ==========
-    label act1_help_luggage:
-        "我们刚要转身，她的行李箱滑了一下。"
-        play sound "audio/sound/sfx_luggage_drop.ogg"
-        show ami surprised at truecenter zorder 2
-        with hpunch
-
-        am "啊——！我的行李……！"
-
-        menu:
-            "怎么办？"
-
-            "立刻蹲下来帮她捡":
-                $ ami_love += 3
-                $ helped_with_luggage = True
-                jk "别担心，我帮你捡！"
-                jump act1_pick_luggage
-
-            "先稳住她，再慢慢捡":
-                $ ami_love += 1
-                jk "没伤到吧？慢慢来。"
-
-    # ========== 共同剧情：捡行李 ==========
-    label act1_pick_luggage:
-        "我蹲下身，开始帮她捡散落的物品。"
-        "一盒新加坡的肉骨茶调料、一本英文小说、一件毛衣……"
-
-        show ami blush at truecenter zorder 2
-        with dissolve
-
-        am "真、真的很抱歉！给你添麻烦了……"
-
-        jk "没关系，反正我也在等人。"
-        jk "你是从哪里飞来的？"
-
-        am "新加坡……转机过来的。"
-        am "我是来惠灵顿读书的，Victoria University。"
-
-        jk "（等等，Victoria University？）"
-
-        "我愣了一下，然后笑了出来。"
-
-        jk "哈哈，这么巧？我也是 Victoria University 的！"
-        jk "我叫杰克，大三。"
-
-        am "真、真的吗？！"
-
-        show ami smile at truecenter zorder 2
-        with dissolve
-
-        am "我叫阿米，Ami。研究生新生。"
-        am "请多关照！"
-
-        $ met_at_airport = True
-        $ player_name = "杰克"
-
-    # ========== 场景5：咖啡馆 ==========
-    # 我们已经互相认识了，但我的朋友还没来
-    jk "对了，你刚下飞机一定累了吧？"
-    jk "要不要先去机场的咖啡店坐一下？"
-    jk "我朋友还要一会儿才到，我可以陪你等。"
-
-    show ami thinking at truecenter zorder 2
+    # ============================================================
+    # Scene 2: 相认 (餐桌近景)
+    # ============================================================
+    scene bg dining_table_window
     with dissolve
 
-    am "这样……不会打扰你吗？"
+    # 显示 LX 立绘 (右侧)
+    show lx sweet_smile at right zorder 2
+    with dissolve
 
-    jk "完全不会！我也是自己一个人。"
+    "我走近落座。她大概只是随意地扫了一眼门口，看看是谁来晚了。"
+    "她的目光从我脸上滑过去，又滑回来，停住了。"
+    "然后她笑了。"
+    "嘴角轻轻往上弯，眼睛弯成两道很浅的月牙。"
+    "那枚红色的发卡在她偏头的时候滑了一下，碰到耳朵上方的发丝，又停住。"
+    with Pause(1.0)
 
-    am "那……那好吧。谢谢你，杰克。"
+    "「LX？」"
+    "我先开口了。我记得她的名字，她学习很好，我印象里是年级第4。"
+    "虽然我们不怎么说话但是她的名字我是知道的，"
+    "她也马上回复了我，显然几年时间我还没有被淡忘成某甲。"
+    with Pause(0.5)
 
-    # 切换背景：机场咖啡店
-    scene bg airport_cafe
-    show ami smile at truecenter zorder 2
+    show lx smile at right zorder 2
+    with dissolve
+
+    "我走到她的对面坐下，听着一群同学聊天。"
+    "我平时都是聊天的主力，一个社牛，今天我倒是比较沉默，"
+    "只是时不时的偷偷看看这位熟悉又陌生的美女。"
+    "之后的同学聚会很模糊，就那几个人说那几个熟悉的话题。"
+    "推杯换盏，时间过得很快。"
+    with Pause(1.0)
+
+    # ============================================================
+    # Scene 3: 暧昧 (餐桌近景, 同图)
+    # ============================================================
+    "散场的时候我特意多留了一会儿，想要找个机会和她搭讪。"
+    "我这个人是没有任何技巧的，就是寒暄说她出落得好漂亮，有一双白白的大长腿。"
+    "这话听起来有点轻佻，实则我是词穷而已。"
+    "她听到这个话大概也是吃了一惊，但是没有特意的回避我。"
+    "我还是找机会把她送到了楼下。"
+    with Pause(1.0)
+
+    show lx shy at right zorder 2
+    with dissolve
+
+    "她站在餐桌边上，暖黄灯光落在她脸上。"
+    "风把大衣下摆吹动了一下，红色发卡滑了一下，碰到耳朵上方的发丝。"
+    with Pause(1.0)
+
+    "她看着我。我看着她。我们站在那几秒钟里，谁都没说话。"
+    "身边有人来来去去，打车的声音、告别的声音、初冬的风声混在一起，"
+    "可那几秒钟里我什么都听不见。"
+    with Pause(1.0)
+
+    # 内心独白 cue (D 项 - 增强代入感)
+    "（我想……算了，就这样吧。）"
+    with Pause(0.5)
+
+    # 暧昧对话 (核心)
+    "我脑子一热，话就冲出口了。"
+    "「你……腿真长，还白。」"
+    with Pause(1.0)
+
+    "话一出口我就想抽自己。这是什么鬼夸奖，轻佻得像在调戏。"
+    "我尴尬地站着，不敢看她的眼睛。"
+    with Pause(0.5)
+
+    "但她没躲。她反而轻轻笑了一下，眼尾微微弯起来，"
+    "声音轻轻的，带着点说不清的意味。"
+
+    show lx smile at right zorder 2
+    with dissolve
+
+    # 保留核心暧昧台词
+    lx "……那你多看几眼。"
+    with Pause(1.0)
+
+    "我愣住了。风从程庄路那边吹过来，她额前的碎发被吹乱了，"
+    "她伸手去拢，那枚红色发卡在灯光下滑了一下。"
+    "我想接话，但舌头像打了结，什么都说不出来。"
+    with Pause(1.0)
+
+    "她笑了一下，把围巾裹紧，朝我摆了摆手。"
+
+    show lx sweet_smile at right zorder 2
+    with dissolve
+
+    lx "那我走了。"
+    "「嗯。路上小心。」"
+    with Pause(1.0)
+
+    # ============================================================
+    # Scene 4: 离去 (公交站)
+    # ============================================================
+    scene bg bus_stop
     with fade
 
-    play music "audio/music/bgm_daily.ogg" fadein 1.5
-
-    "我们坐在窗边，两杯咖啡冒着热气。"
-    "窗外，云层渐渐散开，阳光洒在海面上。"
-
-    play sound "audio/sound/sfx_cup.ogg"
-    am "（吹了吹咖啡）……"
-    am "杰克，我可以问你一件事吗？"
-
-    jk "当然。"
-
-    show ami thinking at truecenter zorder 2
+    # LX 离场
+    hide lx
     with dissolve
 
-    am "你……为什么一开始会注意到我？"
-    am "我是说，这里有那么多人。"
+    with Pause(0.5)
 
-    "（为什么呢？我想了想。）"
+    "然后她钻进车里，车门关上。"
+    with Pause(0.8)
 
-    menu:
-        "为什么注意到她？"
+    # 视觉锚点：车尾灯红线
+    "车尾灯在深蓝色夜色里拉成一条红线，慢慢弯过街角，消失了。"
+    with Pause(1.0)
 
-        "因为她的行李快倒了":
-            $ ami_love += 1
-            jk "说真的，因为我看到你的行李快倒了。"
-            jk "总不能看着它砸到你脚上吧？"
-            show ami blush at truecenter zorder 2
-            with dissolve
-            am "原、原来是这样……"
-            am "（脸有点红）"
+    "我站在路边，北京十月的风吹得我耳朵发冷。"
+    with Pause(0.8)
 
-        "因为她看起来是亚洲人":
-            $ jack_love += 1
-            jk "可能因为……看到亚洲面孔比较亲切？"
-            jk "我也认识一些亚裔朋友。"
-            show ami normal at truecenter zorder 2
-            with dissolve
-            am "这样啊……"
+    "「有缘就会再见面的」"
+    with Pause(0.5)
 
-        "因为她的眼神很特别":
-            $ ami_love += 2
-            jk "嗯……可能是因为你的眼神？"
-            jk "看起来有点迷茫，又有点坚定。"
-            jk "有点像……嗯，我也说不清。"
-            show ami blush at truecenter zorder 2
-            with dissolve
-            am "（低下头）你、你真会说话……"
+    # 视觉锚点：路灯雨丝 + 远处公交车
+    "路灯把雨丝照成斜线。远处一辆公交车慢慢驶来。"
+    with Pause(1.0)
 
-    $ shared_coffee = True
+    "我小声念了一句，然后转身，朝着公交的方向慢慢走去。"
+    "初冬下起了小雨。"
+    with Pause(2.0)
 
-    # ========== 场景6：命运的巧合 ==========
-    "我们聊了聊各自的家乡、喜欢的音乐、还有对新西兰的期待。"
-
-    show ami smile at truecenter zorder 2
+    # ============================================================
+    # 结束
+    # ============================================================
+    scene black
     with dissolve
 
-    am "说起来，我来之前查了很多惠灵顿的资料。"
-    am "都说这里风很大，是真的吗？"
+    centered "{size=+10}—— 落日和明天 ——{/size}"
+    with Pause(2.0)
 
-    jk "哈哈，是真的。'Windy Wellington'可不是白叫的。"
-    jk "你今天运气不错，风不算大。"
+    "[[END OF ACT 1]]"
+    with Pause(1.5)
 
-    am "那我以后一定要买一件很厚的外套……"
-
-    # 杰克突然想到什么
-    jk "对了！"
-    jk "你是研究生新生的话，应该需要人带你去校园吧？"
-    jk "如果你不介意，我可以……"
-
-    # 杰克的手机突然响了
-    play sound "audio/sound/sfx_camera.ogg"  # 模拟手机铃声
-
-    "我的手机响了。屏幕上显示：'Mike'。"
-
-    jk "啊，我的朋友到了！抱歉，我要去接他一下。"
-
-    show ami sad at truecenter zorder 2
-    with dissolve
-
-    am "嗯，没关系……"
-
-    jk "你在这里等我一下？我马上回来！"
-    jk "然后我送你到机场大巴站。"
-
-    am "好、好的。"
-
-    "（我匆匆跑向出口，心里想着：希望她还在那里。）"
-
-    # ========== 场景7：尾声 ==========
-    # 5分钟后，杰克带着朋友回来
-    scene bg airport_window
-    with fade
-
-    "我带着朋友 Mike 回到咖啡店。"
-    "阿米还在窗边坐着，阳光打在她的侧脸上。"
-
-    show ami smile at truecenter zorder 2
-    with dissolve
-
-    am "杰克！这边！"
-
-    "我向 Mike 介绍：'这是阿米，Victoria University 的研究生新生。'"
-
-    "Mike 坏笑了一下：'哦？刚才还说要我快点过来，原来是急着见人呢。'"
-
-    show ami blush at truecenter zorder 2
-    with dissolve
-
-    am "（脸红）你、你别乱说……"
-
-    jk "Mike！你够了。"
-
-    # ========== 场景8：第一幕结束 ==========
-    scene bg wellington_city
-    with dissolve
-
-    "我们一起送阿米去了机场大巴站。"
-    "临别时，她从包里拿出一盒肉骨茶调料。"
-
-    show ami smile at truecenter zorder 2
-    with dissolve
-
-    am "这个……送给你。"
-    am "谢谢你今天帮我。"
-    am "如果……如果以后有机会的话，我请你吃饭。"
-
-    jk "那我们互相留个联系方式吧。"
-
-    am "嗯！"
-
-    "我看着她走上大巴，车门关闭，缓缓驶出站台。"
-    "她透过车窗向我挥了挥手。"
-
-    play music "audio/music/bgm_romantic.ogg" fadein 2.0
-
-    "（大康兔的第一次相遇，就这样结束了。）"
-    "（但不知道为什么，我觉得……）"
-    "（这不是最后一次见面。）"
-
-    # 显示第一幕结束画面
-    scene cg ending_act1
-    with Dissolve(2.0)
-
-    "——Act 1：完——"
-    with Pause(3.0)
-
-    # 自动存档
-    $ renpy.save("act1_end", extra_info="第一幕结束")
-
-    # 返回主菜单或继续第二幕
-    return
-
-
-# 第一幕结束后的入口
-label after_act1:
-    "你已经完成了第一幕。"
-    "是否继续第二幕？"
+    $ act1_complete = True
+    $ current_location = "bus_stop"
     return
