@@ -33,7 +33,7 @@ image lx radiant    = "images/characters/rita/sprite_radiant-smile_0001.png"
 image lx laugh      = "images/characters/rita/sprite_laughing_0003.png"
 image lx glance     = "images/characters/rita/sprite_glare-of-judgment_0001.png"
 image lx back_and_smile = "images/characters/rita/sprite_sweet-smile_0006.png"
-image lx back_and_surprised = "images/characters/rita/sprite_surprised_0006.png"
+image lx back_and_surprised = "images/characters/rita/sprite_surprised_0005.png"
 
 
 # 兼容别名
@@ -218,6 +218,8 @@ label act1:
     lx "那我走了。"
     "「嗯。路上小心。」"
     with Pause(1.0)
+
+    hide lx back_and_surprised
 
     "然后她钻进车里，车门关上。"
     with Pause(0.8)
