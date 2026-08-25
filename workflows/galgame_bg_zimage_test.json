@@ -1,0 +1,82 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 142031,
+      "steps": 10,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": ["1", 0],
+      "positive": ["6", 0],
+      "negative": ["7", 0],
+      "latent_image": ["8", 0]
+    },
+    "class_type": "KSampler",
+    "_meta": {"title": "KSampler (Z-Image-Turbo, 10 step cfg=1, real photo)"}
+  },
+  "1": {
+    "inputs": {
+      "unet_name": "z_image_turbo_bf16.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {"title": "UNET Z-Image-Turbo bf16 (merged base+distill)"}
+  },
+  "5": {
+    "inputs": {
+      "clip_name": "qwen_3_4b.safetensors",
+      "type": "qwen_image"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {"title": "CLIPLoader Qwen3 4B (z-image default)"}
+  },
+  "4": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {"title": "VAE ae (z-image default)"}
+  },
+  "6": {
+    "inputs": {
+      "text": "masterpiece, best quality, photorealistic, real photograph, shot on 35mm film, exterior night view of a modern two-story restaurant building entrance, October 2009, tall wide doorway with warm amber light spilling onto dry sidewalk, simple plastered light gray concrete facade, two-story building with modest upper floor windows, soft wall-mounted lamp glowing at entrance, warm yellow glow against deep blue night sky, distant street with blurred car tail lights bokeh, mild film grain, slightly desaturated 2009 beijing color palette, nostalgic atmosphere, no people, no signs with letters, no text, no characters, no red lanterns, 1920x1080 wallpaper",
+      "clip": ["5", 0]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {"title": "Positive - Scene 1 (real photo style)"}
+  },
+  "7": {
+    "inputs": {
+      "text": "anime, cartoon, illustration, drawing, painted, person, people, human, character, figure, crowd, vehicle in foreground, modern smartphone, LED billboard, text, words, letters, alphabet, chinese characters, japanese characters, signs, banners, logos, watermarks, signatures, lowres, bad anatomy, worst quality, blurry, modern glass building, skyscraper, neon lights, wooden architecture, traditional chinese wooden building, wooden door, dark tile roof, red paper lantern, red lantern, chinese lantern, oriental lantern, exterior chinese style, pagoda, upturned eaves, hanfu, qipao",
+      "clip": ["5", 0]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {"title": "Negative (anti-cartoon + anti-asia-cues)"}
+  },
+  "8": {
+    "inputs": {
+      "width": 1920,
+      "height": 1080,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {"title": "Empty Latent (1920x1080)"}
+  },
+  "9": {
+    "inputs": {
+      "samples": ["3", 0],
+      "vae": ["4", 0]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {"title": "VAE Decode"}
+  },
+  "10": {
+    "inputs": {
+      "filename_prefix": "zimage_bg_scene1_test",
+      "images": ["9", 0]
+    },
+    "class_type": "SaveImage",
+    "_meta": {"title": "Save Image"}
+  }
+}

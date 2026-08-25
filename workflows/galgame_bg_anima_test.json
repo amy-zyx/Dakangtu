@@ -1,0 +1,91 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 142021,
+      "steps": 10,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": ["2", 0],
+      "positive": ["6", 0],
+      "negative": ["7", 0],
+      "latent_image": ["8", 0]
+    },
+    "class_type": "KSampler",
+    "_meta": {"title": "KSampler (Anima Turbo)"}
+  },
+  "2": {
+    "inputs": {
+      "model": ["1", 0],
+      "lora_name": "Anima\\anima-turbo-lora-v0.1.safetensors",
+      "strength_model": 1.0
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {"title": "Anima Turbo LoRA"}
+  },
+  "1": {
+    "inputs": {
+      "unet_name": "anima-base-v1.0.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {"title": "UNET Anima Base v1.0"}
+  },
+  "5": {
+    "inputs": {
+      "clip_name": "qwen_3_06b_base.safetensors",
+      "type": "qwen_image"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {"title": "CLIPLoader Qwen3 0.6B (anima official)"}
+  },
+  "4": {
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {"title": "VAE qwen_image_vae (anima official)"}
+  },
+  "6": {
+    "inputs": {
+      "text": "masterpiece, best quality, score_9, anime style, exterior night view of a modern two-story restaurant building entrance, October 2009, tall wide doorway with warm amber light spilling onto dry sidewalk, simple plastered light gray concrete facade, two-story building with modest upper floor windows, soft wall-mounted lamp glowing at entrance, warm yellow glow against deep blue night sky, distant street with blurred car tail lights bokeh, soft painterly texture, 2D galgame background art style, nostalgic atmosphere, no people, no signs with letters, no text, no characters, no red lanterns, 1920x1080 wallpaper",
+      "clip": ["5", 0]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {"title": "Positive - Scene 1 (Restaurant Exterior)"}
+  },
+  "7": {
+    "inputs": {
+      "text": "person, people, human, character, figure, crowd, vehicle in foreground, modern smartphone, LED billboard, anime character, text, words, letters, alphabet, chinese characters, japanese characters, signs, banners, logos, watermarks, signatures, lowres, bad anatomy, worst quality, blurry, modern glass building, skyscraper, neon lights, wooden architecture, traditional chinese wooden building, wooden door, dark tile roof, red paper lantern, red lantern, chinese lantern, oriental lantern, exterior chinese style, pagoda, upturned eaves, hanfu, qipao",
+      "clip": ["5", 0]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {"title": "Negative"}
+  },
+  "8": {
+    "inputs": {
+      "width": 1920,
+      "height": 1080,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {"title": "Empty Latent (1920x1080)"}
+  },
+  "9": {
+    "inputs": {
+      "samples": ["3", 0],
+      "vae": ["4", 0]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {"title": "VAE Decode"}
+  },
+  "10": {
+    "inputs": {
+      "filename_prefix": "anima_bg_scene1_test",
+      "images": ["9", 0]
+    },
+    "class_type": "SaveImage",
+    "_meta": {"title": "Save Image"}
+  }
+}
