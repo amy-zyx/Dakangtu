@@ -23,18 +23,29 @@ image bg street_corner        = "images/backgrounds/zimage_anime_v5_bg_scene4_bu
 # 注: 暂用 Rita 角色图作为 LX 立绘占位 (因 LX 角色立绘尚未生成)
 # 立绘选择依据剧本描述: 姜黄色大衣 → preview_coat_yellow.png 最贴合
 # 注意: image attribute 名不能用 Python 关键字, 故用 default_view 替代 default
-image lx default_view = "images/characters/rita/preview_coat_yellow.png"   # 默认: 姜黄大衣版
-image lx normal     = "images/characters/rita/face_neutral-emote_0001.png"
-image lx smile      = "images/characters/rita/face_content-smile_0001.png"
-image lx sweet_smile = "images/characters/rita/face_sweet-smile_0001.png"
-image lx shy        = "images/characters/rita/face_shy-smile_0001.png"
-image lx surprised  = "images/characters/rita/face_surprised_0001.png"
-image lx radiant    = "images/characters/rita/face_radiant-smile_0001.png"
-image lx laugh      = "images/characters/rita/face_laughing_0001.png"
-image lx glance     = "images/characters/rita/face_glare-of-judgment_0001.png"
+image lx default_view = "images/characters/rita/sprite_neutral-emote_0004.png"   # 默认: 姜黄大衣版
+image lx normal     = "images/characters/rita/sprite_neutral-emote_0004.png"
+image lx smile      = "images/characters/rita/sprite_content-smile_0001.png"
+image lx sweet_smile = "images/characters/rita/sprite_sweet-smile_0005.png"
+image lx shy        = "images/characters/rita/sprite_shy-smile_0005.png"
+image lx surprised  = "images/characters/rita/sprite_surprised_0002.png"
+image lx radiant    = "images/characters/rita/sprite_radiant-smile_0001.png"
+image lx laugh      = "images/characters/rita/sprite_laughing_0003.png"
+image lx glance     = "images/characters/rita/sprite_glare-of-judgment_0001.png"
+image lx back_and_smile = "images/characters/rita/sprite_sweet-smile_0006.png"
+image lx back_and_surprised = "images/characters/rita/sprite_surprised_0006.png"
+
 
 # 兼容别名
 image lx coat_yellow = "images/characters/rita/preview_coat_yellow.png"
+
+# ============================================================
+# 半身像位置 transform (LX 偏右, 腰以上, 不要顶天立地)
+# ============================================================
+transform lx_position:
+    xalign 0.70       # 偏右 (0.5=正中, 1.0=最右)
+    yalign 0.01     # 垂直中点对齐 (全身像时腰以上露出, 脚被屏幕底截断)
+    #zoom 0.75         # 缩小到 75%, 避免顶天立地
 
 # ============================================================
 # Act 1: 落日和明天
@@ -78,6 +89,16 @@ label act1:
     "我按着手机里那条短信找过去，推开了包间的门。"
     with Pause(1.0)
 
+    # ============================================================
+    # Scene 2: 相认 (餐桌近景)
+    # ============================================================
+    scene bg dining_table_window
+    with dissolve
+
+    # 显示 LX 立绘 (右侧)
+    show lx normal at lx_position zorder 2
+    with dissolve
+
     # 旁白：发现 LX
     "我在那一桌子喧闹里一眼扫过去，然后目光被她吸引了。"
 
@@ -113,16 +134,6 @@ label act1:
     "她偶尔动一下，大衣的下摆随着动作轻轻晃。"
     with Pause(1.0)
 
-    # ============================================================
-    # Scene 2: 相认 (餐桌近景)
-    # ============================================================
-    scene bg dining_table_window
-    with dissolve
-
-    # 显示 LX 立绘 (右侧)
-    show lx sweet_smile at right zorder 2
-    with dissolve
-
     "我走近落座。她大概只是随意地扫了一眼门口，看看是谁来晚了。"
     "她的目光从我脸上滑过去，又滑回来，停住了。"
     "然后她笑了。"
@@ -136,7 +147,7 @@ label act1:
     "她也马上回复了我，显然几年时间我还没有被淡忘成某甲。"
     with Pause(0.5)
 
-    show lx smile at right zorder 2
+    show lx smile at lx_position zorder 2
     with dissolve
 
     "我走到她的对面坐下，听着一群同学聊天。"
@@ -146,9 +157,14 @@ label act1:
     "推杯换盏，时间过得很快。"
     with Pause(1.0)
 
+
     # ============================================================
-    # Scene 3: 暧昧 (餐桌近景, 同图)
+    # Scene 3: 离去 (公交站)
     # ============================================================
+
+    # LX 离场
+    scene bg bus_stop
+    with fade
     "散场的时候我特意多留了一会儿，想要找个机会和她搭讪。"
     "我这个人是没有任何技巧的，就是寒暄说她出落得好漂亮，有一双白白的大长腿。"
     "这话听起来有点轻佻，实则我是词穷而已。"
@@ -156,10 +172,10 @@ label act1:
     "我还是找机会把她送到了楼下。"
     with Pause(1.0)
 
-    show lx shy at right zorder 2
+    show lx back_and_smile at lx_position zorder 2
     with dissolve
 
-    "她站在餐桌边上，暖黄灯光落在她脸上。"
+    "她站在路旁，暖黄灯光落在她脸上。"
     "风把大衣下摆吹动了一下，红色发卡滑了一下，碰到耳朵上方的发丝。"
     with Pause(1.0)
 
@@ -177,6 +193,9 @@ label act1:
     "「你……腿真长，还白。」"
     with Pause(1.0)
 
+    show lx back_and_surprised at lx_position zorder 2
+    with dissolve
+
     "话一出口我就想抽自己。这是什么鬼夸奖，轻佻得像在调戏。"
     "我尴尬地站着，不敢看她的眼睛。"
     with Pause(0.5)
@@ -184,11 +203,8 @@ label act1:
     "但她没躲。她反而轻轻笑了一下，眼尾微微弯起来，"
     "声音轻轻的，带着点说不清的意味。"
 
-    show lx smile at right zorder 2
-    with dissolve
-
     # 保留核心暧昧台词
-    lx "……那你多看几眼。"
+    lx "…… 你还是像以前一样那么奇怪。"
     with Pause(1.0)
 
     "我愣住了。风从程庄路那边吹过来，她额前的碎发被吹乱了，"
@@ -198,24 +214,10 @@ label act1:
 
     "她笑了一下，把围巾裹紧，朝我摆了摆手。"
 
-    show lx sweet_smile at right zorder 2
-    with dissolve
 
     lx "那我走了。"
     "「嗯。路上小心。」"
     with Pause(1.0)
-
-    # ============================================================
-    # Scene 4: 离去 (公交站)
-    # ============================================================
-    scene bg bus_stop
-    with fade
-
-    # LX 离场
-    hide lx
-    with dissolve
-
-    with Pause(0.5)
 
     "然后她钻进车里，车门关上。"
     with Pause(0.8)
