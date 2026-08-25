@@ -1,4 +1,4 @@
-﻿################################################################################
+################################################################################
 ## 初始化
 ################################################################################
 
@@ -345,25 +345,14 @@ screen main_menu():
     ## 此语句可确保替换掉任何其他菜单屏幕。
     tag menu
 
-    add gui.main_menu_background
+    ## 封面图: 把你做的封面图放到 game/gui/main_menu.png (1920x1080 推荐)
+    add "gui/main_menu.png"
 
-    ## 此空框可使标题菜单变暗。
-    frame:
-        style "main_menu_frame"
-
-    ## use 语句将其他的屏幕包含进此屏幕。标题屏幕的实际内容在导航屏幕中。
-    use navigation
-
-    if gui.show_name:
-
-        vbox:
-            style "main_menu_vbox"
-
-            text "[config.name!t]":
-                style "main_menu_title"
-
-            text "[config.version]":
-                style "main_menu_version"
+    ## 简单 "开始游戏" 按钮 (只此一个)
+    textbutton _("开始游戏"):
+        xalign 0.5
+        yalign 0.88
+        action Start()
 
 
 style main_menu_frame is empty
