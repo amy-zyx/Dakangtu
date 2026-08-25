@@ -345,8 +345,9 @@ screen main_menu():
     ## 此语句可确保替换掉任何其他菜单屏幕。
     tag menu
 
-    ## 封面图: 把你做的封面图放到 game/gui/main_menu.png (1920x1080 推荐)
-    add "gui/main_menu.png"
+    ## 动画播放一次后切换为静态图
+    ## image 参数：视频播放前短暂显示 + 播放结束后显示
+    add Movie(play="videos/logo.mp4", image="images/backgrounds/fire_woods_2.png") xalign 0.5 yalign 0.5 zoom 0.25
 
     ## 简单 "开始游戏" 按钮 (只此一个)
     textbutton _("开始游戏"):

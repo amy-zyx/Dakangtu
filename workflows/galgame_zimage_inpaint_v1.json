@@ -1,95 +1,188 @@
 {
-  "1": {
-    "inputs": {
-      "image": "example.png"
+  "last_node_id": 11,
+  "last_link_id": 13,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImage",
+      "pos": [50, 250],
+      "size": [320, 320],
+      "inputs": [],
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [1, 2]},
+        {"name": "MASK", "type": "MASK", "links": null}
+      ],
+      "properties": {"Node name for S&R": "LoadImage"},
+      "widgets_values": ["example.png"]
     },
-    "class_type": "LoadImage",
-    "_meta": {"title": "Load Image (右键画 mask)"}
+    {
+      "id": 2,
+      "type": "UNETLoader",
+      "pos": [-700, 0],
+      "size": [320, 100],
+      "inputs": [],
+      "outputs": [
+        {"name": "MODEL", "type": "MODEL", "links": [3]}
+      ],
+      "properties": {"Node name for S&R": "UNETLoader"},
+      "widgets_values": ["z_image_turbo_bf16.safetensors"]
+    },
+    {
+      "id": 3,
+      "type": "CLIPLoader",
+      "pos": [-700, 150],
+      "size": [320, 100],
+      "inputs": [],
+      "outputs": [
+        {"name": "CLIP", "type": "CLIP", "links": [4, 5]}
+      ],
+      "properties": {"Node name for S&R": "CLIPLoader"},
+      "widgets_values": ["qwen_3_4b.safetensors", "qwen_image"]
+    },
+    {
+      "id": 4,
+      "type": "VAELoader",
+      "pos": [-700, 300],
+      "size": [320, 100],
+      "inputs": [],
+      "outputs": [
+        {"name": "VAE", "type": "VAE", "links": [6, 7]}
+      ],
+      "properties": {"Node name for S&R": "VAELoader"},
+      "widgets_values": ["ae.safetensors"]
+    },
+    {
+      "id": 5,
+      "type": "CLIPTextEncode",
+      "pos": [-300, 50],
+      "size": [400, 200],
+      "inputs": [
+        {"name": "clip", "type": "CLIP", "link": 4}
+      ],
+      "outputs": [
+        {"name": "CONDITIONING", "type": "CONDITIONING", "links": [8]}
+      ],
+      "properties": {"Node name for S&R": "CLIPTextEncode"},
+      "widgets_values": ["masterpiece, best quality, 2d anime galgame style, girl in a restaurant setting"]
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [-300, 320],
+      "size": [400, 200],
+      "inputs": [
+        {"name": "clip", "type": "CLIP", "link": 5}
+      ],
+      "outputs": [
+        {"name": "CONDITIONING", "type": "CONDITIONING", "links": [9]}
+      ],
+      "properties": {"Node name for S&R": "CLIPTextEncode"},
+      "widgets_values": ["photorealistic, 3d render, deformed, blurry, lowres, bad anatomy, text, watermark, multiple people, modern building, glass building, neon, lantern"]
+    },
+    {
+      "id": 7,
+      "type": "VAEEncode",
+      "pos": [450, 250],
+      "size": [320, 100],
+      "inputs": [
+        {"name": "pixels", "type": "IMAGE", "link": 1},
+        {"name": "vae", "type": "VAE", "link": 6}
+      ],
+      "outputs": [
+        {"name": "LATENT", "type": "LATENT", "links": [10]}
+      ],
+      "properties": {"Node name for S&R": "VAEEncode"},
+      "widgets_values": []
+    },
+    {
+      "id": 8,
+      "type": "SetLatentNoiseMask",
+      "pos": [800, 250],
+      "size": [320, 100],
+      "inputs": [
+        {"name": "samples", "type": "LATENT", "link": 10},
+        {"name": "mask", "type": "MASK", "link": 2}
+      ],
+      "outputs": [
+        {"name": "LATENT", "type": "LATENT", "links": [11]}
+      ],
+      "properties": {"Node name for S&R": "SetLatentNoiseMask"},
+      "widgets_values": []
+    },
+    {
+      "id": 9,
+      "type": "KSampler",
+      "pos": [1150, 100],
+      "size": [320, 320],
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 3},
+        {"name": "positive", "type": "CONDITIONING", "link": 8},
+        {"name": "negative", "type": "CONDITIONING", "link": 9},
+        {"name": "latent_image", "type": "LATENT", "link": 11}
+      ],
+      "outputs": [
+        {"name": "LATENT", "type": "LATENT", "links": [12]}
+      ],
+      "properties": {"Node name for S&R": "KSampler"},
+      "widgets_values": [142021, "fixed", 10, 1.0, "euler", "simple", 0.7]
+    },
+    {
+      "id": 10,
+      "type": "VAEDecode",
+      "pos": [1500, 250],
+      "size": [320, 100],
+      "inputs": [
+        {"name": "samples", "type": "LATENT", "link": 12},
+        {"name": "vae", "type": "VAE", "link": 7}
+      ],
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [13]}
+      ],
+      "properties": {"Node name for S&R": "VAEDecode"},
+      "widgets_values": []
+    },
+    {
+      "id": 11,
+      "type": "SaveImage",
+      "pos": [1850, 250],
+      "size": [320, 200],
+      "inputs": [
+        {"name": "images", "type": "IMAGE", "link": 13}
+      ],
+      "outputs": [],
+      "properties": {"Node name for S&R": "SaveImage"},
+      "widgets_values": ["zimage_inpaint"]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 7, 0, "IMAGE"],
+    [2, 1, 1, 8, 1, "MASK"],
+    [3, 2, 0, 9, 0, "MODEL"],
+    [4, 3, 0, 5, 0, "CLIP"],
+    [5, 3, 0, 6, 0, "CLIP"],
+    [6, 4, 0, 7, 1, "VAE"],
+    [7, 4, 0, 10, 1, "VAE"],
+    [8, 5, 0, 9, 1, "CONDITIONING"],
+    [9, 6, 0, 9, 2, "CONDITIONING"],
+    [10, 7, 0, 8, 0, "LATENT"],
+    [11, 8, 0, 9, 3, "LATENT"],
+    [12, 9, 0, 10, 0, "LATENT"],
+    [13, 10, 0, 11, 0, "IMAGE"]
+  ],
+  "groups": [
+    {
+      "title": "Z-Image Inpaint (manual mask, denoise 0.7)",
+      "bounding": [0, -100, 2300, 700],
+      "color": "#3f789e"
+    }
+  ],
+  "config": {},
+  "extra": {
+    "workflow_info": {
+      "version": "1.0",
+      "author": "Dakangtu",
+      "description": "Z-Image inpainting with hand-drawn mask via LoadImage MaskEditor"
+    }
   },
-  "2": {
-    "inputs": {
-      "unet_name": "z_image_turbo_bf16.safetensors"
-    },
-    "class_type": "UNETLoader",
-    "_meta": {"title": "Load z-image DiT"}
-  },
-  "3": {
-    "inputs": {
-      "text_encoder_name": "qwen_3_4b.safetensors",
-      "type": "qwen_image"
-    },
-    "class_type": "CLIPLoader",
-    "_meta": {"title": "Load Qwen3 4B (qwen_image type)"}
-  },
-  "4": {
-    "inputs": {
-      "vae_name": "ae.safetensors"
-    },
-    "class_type": "VAELoader",
-    "_meta": {"title": "Load z-image VAE"}
-  },
-  "5": {
-    "inputs": {
-      "text": "same composition, same style, 2d anime, masterpiece, best quality, the masked area redrawn cleanly",
-      "clip": ["3", 0]
-    },
-    "class_type": "CLIPTextEncode",
-    "_meta": {"title": "CLIPTextEncode (Positive)"}
-  },
-  "6": {
-    "inputs": {
-      "text": "blurry, deformed, lowres, bad anatomy, worst quality, text, watermark, modern style, photorealistic, 3d render",
-      "clip": ["3", 0]
-    },
-    "class_type": "CLIPTextEncode",
-    "_meta": {"title": "CLIPTextEncode (Negative)"}
-  },
-  "7": {
-    "inputs": {
-      "pixels": ["1", 0],
-      "vae": ["4", 0]
-    },
-    "class_type": "VAEEncode",
-    "_meta": {"title": "VAE Encode (全图)"}
-  },
-  "8": {
-    "inputs": {
-      "samples": ["7", 0],
-      "mask": ["1", 1]
-    },
-    "class_type": "SetLatentNoiseMask",
-    "_meta": {"title": "Set Latent Noise Mask (按 mask 置 noise)"}
-  },
-  "9": {
-    "inputs": {
-      "seed": 42,
-      "steps": 10,
-      "cfg": 1,
-      "sampler_name": "euler",
-      "scheduler": "simple",
-      "denoise": 0.7,
-      "model": ["2", 0],
-      "positive": ["5", 0],
-      "negative": ["6", 0],
-      "latent_image": ["8", 0]
-    },
-    "class_type": "KSampler",
-    "_meta": {"title": "KSampler (denoise 0.7 = 局部精修)"}
-  },
-  "10": {
-    "inputs": {
-      "samples": ["9", 0],
-      "vae": ["4", 0]
-    },
-    "class_type": "VAEDecode",
-    "_meta": {"title": "VAE Decode"}
-  },
-  "11": {
-    "inputs": {
-      "filename_prefix": "zimage_inpaint",
-      "images": ["10", 0]
-    },
-    "class_type": "SaveImage",
-    "_meta": {"title": "Save Image"}
-  }
+  "version": 1
 }

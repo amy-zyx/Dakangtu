@@ -1,0 +1,77 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 1140514,
+      "steps": 25,
+      "cfg": 7.0,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": ["12", 0],
+      "positive": ["6", 0],
+      "negative": ["7", 0],
+      "latent_image": ["8", 0]
+    },
+    "class_type": "KSampler",
+    "_meta": {"title": "KSampler (SDXL + pixel-art-xl, 25 step cfg=7)"}
+  },
+  "1": {
+    "inputs": {
+      "ckpt_name": "waiIllustriousSDXL_v170.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {"title": "Checkpoint waiIllustriousSDXL v170"}
+  },
+  "12": {
+    "inputs": {
+      "model": ["1", 0],
+      "clip": ["1", 1],
+      "lora_name": "pixel-art-xl-v1.1.safetensors",
+      "strength_model": 0.9,
+      "strength_clip": 0.9
+    },
+    "class_type": "LoraLoader",
+    "_meta": {"title": "LoRA pixel-art-xl-v1.1 (0.9)"}
+  },
+  "6": {
+    "inputs": {
+      "text": "masterpiece, best quality, pixel art, sharp pixel edges, limited color palette, crisp dithering, clean sprite shading, no anti-aliasing, no blur, no smooth gradients, two-story modern restaurant exterior, October 2009 beijing, simple light gray concrete facade, tall wide doorway, warm amber light spilling onto dry sidewalk, wall-mounted lamp, distant blurred car tail lights, deep blue night sky, mild film grain, no people, no signs with text, no letters, no red lanterns, 1920x1080",
+      "clip": ["12", 1]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {"title": "Positive - Scene 1 Pixel Art (SDXL)"}
+  },
+  "7": {
+    "inputs": {
+      "text": "photorealistic, photograph, 3d render, smooth gradient, anti-aliased, blurry, soft shading, painterly, person, people, human, character, figure, vehicle in foreground, modern smartphone, LED billboard, text, words, letters, alphabet, chinese characters, japanese characters, signs, banners, logos, watermarks, signatures, lowres, bad anatomy, worst quality, modern glass building, skyscraper, neon lights, wooden architecture, traditional chinese wooden building, wooden door, dark tile roof, red paper lantern, red lantern, chinese lantern, oriental lantern, pagoda, upturned eaves, refiner",
+      "clip": ["12", 1]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {"title": "Negative (anti-realistic + no refiner)"}
+  },
+  "8": {
+    "inputs": {
+      "width": 1920,
+      "height": 1080,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {"title": "Empty Latent (1920x1080)"}
+  },
+  "9": {
+    "inputs": {
+      "samples": ["3", 0],
+      "vae": ["1", 2]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {"title": "VAE Decode (SDXL built-in)"}
+  },
+  "10": {
+    "inputs": {
+      "filename_prefix": "sdxl_pixelart_scene1",
+      "images": ["9", 0]
+    },
+    "class_type": "SaveImage",
+    "_meta": {"title": "Save Image"}
+  }
+}
