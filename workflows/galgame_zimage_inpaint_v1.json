@@ -1,0 +1,95 @@
+{
+  "1": {
+    "inputs": {
+      "image": "example.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {"title": "Load Image (右键画 mask)"}
+  },
+  "2": {
+    "inputs": {
+      "unet_name": "z_image_turbo_bf16.safetensors"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {"title": "Load z-image DiT"}
+  },
+  "3": {
+    "inputs": {
+      "text_encoder_name": "qwen_3_4b.safetensors",
+      "type": "qwen_image"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {"title": "Load Qwen3 4B (qwen_image type)"}
+  },
+  "4": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {"title": "Load z-image VAE"}
+  },
+  "5": {
+    "inputs": {
+      "text": "same composition, same style, 2d anime, masterpiece, best quality, the masked area redrawn cleanly",
+      "clip": ["3", 0]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {"title": "CLIPTextEncode (Positive)"}
+  },
+  "6": {
+    "inputs": {
+      "text": "blurry, deformed, lowres, bad anatomy, worst quality, text, watermark, modern style, photorealistic, 3d render",
+      "clip": ["3", 0]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {"title": "CLIPTextEncode (Negative)"}
+  },
+  "7": {
+    "inputs": {
+      "pixels": ["1", 0],
+      "vae": ["4", 0]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {"title": "VAE Encode (全图)"}
+  },
+  "8": {
+    "inputs": {
+      "samples": ["7", 0],
+      "mask": ["1", 1]
+    },
+    "class_type": "SetLatentNoiseMask",
+    "_meta": {"title": "Set Latent Noise Mask (按 mask 置 noise)"}
+  },
+  "9": {
+    "inputs": {
+      "seed": 42,
+      "steps": 10,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 0.7,
+      "model": ["2", 0],
+      "positive": ["5", 0],
+      "negative": ["6", 0],
+      "latent_image": ["8", 0]
+    },
+    "class_type": "KSampler",
+    "_meta": {"title": "KSampler (denoise 0.7 = 局部精修)"}
+  },
+  "10": {
+    "inputs": {
+      "samples": ["9", 0],
+      "vae": ["4", 0]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {"title": "VAE Decode"}
+  },
+  "11": {
+    "inputs": {
+      "filename_prefix": "zimage_inpaint",
+      "images": ["10", 0]
+    },
+    "class_type": "SaveImage",
+    "_meta": {"title": "Save Image"}
+  }
+}
