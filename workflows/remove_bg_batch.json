@@ -1,0 +1,78 @@
+{
+  "last_node_id": 3,
+  "last_link_id": 2,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadImagesFromDirectory",
+      "pos": [100, 200],
+      "size": [320, 120],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [
+        {"name": "directory", "type": "WIDGET", "link": null, "widget": true}
+      ],
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [1], "slot_index": 0},
+        {"name": "MASK", "type": "MASK", "links": null, "slot_index": 1}
+      ],
+      "properties": {},
+      "widgets_values": ["input/batch_remove_bg"]
+    },
+    {
+      "id": 2,
+      "type": "Image Remove Background (rembg)",
+      "pos": [490, 200],
+      "size": [315, 100],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {"name": "image", "type": "IMAGE", "link": 1, "slot_index": 0},
+        {"name": "model_name", "type": "COMBO", "link": null, "widget": true}
+      ],
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [2], "slot_index": 0}
+      ],
+      "properties": {},
+      "widgets_values": ["isnet-anime"]
+    },
+    {
+      "id": 3,
+      "type": "SaveImage",
+      "pos": [870, 200],
+      "size": [315, 80],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {"name": "images", "type": "IMAGE", "link": 2, "slot_index": 0},
+        {"name": "filename_prefix", "type": "WIDGET", "link": null, "widget": true}
+      ],
+      "outputs": [],
+      "properties": {},
+      "widgets_values": ["remove_bg_batch"]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 2, 0, "IMAGE"],
+    [2, 2, 0, 3, 0, "IMAGE"]
+  ],
+  "groups": [
+    {
+      "title": "Remove Background Batch (LoadImagesFromDirectory + rembg + SaveImage)",
+      "bounding": [80, 140, 1130, 220],
+      "color": "#3f789e"
+    }
+  ],
+  "config": {},
+  "extra": {
+    "workflow_info": {
+      "name": "Remove Background Batch (batchimg rembg + isnet-anime)",
+      "author": "trae",
+      "description": "批量 rembg 流程: LoadImagesFromDirectory(目录所有图) -> Image Remove Background (batchimg isnet-anime) -> SaveImage(透明 PNG, 自动按 00001 编号)。把要处理的图片放到 ComfyUI input 目录下指定子目录里, 修改 directory 字段即可。"
+    }
+  },
+  "version": 0.4
+}

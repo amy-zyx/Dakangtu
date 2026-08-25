@@ -1,6 +1,0 @@
-[0] queue: running=['a1f56918'] pending=[]
-[15] queue: running=['a1f56918'] pending=[]
-[29] DONE! outputs keys: ['8']
-  [OK] yuzu_v1_s11_00001_.png -> C:\Users\jwu40\Documents\trae_projects\Dakangtu\output\yuzu_v1\yuzu_v1_s11_00001_.png (539[74] DONE! outputs keys: ['8']
-  [OK] yuzu_v1_s11_00001_.png -> C:\Users\jwu40\Documents\trae_projects\Dakangtu\output\yuzu_v1\yuzu_v1_s11_00001_.png (539622 bytes)
-SUCCESS

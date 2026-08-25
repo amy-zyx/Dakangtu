@@ -1,6 +1,0 @@
-  /: 200 | <!doctype html><html lang="en"><head><link rel="stylesheet" href="user.css"><link rel="stylesheet" href="api/userdata/user.css"><meta charset="UTF-8"/
-  /system_stats: 200 | {"system": {"os": "linux", "ram_total": 68719476736, "ram_free": 67399655424, "comfyui_version": "0.18.0", "required_frontend_version": "1.41.21", "in
-  /object_info: 200 | {"KSampler": {"input": {"required": {"model": ["MODEL", {"tooltip": "The model used for denoising the input latent."}], "seed": ["INT", {"default": 0,
-  /queue: 200 | {"queue_running": [], "queue_pending": []}
-  /history: 200 | {}
-  /prompt: 200 | {"exec_info": {"queue_remaining": 0}}

@@ -50,7 +50,6 @@ label act1:
     scene black
     with Pause(1.0)
 
-    "——《大康兔》——"
     "Act 1：落日和明天"
     with Pause(2.0)
 

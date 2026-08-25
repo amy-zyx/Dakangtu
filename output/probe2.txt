@@ -1,4 +1,0 @@
-HOST = cpod-1ud2p6nylymq.podtcp.compshare.cn
-DNS OK: 117.50.190.229
-OPEN TCP: [28682]
-  http://cpod-1ud2p6nylymq.podtcp.compshare.cn:28682  -> HTTP 502

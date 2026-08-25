@@ -1,5 +1,0 @@
-POST /interrupt: 200 
-
-=== /queue after interrupt ===
-  running: []
-  pending: ['a1f56918-54d3-4918-b4b7-60a827cada6f']
