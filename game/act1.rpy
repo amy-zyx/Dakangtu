@@ -10,14 +10,14 @@
 
 # ============ 背景图声明 (1920x1080 全屏) ============
 # 主体场景
-image bg restaurant_interior  = "images/backgrounds/zimage_anime_bg_scene2_private_dining_room_00001_.png"
-image bg dining_table_window  = "images/backgrounds/zimage_anime_bg_scene3_dining_table_window_00001_.png"
-image bg bus_stop             = "images/backgrounds/zimage_anime_v5_bg_scene4_bus_stop_00001_.png"
+image bg restaurant_interior  = "images/backgrounds/act1/zimage_anime_bg_scene2_private_dining_room_00001_.png"
+image bg dining_table_window  = "images/backgrounds/act1/zimage_anime_bg_scene3_dining_table_window_00001_.png"
+image bg bus_stop             = "images/backgrounds/act1/zimage_anime_v5_bg_scene4_bus_stop_00001_.png"
 
 # 兼容别名 (让旧 scene bg xxx 仍能工作 / 方便后续替换图)
-image bg private_dining_room  = "images/backgrounds/zimage_anime_bg_scene2_private_dining_room_00001_.png"
-image bg dining_table         = "images/backgrounds/zimage_anime_bg_scene3_dining_table_window_00001_.png"
-image bg street_corner        = "images/backgrounds/zimage_anime_v5_bg_scene4_bus_stop_00001_.png"
+image bg private_dining_room  = "images/backgrounds/act1/zimage_anime_bg_scene2_private_dining_room_00001_.png"
+image bg dining_table         = "images/backgrounds/act1/zimage_anime_bg_scene3_dining_table_window_00001_.png"
+image bg street_corner        = "images/backgrounds/act1/zimage_anime_v5_bg_scene4_bus_stop_00001_.png"
 
 # ============ LX 立绘声明 ============
 # 注: 暂用 Rita 角色图作为 LX 立绘占位 (因 LX 角色立绘尚未生成)
