@@ -250,8 +250,9 @@ screen quick_menu():
 
 
 ## 此代码确保只要用户没有主动隐藏界面，就会在游戏中显示 quick_menu 屏幕。
-init python:
-    config.overlay_screens.append("quick_menu")
+# 已禁用：项目不需要底部游戏菜单（保存/历史/快进等）
+# init python:
+#     config.overlay_screens.append("quick_menu")
 
 default quick_menu = True
 
