@@ -5,186 +5,583 @@
     {
       "id": 1,
       "type": "LoadImage",
-      "pos": [50, 400],
-      "size": [320, 320],
+      "pos": [
+        50,
+        400
+      ],
+      "size": [
+        320,
+        320
+      ],
       "inputs": [],
       "outputs": [
-        {"name": "IMAGE", "type": "IMAGE", "links": [1]},
-        {"name": "MASK", "type": "MASK", "links": null}
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
       ],
-      "properties": {"Node name for S&R": "LoadImage"},
-      "widgets_values": ["example.png"]
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "example.png"
+      ],
+      "class_type": "LoadImage"
     },
     {
       "id": 2,
       "type": "UNETLoader",
-      "pos": [-1100, -200],
-      "size": [320, 100],
+      "pos": [
+        -1100,
+        -200
+      ],
+      "size": [
+        320,
+        100
+      ],
       "inputs": [],
       "outputs": [
-        {"name": "MODEL", "type": "MODEL", "links": [2, 3]}
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            2,
+            3
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "UNETLoader"},
-      "widgets_values": ["anima-base-v1.0.safetensors"]
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "anima-base-v1.0.safetensors"
+      ],
+      "class_type": "UNETLoader"
     },
     {
       "id": 3,
       "type": "CLIPLoader",
-      "pos": [-1100, -50],
-      "size": [320, 100],
+      "pos": [
+        -1100,
+        -50
+      ],
+      "size": [
+        320,
+        100
+      ],
       "inputs": [],
       "outputs": [
-        {"name": "CLIP", "type": "CLIP", "links": [4, 5]}
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            4,
+            5
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "CLIPLoader"},
-      "widgets_values": ["qwen_3_06b_base.safetensors", "qwen_image"]
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen_3_06b_base.safetensors",
+        "qwen_image"
+      ],
+      "class_type": "CLIPLoader"
     },
     {
       "id": 4,
       "type": "VAELoader",
-      "pos": [-1100, 100],
-      "size": [320, 100],
+      "pos": [
+        -1100,
+        100
+      ],
+      "size": [
+        320,
+        100
+      ],
       "inputs": [],
       "outputs": [
-        {"name": "VAE", "type": "VAE", "links": [6]}
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            6
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "VAELoader"},
-      "widgets_values": ["qwen_image_vae.safetensors"]
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "qwen_image_vae.safetensors"
+      ],
+      "class_type": "VAELoader"
     },
     {
       "id": 5,
       "type": "CLIPTextEncode",
-      "pos": [-700, 50],
-      "size": [400, 200],
+      "pos": [
+        -700,
+        50
+      ],
+      "size": [
+        400,
+        200
+      ],
       "inputs": [
-        {"name": "clip", "type": "CLIP", "link": 4}
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 4,
+          "slot_index": 0
+        }
       ],
       "outputs": [
-        {"name": "CONDITIONING", "type": "CONDITIONING", "links": [7]}
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            7
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "CLIPTextEncode"},
-      "widgets_values": ["masterpiece, best quality, 2d anime galgame cover art, half-body shot of a young Chinese woman, mustard yellow long coat, red hair clip, deep brown eyes, short black hair, V-neck white sweater underneath, standing at warm restaurant door threshold, amber lantern light spilling from behind, deep blue night sky background, soft painterly texture, cinematic composition with negative space at top for title, warm amber and red color palette, atmospheric depth, gentle shy smile, nostalgic autumn mood, October 2009 Beijing"]
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "masterpiece, best quality, 2d anime galgame cover art, half-body shot of a young Chinese woman, mustard yellow long coat, red hair clip, deep brown eyes, short black hair, V-neck white sweater underneath, standing at warm restaurant door threshold, amber lantern light spilling from behind, deep blue night sky background, soft painterly texture, cinematic composition with negative space at top for title, warm amber and red color palette, atmospheric depth, gentle shy smile, nostalgic autumn mood, October 2009 Beijing"
+      ],
+      "class_type": "CLIPTextEncode"
     },
     {
       "id": 6,
       "type": "CLIPTextEncode",
-      "pos": [-700, 320],
-      "size": [400, 200],
+      "pos": [
+        -700,
+        320
+      ],
+      "size": [
+        400,
+        200
+      ],
       "inputs": [
-        {"name": "clip", "type": "CLIP", "link": 5}
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5,
+          "slot_index": 0
+        }
       ],
       "outputs": [
-        {"name": "CONDITIONING", "type": "CONDITIONING", "links": [8]}
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            8
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "CLIPTextEncode"},
-      "widgets_values": ["photorealistic, 3d render, deformed, blurry, lowres, bad anatomy, text, watermark, chinese characters, japanese characters, signs with letters, multiple people, modern glass building, skyscraper, neon lights, red paper lantern, hanging lantern, three-wheeled vehicle, columns, vehicle in foreground"]
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "photorealistic, 3d render, deformed, blurry, lowres, bad anatomy, text, watermark, chinese characters, japanese characters, signs with letters, multiple people, modern glass building, skyscraper, neon lights, red paper lantern, hanging lantern, three-wheeled vehicle, columns, vehicle in foreground"
+      ],
+      "class_type": "CLIPTextEncode"
     },
     {
       "id": 7,
       "type": "IPAdapter Unified Loader",
-      "pos": [-700, 550],
-      "size": [400, 200],
+      "pos": [
+        -700,
+        550
+      ],
+      "size": [
+        400,
+        200
+      ],
       "inputs": [
-        {"name": "model", "type": "MODEL", "link": 2}
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 2,
+          "slot_index": 0
+        }
       ],
       "outputs": [
-        {"name": "model", "type": "MODEL", "links": [9]}
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            9
+          ]
+        },
+        {
+          "name": "ipadapter",
+          "type": "IPADAPTER",
+          "links": []
+        }
       ],
-      "properties": {"Node name for S&R": "IPAdapter Unified Loader"},
-      "widgets_values": ["flux-ip-adapter-v0.1.safetensors", "PLUS FACE (portraits)", 0.0, 0.85, 0.0, 1.0]
+      "properties": {
+        "Node name for S&R": "IPAdapter Unified Loader"
+      },
+      "widgets_values": [
+        "flux-ip-adapter-v0.1.safetensors",
+        "PLUS FACE (portraits)",
+        0.0,
+        0.85,
+        0.0,
+        1.0
+      ],
+      "class_type": "IPAdapter Unified Loader"
     },
     {
       "id": 8,
       "type": "IPAdapter Apply",
-      "pos": [450, 400],
-      "size": [400, 200],
+      "pos": [
+        450,
+        400
+      ],
+      "size": [
+        400,
+        200
+      ],
       "inputs": [
-        {"name": "model", "type": "MODEL", "link": 3},
-        {"name": "ipadapter", "type": "IPADAPTER", "link": 9},
-        {"name": "image", "type": "IMAGE", "link": 1}
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "ipadapter",
+          "type": "IPADAPTER",
+          "link": 9,
+          "slot_index": 1
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1,
+          "slot_index": 2
+        },
+        {
+          "name": "attn_mask",
+          "type": "MASK",
+          "link": null,
+          "slot_index": 3
+        },
+        {
+          "name": "clip_vision",
+          "type": "CLIP_VISION",
+          "link": null,
+          "slot_index": 4
+        }
       ],
       "outputs": [
-        {"name": "MODEL", "type": "MODEL", "links": [10]}
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            10
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "IPAdapter Apply"},
-      "widgets_values": [0.85, 0.0, 1.0, 0.0]
+      "properties": {
+        "Node name for S&R": "IPAdapter Apply"
+      },
+      "widgets_values": [
+        0.85,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "class_type": "IPAdapter Apply"
     },
     {
       "id": 9,
       "type": "EmptyLatentImage",
-      "pos": [450, 700],
-      "size": [320, 100],
+      "pos": [
+        450,
+        700
+      ],
+      "size": [
+        320,
+        100
+      ],
       "inputs": [],
       "outputs": [
-        {"name": "LATENT", "type": "LATENT", "links": [11]}
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            11
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "EmptyLatentImage"},
-      "widgets_values": [1920, 1080, 1]
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1920,
+        1080,
+        1
+      ],
+      "class_type": "EmptyLatentImage"
     },
     {
       "id": 10,
       "type": "KSampler",
-      "pos": [900, 400],
-      "size": [320, 320],
+      "pos": [
+        900,
+        400
+      ],
+      "size": [
+        320,
+        320
+      ],
       "inputs": [
-        {"name": "model", "type": "MODEL", "link": 10},
-        {"name": "positive", "type": "CONDITIONING", "link": 7},
-        {"name": "negative", "type": "CONDITIONING", "link": 8},
-        {"name": "latent_image", "type": "LATENT", "link": 11}
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 10,
+          "slot_index": 0
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 7,
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 8,
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 11,
+          "slot_index": 3
+        }
       ],
       "outputs": [
-        {"name": "LATENT", "type": "LATENT", "links": [12]}
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            12
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "KSampler"},
-      "widgets_values": [142001, "fixed", 10, 1.0, "euler", "simple", 1.0]
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        142001,
+        "fixed",
+        10,
+        1.0,
+        "euler",
+        "simple",
+        1.0
+      ],
+      "class_type": "KSampler"
     },
     {
       "id": 11,
       "type": "VAEDecode",
-      "pos": [1300, 400],
-      "size": [320, 100],
+      "pos": [
+        1300,
+        400
+      ],
+      "size": [
+        320,
+        100
+      ],
       "inputs": [
-        {"name": "samples", "type": "LATENT", "link": 12},
-        {"name": "vae", "type": "VAE", "link": 6}
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 12,
+          "slot_index": 0
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 6,
+          "slot_index": 1
+        }
       ],
       "outputs": [
-        {"name": "IMAGE", "type": "IMAGE", "links": [13]}
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            13
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "VAEDecode"},
-      "widgets_values": []
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "class_type": "VAEDecode"
     },
     {
       "id": 12,
       "type": "SaveImage",
-      "pos": [1700, 400],
-      "size": [320, 200],
+      "pos": [
+        1700,
+        400
+      ],
+      "size": [
+        320,
+        200
+      ],
       "inputs": [
-        {"name": "images", "type": "IMAGE", "link": 13}
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 13,
+          "slot_index": 0
+        }
       ],
       "outputs": [],
-      "properties": {"Node name for S&R": "SaveImage"},
-      "widgets_values": ["anima_cover_ipadapter"]
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "anima_cover_ipadapter"
+      ],
+      "class_type": "SaveImage"
     }
   ],
   "links": [
-    [1, 1, 0, 8, 2, "IMAGE"],
-    [2, 2, 0, 7, 0, "MODEL"],
-    [3, 2, 0, 8, 0, "MODEL"],
-    [4, 3, 0, 5, 0, "CLIP"],
-    [5, 3, 0, 6, 0, "CLIP"],
-    [6, 4, 0, 11, 1, "VAE"],
-    [7, 5, 0, 10, 1, "CONDITIONING"],
-    [8, 6, 0, 10, 2, "CONDITIONING"],
-    [9, 7, 0, 8, 1, "IPADAPTER"],
-    [10, 8, 0, 10, 0, "MODEL"],
-    [11, 9, 0, 10, 3, "LATENT"],
-    [12, 10, 0, 11, 0, "LATENT"],
-    [13, 11, 0, 12, 0, "IMAGE"]
+    [
+      1,
+      1,
+      0,
+      8,
+      2,
+      "IMAGE"
+    ],
+    [
+      2,
+      2,
+      0,
+      7,
+      0,
+      "MODEL"
+    ],
+    [
+      3,
+      2,
+      0,
+      8,
+      0,
+      "MODEL"
+    ],
+    [
+      4,
+      3,
+      0,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      5,
+      3,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      6,
+      4,
+      0,
+      11,
+      1,
+      "VAE"
+    ],
+    [
+      7,
+      5,
+      0,
+      10,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      8,
+      6,
+      0,
+      10,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      9,
+      7,
+      0,
+      8,
+      1,
+      "IPADAPTER"
+    ],
+    [
+      10,
+      8,
+      0,
+      10,
+      0,
+      "MODEL"
+    ],
+    [
+      11,
+      9,
+      0,
+      10,
+      3,
+      "LATENT"
+    ],
+    [
+      12,
+      10,
+      0,
+      11,
+      0,
+      "LATENT"
+    ],
+    [
+      13,
+      11,
+      0,
+      12,
+      0,
+      "IMAGE"
+    ]
   ],
   "groups": [
     {
       "title": "Anima Cover Gen (Flux IP-Adapter, txt2img + IP reference)",
-      "bounding": [-50, -300, 2100, 1200],
+      "bounding": [
+        -50,
+        -300,
+        2100,
+        1200
+      ],
       "color": "#3f789e"
     }
   ],

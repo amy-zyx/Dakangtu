@@ -5,233 +5,703 @@
     {
       "id": 1,
       "type": "LoadImage",
-      "pos": [50, 250],
-      "size": [320, 320],
+      "pos": [
+        50,
+        250
+      ],
+      "size": [
+        320,
+        320
+      ],
       "inputs": [],
       "outputs": [
-        {"name": "IMAGE", "type": "IMAGE", "links": [1, 14]},
-        {"name": "MASK", "type": "MASK", "links": null}
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            1,
+            14
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": []
+        }
       ],
-      "properties": {"Node name for S&R": "LoadImage"},
-      "widgets_values": ["example.png"]
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "example.png"
+      ],
+      "class_type": "LoadImage"
     },
     {
       "id": 2,
       "type": "UNETLoader",
-      "pos": [-1100, -200],
-      "size": [320, 100],
+      "pos": [
+        -1100,
+        -200
+      ],
+      "size": [
+        320,
+        100
+      ],
       "inputs": [],
       "outputs": [
-        {"name": "MODEL", "type": "MODEL", "links": [3]}
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            3
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "UNETLoader"},
-      "widgets_values": ["z_image_turbo_bf16.safetensors"]
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "z_image_turbo_bf16.safetensors"
+      ],
+      "class_type": "UNETLoader"
     },
     {
       "id": 3,
       "type": "CLIPLoader",
-      "pos": [-1100, -50],
-      "size": [320, 100],
+      "pos": [
+        -1100,
+        -50
+      ],
+      "size": [
+        320,
+        100
+      ],
       "inputs": [],
       "outputs": [
-        {"name": "CLIP", "type": "CLIP", "links": [4, 5]}
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            4,
+            5
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "CLIPLoader"},
-      "widgets_values": ["qwen_3_4b.safetensors", "qwen_image"]
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen_3_4b.safetensors",
+        "qwen_image"
+      ],
+      "class_type": "CLIPLoader"
     },
     {
       "id": 4,
       "type": "VAELoader",
-      "pos": [-1100, 100],
-      "size": [320, 100],
+      "pos": [
+        -1100,
+        100
+      ],
+      "size": [
+        320,
+        100
+      ],
       "inputs": [],
       "outputs": [
-        {"name": "VAE", "type": "VAE", "links": [6, 7]}
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            6,
+            7
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "VAELoader"},
-      "widgets_values": ["ae.safetensors"]
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.safetensors"
+      ],
+      "class_type": "VAELoader"
     },
     {
       "id": 5,
       "type": "CLIPTextEncode",
-      "pos": [-700, 50],
-      "size": [400, 200],
+      "pos": [
+        -700,
+        50
+      ],
+      "size": [
+        400,
+        200
+      ],
       "inputs": [
-        {"name": "clip", "type": "CLIP", "link": 4}
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 4,
+          "slot_index": 0
+        }
       ],
       "outputs": [
-        {"name": "CONDITIONING", "type": "CONDITIONING", "links": [8]}
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            8
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "CLIPTextEncode"},
-      "widgets_values": ["masterpiece, best quality, 2d anime galgame style, girl with elegant blue silk qipao, soft lighting"]
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "masterpiece, best quality, 2d anime galgame style, girl with elegant blue silk qipao, soft lighting"
+      ],
+      "class_type": "CLIPTextEncode"
     },
     {
       "id": 6,
       "type": "CLIPTextEncode",
-      "pos": [-700, 320],
-      "size": [400, 200],
+      "pos": [
+        -700,
+        320
+      ],
+      "size": [
+        400,
+        200
+      ],
       "inputs": [
-        {"name": "clip", "type": "CLIP", "link": 5}
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 5,
+          "slot_index": 0
+        }
       ],
       "outputs": [
-        {"name": "CONDITIONING", "type": "CONDITIONING", "links": [9]}
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            9
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "CLIPTextEncode"},
-      "widgets_values": ["photorealistic, 3d render, deformed, blurry, lowres, bad anatomy, text, watermark, multiple people"]
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "photorealistic, 3d render, deformed, blurry, lowres, bad anatomy, text, watermark, multiple people"
+      ],
+      "class_type": "CLIPTextEncode"
     },
     {
       "id": 7,
       "type": "GroundingDinoModelLoader",
-      "pos": [-1100, 250],
-      "size": [320, 100],
+      "pos": [
+        -1100,
+        250
+      ],
+      "size": [
+        320,
+        100
+      ],
       "inputs": [],
       "outputs": [
-        {"name": "model", "type": "GROUNDING_DINO_MODEL", "links": [10]}
+        {
+          "name": "model",
+          "type": "GROUNDING_DINO_MODEL",
+          "links": [
+            10
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "GroundingDinoModelLoader"},
-      "widgets_values": ["grounding-dino-tiny.safetensors"]
+      "properties": {
+        "Node name for S&R": "GroundingDinoModelLoader"
+      },
+      "widgets_values": [
+        "grounding-dino-tiny.safetensors"
+      ],
+      "class_type": "GroundingDinoModelLoader"
     },
     {
       "id": 8,
       "type": "GroundingDinoDetect",
-      "pos": [-400, 100],
-      "size": [350, 200],
+      "pos": [
+        -400,
+        100
+      ],
+      "size": [
+        350,
+        200
+      ],
       "inputs": [
-        {"name": "image", "type": "IMAGE", "link": 1},
-        {"name": "model", "type": "GROUNDING_DINO_MODEL", "link": 10}
+        {
+          "name": "model",
+          "type": "GROUNDING_DINO_MODEL",
+          "link": 1,
+          "slot_index": 0
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 10,
+          "slot_index": 1
+        }
       ],
       "outputs": [
-        {"name": "bbox", "type": "BBOX", "links": [11]}
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            11
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "GroundingDinoDetect"},
-      "widgets_values": ["red dress", 0.3]
+      "properties": {
+        "Node name for S&R": "GroundingDinoDetect"
+      },
+      "widgets_values": [
+        "red dress",
+        0.3
+      ],
+      "class_type": "GroundingDinoDetect"
     },
     {
       "id": 9,
       "type": "SAM2ModelLoader",
-      "pos": [-1100, 400],
-      "size": [320, 100],
+      "pos": [
+        -1100,
+        400
+      ],
+      "size": [
+        320,
+        100
+      ],
       "inputs": [],
       "outputs": [
-        {"name": "model", "type": "SAM2_MODEL", "links": [12]}
+        {
+          "name": "model",
+          "type": "SAM2_MODEL",
+          "links": [
+            12
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "SAM2ModelLoader"},
-      "widgets_values": ["sam2.1_hiera_small.safetensors"]
+      "properties": {
+        "Node name for S&R": "SAM2ModelLoader"
+      },
+      "widgets_values": [
+        "sam2.1_hiera_small.safetensors"
+      ],
+      "class_type": "SAM2ModelLoader"
     },
     {
       "id": 10,
       "type": "SAM2Segment",
-      "pos": [0, 100],
-      "size": [350, 150],
+      "pos": [
+        0,
+        100
+      ],
+      "size": [
+        350,
+        150
+      ],
       "inputs": [
-        {"name": "image", "type": "IMAGE", "link": 1},
-        {"name": "model", "type": "SAM2_MODEL", "link": 12},
-        {"name": "bbox", "type": "BBOX", "link": 11}
+        {
+          "name": "model",
+          "type": "SAM2_MODEL",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 12,
+          "slot_index": 1
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 11,
+          "slot_index": 2
+        }
       ],
       "outputs": [
-        {"name": "mask", "type": "MASK", "links": [13]}
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            13
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "SAM2Segment"},
-      "widgets_values": []
+      "properties": {
+        "Node name for S&R": "SAM2Segment"
+      },
+      "widgets_values": [],
+      "class_type": "SAM2Segment"
     },
     {
       "id": 11,
       "type": "VAEEncode",
-      "pos": [400, 400],
-      "size": [320, 100],
+      "pos": [
+        400,
+        400
+      ],
+      "size": [
+        320,
+        100
+      ],
       "inputs": [
-        {"name": "pixels", "type": "IMAGE", "link": 14},
-        {"name": "vae", "type": "VAE", "link": 6}
+        {
+          "name": "pixels",
+          "type": "IMAGE",
+          "link": 14,
+          "slot_index": 0
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 6,
+          "slot_index": 1
+        }
       ],
       "outputs": [
-        {"name": "LATENT", "type": "LATENT", "links": [15]}
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            15
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "VAEEncode"},
-      "widgets_values": []
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": [],
+      "class_type": "VAEEncode"
     },
     {
       "id": 12,
       "type": "SetLatentNoiseMask",
-      "pos": [750, 250],
-      "size": [320, 100],
+      "pos": [
+        750,
+        250
+      ],
+      "size": [
+        320,
+        100
+      ],
       "inputs": [
-        {"name": "samples", "type": "LATENT", "link": 15},
-        {"name": "mask", "type": "MASK", "link": 13}
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 15,
+          "slot_index": 0
+        },
+        {
+          "name": "mask",
+          "type": "MASK",
+          "link": 13,
+          "slot_index": 1
+        }
       ],
       "outputs": [
-        {"name": "LATENT", "type": "LATENT", "links": [16]}
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            16
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "SetLatentNoiseMask"},
-      "widgets_values": []
+      "properties": {
+        "Node name for S&R": "SetLatentNoiseMask"
+      },
+      "widgets_values": [],
+      "class_type": "SetLatentNoiseMask"
     },
     {
       "id": 13,
       "type": "KSampler",
-      "pos": [1100, 100],
-      "size": [320, 320],
+      "pos": [
+        1100,
+        100
+      ],
+      "size": [
+        320,
+        320
+      ],
       "inputs": [
-        {"name": "model", "type": "MODEL", "link": 3},
-        {"name": "positive", "type": "CONDITIONING", "link": 8},
-        {"name": "negative", "type": "CONDITIONING", "link": 9},
-        {"name": "latent_image", "type": "LATENT", "link": 16}
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 8,
+          "slot_index": 1
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 9,
+          "slot_index": 2
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 16,
+          "slot_index": 3
+        }
       ],
       "outputs": [
-        {"name": "LATENT", "type": "LATENT", "links": [17]}
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            17
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "KSampler"},
-      "widgets_values": [142031, "fixed", 10, 1.0, "euler", "simple", 0.7]
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        142031,
+        "fixed",
+        10,
+        1.0,
+        "euler",
+        "simple",
+        0.7
+      ],
+      "class_type": "KSampler"
     },
     {
       "id": 14,
       "type": "VAEDecode",
-      "pos": [1500, 250],
-      "size": [320, 100],
+      "pos": [
+        1500,
+        250
+      ],
+      "size": [
+        320,
+        100
+      ],
       "inputs": [
-        {"name": "samples", "type": "LATENT", "link": 17},
-        {"name": "vae", "type": "VAE", "link": 7}
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 17,
+          "slot_index": 0
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 7,
+          "slot_index": 1
+        }
       ],
       "outputs": [
-        {"name": "IMAGE", "type": "IMAGE", "links": [18]}
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            18
+          ]
+        }
       ],
-      "properties": {"Node name for S&R": "VAEDecode"},
-      "widgets_values": []
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [],
+      "class_type": "VAEDecode"
     },
     {
       "id": 15,
       "type": "SaveImage",
-      "pos": [1850, 250],
-      "size": [320, 200],
+      "pos": [
+        1850,
+        250
+      ],
+      "size": [
+        320,
+        200
+      ],
       "inputs": [
-        {"name": "images", "type": "IMAGE", "link": 18}
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 18,
+          "slot_index": 0
+        }
       ],
       "outputs": [],
-      "properties": {"Node name for S&R": "SaveImage"},
-      "widgets_values": ["zimage_inpaint_auto"]
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "zimage_inpaint_auto"
+      ],
+      "class_type": "SaveImage"
     }
   ],
   "links": [
-    [1, 1, 0, 8, 0, "IMAGE"],
-    [3, 2, 0, 13, 0, "MODEL"],
-    [4, 3, 0, 5, 0, "CLIP"],
-    [5, 3, 0, 6, 0, "CLIP"],
-    [6, 4, 0, 11, 1, "VAE"],
-    [7, 4, 0, 14, 1, "VAE"],
-    [8, 5, 0, 13, 1, "CONDITIONING"],
-    [9, 6, 0, 13, 2, "CONDITIONING"],
-    [10, 7, 0, 8, 1, "GROUNDING_DINO_MODEL"],
-    [11, 8, 0, 10, 2, "BBOX"],
-    [12, 9, 0, 10, 1, "SAM2_MODEL"],
-    [13, 10, 0, 12, 1, "MASK"],
-    [14, 1, 0, 11, 0, "IMAGE"],
-    [15, 11, 0, 12, 0, "LATENT"],
-    [16, 12, 0, 13, 3, "LATENT"],
-    [17, 13, 0, 14, 0, "LATENT"],
-    [18, 14, 0, 15, 0, "IMAGE"]
+    [
+      1,
+      1,
+      0,
+      8,
+      0,
+      "IMAGE"
+    ],
+    [
+      3,
+      2,
+      0,
+      13,
+      0,
+      "MODEL"
+    ],
+    [
+      4,
+      3,
+      0,
+      5,
+      0,
+      "CLIP"
+    ],
+    [
+      5,
+      3,
+      0,
+      6,
+      0,
+      "CLIP"
+    ],
+    [
+      6,
+      4,
+      0,
+      11,
+      1,
+      "VAE"
+    ],
+    [
+      7,
+      4,
+      0,
+      14,
+      1,
+      "VAE"
+    ],
+    [
+      8,
+      5,
+      0,
+      13,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      9,
+      6,
+      0,
+      13,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      10,
+      7,
+      0,
+      8,
+      1,
+      "GROUNDING_DINO_MODEL"
+    ],
+    [
+      11,
+      8,
+      0,
+      10,
+      2,
+      "BBOX"
+    ],
+    [
+      12,
+      9,
+      0,
+      10,
+      1,
+      "SAM2_MODEL"
+    ],
+    [
+      13,
+      10,
+      0,
+      12,
+      1,
+      "MASK"
+    ],
+    [
+      14,
+      1,
+      0,
+      11,
+      0,
+      "IMAGE"
+    ],
+    [
+      15,
+      11,
+      0,
+      12,
+      0,
+      "LATENT"
+    ],
+    [
+      16,
+      12,
+      0,
+      13,
+      3,
+      "LATENT"
+    ],
+    [
+      17,
+      13,
+      0,
+      14,
+      0,
+      "LATENT"
+    ],
+    [
+      18,
+      14,
+      0,
+      15,
+      0,
+      "IMAGE"
+    ]
   ],
   "groups": [
     {
       "title": "Z-Image Inpaint Auto (GroundingDINO + SAM2 + Inpaint)",
-      "bounding": [-50, -300, 2400, 900],
+      "bounding": [
+        -50,
+        -300,
+        2400,
+        900
+      ],
       "color": "#3f789e"
     }
   ],
