@@ -44,6 +44,15 @@ transform right_pos:
 # ============================================
 label act2:
 
+    scene black
+    with Pause(1.0)
+
+    "Act 2：穿越时空的见面"
+    with Pause(1.0)
+
+    centered "{size=+10}一见如故旧，丝麟酌流霞。{/size}"
+    with Pause(2.0)
+
     # ======================================
     # 场景一：公园长椅
     # ======================================
@@ -238,6 +247,12 @@ label act2:
     "忽然有点伤感，我想，大概是不会再见到了，但是起码不再是一个从未谋面的陌生人。"
 
     "一片云从海那边漂过来, 给刚刚晴朗的天就填上了一抹阴霾。"
+
+    centered "{size=+10}一见如故旧，丝麟酌流霞。{/size}"
+    with Pause(2.0)
+
     "[[END OF ACT 2]]"
     with Pause(1.5)
-    return
+
+    # 结束: 回到章节选择界面
+    jump chapter_select

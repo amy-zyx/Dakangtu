@@ -62,6 +62,9 @@ label act1:
     with Pause(1.0)
 
     "Act 1：落日和明天"
+    with Pause(1.0)
+
+    centered "{size=+10}人的记忆是古怪的，很多感情最终只凝结成几个字，一幅画。{/size}"
     with Pause(2.0)
 
     # ============================================================
@@ -69,16 +72,6 @@ label act1:
     # ============================================================
     scene bg restaurant_interior
     with fade
-
-    # 旁白：开场诗 (一字不改)
-    "东风夜放花千树，更吹落、星如雨。"
-    "宝马雕车香满路。凤箫声动，玉壶光转，一夜鱼龙舞。"
-    "蛾儿雪柳黄金缕，笑语盈盈暗香去。"
-    "众里寻他千百度，蓦然回首，那人却在，灯火阑珊处。"
-    with Pause(1.5)
-
-    "人的记忆是古怪的，很多感情最终只凝结成几个字，一幅画。"
-    with Pause(1.0)
 
     "我推开门走了进去。"
     with Pause(0.5)
@@ -255,7 +248,7 @@ label act1:
     scene black
     with dissolve
 
-    centered "{size=+10}—— 落日和明天 ——{/size}"
+    centered "{size=+10}落日和明天{/size}"
     with Pause(2.0)
 
     "[[END OF ACT 1]]"
@@ -263,4 +256,6 @@ label act1:
 
     $ act1_complete = True
     $ current_location = "bus_stop"
-    return
+
+    # 结束: 回到章节选择界面
+    jump chapter_select
