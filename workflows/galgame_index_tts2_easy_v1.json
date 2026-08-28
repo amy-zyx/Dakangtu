@@ -1,0 +1,131 @@
+{
+  "last_node_id": 5,
+  "last_link_id": 4,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "easy downloadIndexTTSAndLoadModel",
+      "pos": [-700, 0],
+      "size": [320, 180],
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INDEXTTS2_MODEL",
+          "type": "INDEXTTS2_MODEL",
+          "links": [1]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy downloadIndexTTSAndLoadModel"
+      },
+      "widgets_values": [
+        "IndexTTS-2",
+        "auto",
+        false
+      ],
+      "class_type": "easy downloadIndexTTSAndLoadModel"
+    },
+    {
+      "id": 2,
+      "type": "LoadAudio",
+      "pos": [-700, 230],
+      "size": [320, 100],
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [2]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": ["voice_sample.wav"],
+      "class_type": "LoadAudio"
+    },
+    {
+      "id": 3,
+      "type": "easy indexTTSGenerate",
+      "pos": [-100, 100],
+      "size": [420, 300],
+      "inputs": [
+        {
+          "name": "model",
+          "type": "INDEXTTS2_MODEL",
+          "link": 1,
+          "slot_index": 0
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 2,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [3]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy indexTTSGenerate"
+      },
+      "widgets_values": [
+        "你好，很高兴见到你。",
+        0.8,
+        1.0,
+        0.0,
+        1.0,
+        30
+      ],
+      "class_type": "easy indexTTSGenerate"
+    },
+    {
+      "id": 4,
+      "type": "SaveAudio",
+      "pos": [400, 150],
+      "size": [320, 150],
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 3,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveAudio"
+      },
+      "widgets_values": [
+        "output_voice",
+        "wav"
+      ],
+      "class_type": "SaveAudio"
+    }
+  ],
+  "links": [
+    [1, 1, 0, 3, 0, "INDEXTTS2_MODEL"],
+    [2, 2, 0, 3, 1, "AUDIO"],
+    [3, 3, 0, 4, 0, "AUDIO"]
+  ],
+  "groups": [
+    {
+      "title": "IndexTTS-2 Voice Clone (Easy Use)",
+      "bounding": [-750, -50, 1500, 450],
+      "color": "#a86f3f"
+    }
+  ],
+  "config": {},
+  "extra": {
+    "workflow_info": {
+      "version": "1.0",
+      "author": "Dakangtu",
+      "description": "IndexTTS-2 voice clone using comfyui-easy-indextts2 (NOT kaola). 4 nodes: ModelLoader, LoadAudio, Generate, SaveAudio. If nodes error, run workflow in ComfyUI and share exact error."
+    }
+  },
+  "version": 1
+}

@@ -1,0 +1,210 @@
+{
+  "last_node_id": 7,
+  "last_link_id": 6,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "IndexTTS2ModelLoader",
+      "pos": [-700, 0],
+      "size": [320, 130],
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [1]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IndexTTS2ModelLoader"
+      },
+      "widgets_values": [
+        "IndexTTS-2/model.pt",
+        "Qwen2-1.5B-Instruct",
+        "nvidia/bigvgan_v2_24khz_100band_256x",
+        "cuda"
+      ],
+      "class_type": "IndexTTS2ModelLoader"
+    },
+    {
+      "id": 2,
+      "type": "LoadAudio",
+      "pos": [-700, 180],
+      "size": [320, 100],
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [2]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": ["voice_sample.wav"],
+      "class_type": "LoadAudio"
+    },
+    {
+      "id": 3,
+      "type": "IndexTTS2VoicePreset",
+      "pos": [-700, 330],
+      "size": [320, 100],
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VOICE_PRESET",
+          "type": "VOICE_PRESET",
+          "links": [3]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IndexTTS2VoicePreset"
+      },
+      "widgets_values": ["female_01", "IndexTTS-2/voices.json"],
+      "class_type": "IndexTTS2VoicePreset"
+    },
+    {
+      "id": 4,
+      "type": "IndexTTS2TextInput",
+      "pos": [-700, 480],
+      "size": [320, 150],
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "TEXT",
+          "type": "TEXT",
+          "links": [4]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IndexTTS2TextInput"
+      },
+      "widgets_values": ["你好, 很高兴见到你.", 2048],
+      "class_type": "IndexTTS2TextInput"
+    },
+    {
+      "id": 5,
+      "type": "IndexTTS2Emotion",
+      "pos": [-700, 680],
+      "size": [320, 150],
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "EMOTION",
+          "type": "EMOTION",
+          "links": [5]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IndexTTS2Emotion"
+      },
+      "widgets_values": ["happy, friendly, warm", 0.8, true],
+      "class_type": "IndexTTS2Emotion"
+    },
+    {
+      "id": 6,
+      "type": "IndexTTS2Synthesize",
+      "pos": [0, 200],
+      "size": [400, 450],
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1,
+          "slot_index": 0
+        },
+        {
+          "name": "text",
+          "type": "TEXT",
+          "link": 4,
+          "slot_index": 1
+        },
+        {
+          "name": "ref_audio",
+          "type": "AUDIO",
+          "link": 2,
+          "slot_index": 2
+        },
+        {
+          "name": "voice_preset",
+          "type": "VOICE_PRESET",
+          "link": 3,
+          "slot_index": 3
+        },
+        {
+          "name": "emotion",
+          "type": "EMOTION",
+          "link": 5,
+          "slot_index": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [6]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IndexTTS2Synthesize"
+      },
+      "widgets_values": [
+        false,
+        0,
+        0.8,
+        0.8,
+        30,
+        1.0,
+        1.1,
+        600,
+        120
+      ],
+      "class_type": "IndexTTS2Synthesize"
+    },
+    {
+      "id": 7,
+      "type": "SaveAudio",
+      "pos": [550, 250],
+      "size": [320, 200],
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 6,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveAudio"
+      },
+      "widgets_values": ["ami_voice", "wav", 24000],
+      "class_type": "SaveAudio"
+    }
+  ],
+  "links": [
+    [1, 1, 0, 6, 0, "MODEL"],
+    [2, 2, 0, 6, 2, "AUDIO"],
+    [3, 3, 0, 6, 3, "VOICE_PRESET"],
+    [4, 4, 0, 6, 1, "TEXT"],
+    [5, 5, 0, 6, 4, "EMOTION"],
+    [6, 6, 0, 7, 0, "AUDIO"]
+  ],
+  "groups": [
+    {
+      "title": "IndexTTS-2 Voice Synthesis (Qwen Emotion + Voice Clone/Preset)",
+      "bounding": [-750, -50, 1700, 950],
+      "color": "#a86f3f"
+    }
+  ],
+  "config": {},
+  "extra": {
+    "workflow_info": {
+      "version": "1.0",
+      "author": "Dakangtu",
+      "description": "IndexTTS-2 voice synthesis with mode 0 (ref audio clone) or mode 2 (preset). Toggle use_voice_preset to switch."
+    }
+  },
+  "version": 1
+}

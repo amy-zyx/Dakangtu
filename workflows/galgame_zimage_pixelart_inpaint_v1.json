@@ -1,110 +1,7 @@
 {
-  "last_node_id": 12,
+  "last_node_id": 25,
   "last_link_id": 0,
   "nodes": [
-    {
-      "id": 3,
-      "type": "KSampler",
-      "pos": [
-        0,
-        0
-      ],
-      "size": [
-        320,
-        100
-      ],
-      "inputs": [
-        {
-          "name": "seed",
-          "type": "WIDGET",
-          "link": null,
-          "slot_index": 0
-        },
-        {
-          "name": "steps",
-          "type": "WIDGET",
-          "link": null,
-          "slot_index": 1
-        },
-        {
-          "name": "cfg",
-          "type": "WIDGET",
-          "link": null,
-          "slot_index": 2
-        },
-        {
-          "name": "sampler_name",
-          "type": "WIDGET",
-          "link": null,
-          "slot_index": 3
-        },
-        {
-          "name": "scheduler",
-          "type": "WIDGET",
-          "link": null,
-          "slot_index": 4
-        },
-        {
-          "name": "denoise",
-          "type": "WIDGET",
-          "link": null,
-          "slot_index": 5
-        },
-        {
-          "name": "model",
-          "type": "WIDGET",
-          "link": null,
-          "slot_index": 6
-        },
-        {
-          "name": "positive",
-          "type": "WIDGET",
-          "link": null,
-          "slot_index": 7
-        },
-        {
-          "name": "negative",
-          "type": "WIDGET",
-          "link": null,
-          "slot_index": 8
-        },
-        {
-          "name": "latent_image",
-          "type": "WIDGET",
-          "link": null,
-          "slot_index": 9
-        }
-      ],
-      "outputs": [],
-      "properties": {
-        "Node name for S&R": "KSampler"
-      },
-      "widgets_values": [
-        1140514,
-        10,
-        1.0,
-        "euler",
-        "simple",
-        1,
-        [
-          "12",
-          0
-        ],
-        [
-          "6",
-          0
-        ],
-        [
-          "7",
-          0
-        ],
-        [
-          "8",
-          0
-        ]
-      ],
-      "class_type": "KSampler"
-    },
     {
       "id": 1,
       "type": "UNETLoader",
@@ -266,6 +163,230 @@
       "class_type": "LoraLoader"
     },
     {
+      "id": 20,
+      "type": "LoadImage",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "image",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "character_sprite.png"
+      ],
+      "class_type": "LoadImage"
+    },
+    {
+      "id": 21,
+      "type": "ImageToMask",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "image",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "channel",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "ImageToMask"
+      },
+      "widgets_values": [
+        [
+          "20",
+          1
+        ],
+        "alpha"
+      ],
+      "class_type": "ImageToMask"
+    },
+    {
+      "id": 22,
+      "type": "InvertMask",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "InvertMask"
+      },
+      "widgets_values": [
+        [
+          "21",
+          0
+        ]
+      ],
+      "class_type": "InvertMask"
+    },
+    {
+      "id": 23,
+      "type": "MaskBlur",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "mask",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "blur_radius",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        },
+        {
+          "name": "sigma",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 2
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "MaskBlur"
+      },
+      "widgets_values": [
+        [
+          "22",
+          0
+        ],
+        10,
+        10
+      ],
+      "class_type": "MaskBlur"
+    },
+    {
+      "id": 24,
+      "type": "VAEEncode",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "pixels",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "vae",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "VAEEncode"
+      },
+      "widgets_values": [
+        [
+          "20",
+          0
+        ],
+        [
+          "4",
+          0
+        ]
+      ],
+      "class_type": "VAEEncode"
+    },
+    {
+      "id": 25,
+      "type": "SetLatentNoiseMask",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "mask",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SetLatentNoiseMask"
+      },
+      "widgets_values": [
+        [
+          "24",
+          0
+        ],
+        [
+          "23",
+          0
+        ]
+      ],
+      "class_type": "SetLatentNoiseMask"
+    },
+    {
       "id": 6,
       "type": "CLIPTextEncode",
       "pos": [
@@ -295,7 +416,7 @@
         "Node name for S&R": "CLIPTextEncode"
       },
       "widgets_values": [
-        "masterpiece, best quality, pixel art, 16-bit retro game style, sharp pixel edges, limited color palette, crisp dithering, clean sprite shading, no anti-aliasing, no blur, no smooth gradients, two-story modern restaurant exterior, October 2009 beijing, simple light gray concrete facade, tall wide doorway, warm amber light spilling onto dry sidewalk, wall-mounted lamp, distant blurred car tail lights, deep blue night sky, mild film grain, no people, no signs with text, no letters, no red lanterns, 1920x1080",
+        "pixel art, 16-bit retro game style, park background, oak tree with yellow leaves, stone path, summer day, soft daylight, simple scenery, no people, no character, no human figure",
         [
           "12",
           1
@@ -333,7 +454,7 @@
         "Node name for S&R": "CLIPTextEncode"
       },
       "widgets_values": [
-        "photorealistic, photograph, 3d render, smooth gradient, anti-aliased, blurry, soft shading, anime, cartoon, illustration, painterly, person, people, human, character, figure, vehicle in foreground, modern smartphone, LED billboard, text, words, letters, alphabet, chinese characters, japanese characters, signs, banners, logos, watermarks, signatures, lowres, bad anatomy, worst quality, modern glass building, skyscraper, neon lights, wooden architecture, traditional chinese wooden building, wooden door, dark tile roof, red paper lantern, red lantern, chinese lantern, oriental lantern, pagoda, upturned eaves",
+        "person, people, human, character, figure, modern building, 3d render, photorealistic, smooth gradient, anti-aliased, blurry, soft shading, text, watermark, signature",
         [
           "12",
           1
@@ -342,8 +463,8 @@
       "class_type": "CLIPTextEncode"
     },
     {
-      "id": 8,
-      "type": "EmptyLatentImage",
+      "id": 3,
+      "type": "KSampler",
       "pos": [
         0,
         0
@@ -354,34 +475,95 @@
       ],
       "inputs": [
         {
-          "name": "width",
+          "name": "seed",
           "type": "WIDGET",
           "link": null,
           "slot_index": 0
         },
         {
-          "name": "height",
+          "name": "steps",
           "type": "WIDGET",
           "link": null,
           "slot_index": 1
         },
         {
-          "name": "batch_size",
+          "name": "cfg",
           "type": "WIDGET",
           "link": null,
           "slot_index": 2
+        },
+        {
+          "name": "sampler_name",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 3
+        },
+        {
+          "name": "scheduler",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 4
+        },
+        {
+          "name": "denoise",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 5
+        },
+        {
+          "name": "model",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 6
+        },
+        {
+          "name": "positive",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 7
+        },
+        {
+          "name": "negative",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 8
+        },
+        {
+          "name": "latent_image",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 9
         }
       ],
       "outputs": [],
       "properties": {
-        "Node name for S&R": "EmptyLatentImage"
+        "Node name for S&R": "KSampler"
       },
       "widgets_values": [
-        1920,
-        1080,
-        1
+        1140514,
+        10,
+        1.0,
+        "euler",
+        "simple",
+        1.0,
+        [
+          "12",
+          0
+        ],
+        [
+          "6",
+          0
+        ],
+        [
+          "7",
+          0
+        ],
+        [
+          "25",
+          0
+        ]
       ],
-      "class_type": "EmptyLatentImage"
+      "class_type": "KSampler"
     },
     {
       "id": 9,
@@ -454,7 +636,7 @@
         "Node name for S&R": "SaveImage"
       },
       "widgets_values": [
-        "zimage_pixelart_scene1",
+        "zimage_pixelart_inpaint",
         [
           "9",
           0

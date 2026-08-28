@@ -1,0 +1,110 @@
+{
+  "last_node_id": 4,
+  "last_link_id": 3,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "IndexTTS2ModelLoader",
+      "pos": [-700, 0],
+      "size": [320, 180],
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INDEXTTS2_MODEL",
+          "type": "INDEXTTS2_MODEL",
+          "links": [1]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IndexTTS2ModelLoader"
+      },
+      "widgets_values": [
+        "IndexTTS-2",
+        "auto",
+        false,
+        false,
+        false
+      ],
+      "class_type": "IndexTTS2ModelLoader"
+    },
+    {
+      "id": 2,
+      "type": "LoadAudio",
+      "pos": [-700, 240],
+      "size": [320, 100],
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [2]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": ["voice_sample.wav"],
+      "class_type": "LoadAudio"
+    },
+    {
+      "id": 3,
+      "type": "IndexTTS2ScriptDubbing",
+      "pos": [-300, 100],
+      "size": [420, 350],
+      "inputs": [
+        {
+          "name": "model",
+          "type": "INDEXTTS2_MODEL",
+          "link": 1,
+          "slot_index": 0
+        },
+        {
+          "name": "spk_audio_prompt",
+          "type": "AUDIO",
+          "link": 2,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO_LIST",
+          "type": "AUDIO",
+          "links": [3]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IndexTTS2ScriptDubbing"
+      },
+      "widgets_values": [
+        "workflows/ami_act2_lines.srt",
+        1.0,
+        0,
+        1.0,
+        false,
+        0
+      ],
+      "class_type": "IndexTTS2ScriptDubbing"
+    }
+  ],
+  "links": [
+    [1, 1, 0, 3, 0, "INDEXTTS2_MODEL"],
+    [2, 2, 0, 3, 1, "AUDIO"],
+    [3, 3, 0, 4, 0, "AUDIO_LIST"]
+  ],
+  "groups": [
+    {
+      "title": "IndexTTS-2 SRT Batch Dubbing (kaola) - ami 11 lines",
+      "bounding": [-750, -50, 1200, 600],
+      "color": "#a86f3f"
+    }
+  ],
+  "config": {},
+  "extra": {
+    "workflow_info": {
+      "version": "1.0",
+      "author": "Dakangtu",
+      "description": "IndexTTS-2 SRT batch synthesis using IndexTTS2ScriptDubbing. SRT file: workflows/ami_act2_lines.srt (11 lines). Output: 11 WAV files in ComfyUI/output/, one per SRT cue, named ami_XX_<text>.wav. After generation, convert each to OGG and place in game/audio/voice/ami_NN.ogg."
+    }
+  },
+  "version": 1
+}

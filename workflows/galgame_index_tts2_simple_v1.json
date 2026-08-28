@@ -1,0 +1,105 @@
+{
+  "last_node_id": 4,
+  "last_link_id": 3,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadAudio",
+      "pos": [-200, 100],
+      "size": [320, 100],
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [1]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": ["ami_ref.wav"],
+      "class_type": "LoadAudio"
+    },
+    {
+      "id": 2,
+      "type": "IndexTTS2Simple",
+      "pos": [200, 100],
+      "size": [350, 150],
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 1,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [2]
+        },
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IndexTTS2Simple"
+      },
+      "widgets_values": [
+        "Jack，这个地方好像鬼屋哎。你确定这里没有阿飘么？",
+        0.65
+      ],
+      "class_type": "IndexTTS2Simple"
+    },
+    {
+      "id": 3,
+      "type": "IndexTTS2SaveAudio",
+      "pos": [600, 100],
+      "size": [350, 180],
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 2,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "IndexTTS2SaveAudio"
+      },
+      "widgets_values": [
+        "ami_01",
+        "wav",
+        false,
+        "pcm16",
+        "192k"
+      ],
+      "class_type": "IndexTTS2SaveAudio"
+    }
+  ],
+  "links": [
+    [1, 1, 0, 2, 0, "AUDIO"],
+    [2, 2, 0, 3, 0, "AUDIO"]
+  ],
+  "groups": [
+    {
+      "title": "IndexTTS-2 单句合成（ComfyUI-IndexTTS2-main，无 kaola）",
+      "bounding": [-250, 50, 1250, 300],
+      "color": "#3f78a8"
+    }
+  ],
+  "config": {},
+  "extra": {
+    "workflow_info": {
+      "version": "1.0",
+      "author": "Dakangtu",
+      "description": "Single-line TTS using ComfyUI-IndexTTS2-main (no kaola). 3 nodes: LoadAudio -> IndexTTS2Simple -> IndexTTS2SaveAudio. Put ami_ref.wav into ComfyUI's input/ folder, modify the text in IndexTTS2Simple, run."
+    }
+  },
+  "version": 1
+}

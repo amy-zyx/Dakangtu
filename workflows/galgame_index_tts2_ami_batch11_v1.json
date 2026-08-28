@@ -1,0 +1,334 @@
+{
+  "last_node_id": 24,
+  "last_link_id": 23,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "LoadAudio",
+      "pos": [-400, 600],
+      "size": [320, 100],
+      "inputs": [],
+      "outputs": [
+        {"name": "AUDIO", "type": "AUDIO", "links": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}
+      ],
+      "properties": {"Node name for S&R": "LoadAudio"},
+      "widgets_values": ["ami_ref.wav"],
+      "class_type": "LoadAudio"
+    },
+    {
+      "id": 2,
+      "type": "IndexTTS2Simple",
+      "pos": [0, -200],
+      "size": [380, 130],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 1, "slot_index": 0}],
+      "outputs": [
+        {"name": "AUDIO", "type": "AUDIO", "links": [12]},
+        {"name": "STRING", "type": "STRING", "links": null}
+      ],
+      "properties": {"Node name for S&R": "IndexTTS2Simple"},
+      "widgets_values": ["Jack，这个地方好像鬼屋哎。你确定这里没有阿飘么？", 0.65],
+      "class_type": "IndexTTS2Simple"
+    },
+    {
+      "id": 3,
+      "type": "IndexTTS2Simple",
+      "pos": [0, -50],
+      "size": [380, 130],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 2, "slot_index": 0}],
+      "outputs": [
+        {"name": "AUDIO", "type": "AUDIO", "links": [13]},
+        {"name": "STRING", "type": "STRING", "links": null}
+      ],
+      "properties": {"Node name for S&R": "IndexTTS2Simple"},
+      "widgets_values": ["你到了多久了？", 0.65],
+      "class_type": "IndexTTS2Simple"
+    },
+    {
+      "id": 4,
+      "type": "IndexTTS2Simple",
+      "pos": [0, 100],
+      "size": [380, 130],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 3, "slot_index": 0}],
+      "outputs": [
+        {"name": "AUDIO", "type": "AUDIO", "links": [14]},
+        {"name": "STRING", "type": "STRING", "links": null}
+      ],
+      "properties": {"Node name for S&R": "IndexTTS2Simple"},
+      "widgets_values": ["你来过这个地方么？这里好有密室逃脱的风格啊，我最喜欢这类地方了。", 0.65],
+      "class_type": "IndexTTS2Simple"
+    },
+    {
+      "id": 5,
+      "type": "IndexTTS2Simple",
+      "pos": [0, 250],
+      "size": [380, 130],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 4, "slot_index": 0}],
+      "outputs": [
+        {"name": "AUDIO", "type": "AUDIO", "links": [15]},
+        {"name": "STRING", "type": "STRING", "links": null}
+      ],
+      "properties": {"Node name for S&R": "IndexTTS2Simple"},
+      "widgets_values": ["嗯，那么巧么？我也喜欢披萨，奥克兰有三个我最喜欢的披萨店，这里是其中之一！", 0.65],
+      "class_type": "IndexTTS2Simple"
+    },
+    {
+      "id": 6,
+      "type": "IndexTTS2Simple",
+      "pos": [0, 400],
+      "size": [380, 130],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 5, "slot_index": 0}],
+      "outputs": [
+        {"name": "AUDIO", "type": "AUDIO", "links": [16]},
+        {"name": "STRING", "type": "STRING", "links": null}
+      ],
+      "properties": {"Node name for S&R": "IndexTTS2Simple"},
+      "widgets_values": ["我也没有想到会有一天真的见到你，毕竟是10年都没有发过信息的人呢。", 0.65],
+      "class_type": "IndexTTS2Simple"
+    },
+    {
+      "id": 7,
+      "type": "IndexTTS2Simple",
+      "pos": [0, 550],
+      "size": [380, 130],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 6, "slot_index": 0}],
+      "outputs": [
+        {"name": "AUDIO", "type": "AUDIO", "links": [17]},
+        {"name": "STRING", "type": "STRING", "links": null}
+      ],
+      "properties": {"Node name for S&R": "IndexTTS2Simple"},
+      "widgets_values": ["真的么？", 0.65],
+      "class_type": "IndexTTS2Simple"
+    },
+    {
+      "id": 8,
+      "type": "IndexTTS2Simple",
+      "pos": [0, 700],
+      "size": [380, 130],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 7, "slot_index": 0}],
+      "outputs": [
+        {"name": "AUDIO", "type": "AUDIO", "links": [18]},
+        {"name": "STRING", "type": "STRING", "links": null}
+      ],
+      "properties": {"Node name for S&R": "IndexTTS2Simple"},
+      "widgets_values": ["你给我打电话我是很惊讶的，那天刚好有空，聊到了很晚呢。", 0.65],
+      "class_type": "IndexTTS2Simple"
+    },
+    {
+      "id": 9,
+      "type": "IndexTTS2Simple",
+      "pos": [0, 850],
+      "size": [380, 130],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 8, "slot_index": 0}],
+      "outputs": [
+        {"name": "AUDIO", "type": "AUDIO", "links": [19]},
+        {"name": "STRING", "type": "STRING", "links": null}
+      ],
+      "properties": {"Node name for S&R": "IndexTTS2Simple"},
+      "widgets_values": ["我是开车来的，就停在路边。", 0.65],
+      "class_type": "IndexTTS2Simple"
+    },
+    {
+      "id": 10,
+      "type": "IndexTTS2Simple",
+      "pos": [0, 1000],
+      "size": [380, 130],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 9, "slot_index": 0}],
+      "outputs": [
+        {"name": "AUDIO", "type": "AUDIO", "links": [20]},
+        {"name": "STRING", "type": "STRING", "links": null}
+      ],
+      "properties": {"Node name for S&R": "IndexTTS2Simple"},
+      "widgets_values": ["没问题。", 0.65],
+      "class_type": "IndexTTS2Simple"
+    },
+    {
+      "id": 11,
+      "type": "IndexTTS2Simple",
+      "pos": [0, 1150],
+      "size": [380, 130],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 10, "slot_index": 0}],
+      "outputs": [
+        {"name": "AUDIO", "type": "AUDIO", "links": [21]},
+        {"name": "STRING", "type": "STRING", "links": null}
+      ],
+      "properties": {"Node name for S&R": "IndexTTS2Simple"},
+      "widgets_values": ["给你的。我喜欢的酒。", 0.65],
+      "class_type": "IndexTTS2Simple"
+    },
+    {
+      "id": 12,
+      "type": "IndexTTS2Simple",
+      "pos": [0, 1300],
+      "size": [380, 130],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 11, "slot_index": 0}],
+      "outputs": [
+        {"name": "AUDIO", "type": "AUDIO", "links": [22]},
+        {"name": "STRING", "type": "STRING", "links": null}
+      ],
+      "properties": {"Node name for S&R": "IndexTTS2Simple"},
+      "widgets_values": ["好的。", 0.65],
+      "class_type": "IndexTTS2Simple"
+    },
+    {
+      "id": 13,
+      "type": "IndexTTS2SaveAudio",
+      "pos": [500, -200],
+      "size": [350, 180],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 12, "slot_index": 0}],
+      "outputs": [],
+      "properties": {"Node name for S&R": "IndexTTS2SaveAudio"},
+      "widgets_values": ["ami_01", "wav", false, "pcm16", "192k"],
+      "class_type": "IndexTTS2SaveAudio"
+    },
+    {
+      "id": 14,
+      "type": "IndexTTS2SaveAudio",
+      "pos": [500, -50],
+      "size": [350, 180],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 13, "slot_index": 0}],
+      "outputs": [],
+      "properties": {"Node name for S&R": "IndexTTS2SaveAudio"},
+      "widgets_values": ["ami_02", "wav", false, "pcm16", "192k"],
+      "class_type": "IndexTTS2SaveAudio"
+    },
+    {
+      "id": 15,
+      "type": "IndexTTS2SaveAudio",
+      "pos": [500, 100],
+      "size": [350, 180],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 14, "slot_index": 0}],
+      "outputs": [],
+      "properties": {"Node name for S&R": "IndexTTS2SaveAudio"},
+      "widgets_values": ["ami_03", "wav", false, "pcm16", "192k"],
+      "class_type": "IndexTTS2SaveAudio"
+    },
+    {
+      "id": 16,
+      "type": "IndexTTS2SaveAudio",
+      "pos": [500, 250],
+      "size": [350, 180],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 15, "slot_index": 0}],
+      "outputs": [],
+      "properties": {"Node name for S&R": "IndexTTS2SaveAudio"},
+      "widgets_values": ["ami_04", "wav", false, "pcm16", "192k"],
+      "class_type": "IndexTTS2SaveAudio"
+    },
+    {
+      "id": 17,
+      "type": "IndexTTS2SaveAudio",
+      "pos": [500, 400],
+      "size": [350, 180],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 16, "slot_index": 0}],
+      "outputs": [],
+      "properties": {"Node name for S&R": "IndexTTS2SaveAudio"},
+      "widgets_values": ["ami_05", "wav", false, "pcm16", "192k"],
+      "class_type": "IndexTTS2SaveAudio"
+    },
+    {
+      "id": 18,
+      "type": "IndexTTS2SaveAudio",
+      "pos": [500, 550],
+      "size": [350, 180],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 17, "slot_index": 0}],
+      "outputs": [],
+      "properties": {"Node name for S&R": "IndexTTS2SaveAudio"},
+      "widgets_values": ["ami_06", "wav", false, "pcm16", "192k"],
+      "class_type": "IndexTTS2SaveAudio"
+    },
+    {
+      "id": 19,
+      "type": "IndexTTS2SaveAudio",
+      "pos": [500, 700],
+      "size": [350, 180],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 18, "slot_index": 0}],
+      "outputs": [],
+      "properties": {"Node name for S&R": "IndexTTS2SaveAudio"},
+      "widgets_values": ["ami_07", "wav", false, "pcm16", "192k"],
+      "class_type": "IndexTTS2SaveAudio"
+    },
+    {
+      "id": 20,
+      "type": "IndexTTS2SaveAudio",
+      "pos": [500, 850],
+      "size": [350, 180],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 19, "slot_index": 0}],
+      "outputs": [],
+      "properties": {"Node name for S&R": "IndexTTS2SaveAudio"},
+      "widgets_values": ["ami_08", "wav", false, "pcm16", "192k"],
+      "class_type": "IndexTTS2SaveAudio"
+    },
+    {
+      "id": 21,
+      "type": "IndexTTS2SaveAudio",
+      "pos": [500, 1000],
+      "size": [350, 180],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 20, "slot_index": 0}],
+      "outputs": [],
+      "properties": {"Node name for S&R": "IndexTTS2SaveAudio"},
+      "widgets_values": ["ami_09", "wav", false, "pcm16", "192k"],
+      "class_type": "IndexTTS2SaveAudio"
+    },
+    {
+      "id": 22,
+      "type": "IndexTTS2SaveAudio",
+      "pos": [500, 1150],
+      "size": [350, 180],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 21, "slot_index": 0}],
+      "outputs": [],
+      "properties": {"Node name for S&R": "IndexTTS2SaveAudio"},
+      "widgets_values": ["ami_10", "wav", false, "pcm16", "192k"],
+      "class_type": "IndexTTS2SaveAudio"
+    },
+    {
+      "id": 23,
+      "type": "IndexTTS2SaveAudio",
+      "pos": [500, 1300],
+      "size": [350, 180],
+      "inputs": [{"name": "audio", "type": "AUDIO", "link": 22, "slot_index": 0}],
+      "outputs": [],
+      "properties": {"Node name for S&R": "IndexTTS2SaveAudio"},
+      "widgets_values": ["ami_11", "wav", false, "pcm16", "192k"],
+      "class_type": "IndexTTS2SaveAudio"
+    }
+  ],
+  "links": [
+    [1, 1, 0, 2, 0, "AUDIO"],
+    [2, 1, 0, 3, 0, "AUDIO"],
+    [3, 1, 0, 4, 0, "AUDIO"],
+    [4, 1, 0, 5, 0, "AUDIO"],
+    [5, 1, 0, 6, 0, "AUDIO"],
+    [6, 1, 0, 7, 0, "AUDIO"],
+    [7, 1, 0, 8, 0, "AUDIO"],
+    [8, 1, 0, 9, 0, "AUDIO"],
+    [9, 1, 0, 10, 0, "AUDIO"],
+    [10, 1, 0, 11, 0, "AUDIO"],
+    [11, 1, 0, 12, 0, "AUDIO"],
+    [12, 2, 0, 13, 0, "AUDIO"],
+    [13, 3, 0, 14, 0, "AUDIO"],
+    [14, 4, 0, 15, 0, "AUDIO"],
+    [15, 5, 0, 16, 0, "AUDIO"],
+    [16, 6, 0, 17, 0, "AUDIO"],
+    [17, 7, 0, 18, 0, "AUDIO"],
+    [18, 8, 0, 19, 0, "AUDIO"],
+    [19, 9, 0, 20, 0, "AUDIO"],
+    [20, 10, 0, 21, 0, "AUDIO"],
+    [21, 11, 0, 22, 0, "AUDIO"],
+    [22, 12, 0, 23, 0, "AUDIO"]
+  ],
+  "groups": [
+    {
+      "title": "IndexTTS-2 Ami 11 句批量合成 (ComfyUI-IndexTTS2-main, no kaola)",
+      "bounding": [-450, -250, 1350, 1750],
+      "color": "#3f78a8"
+    }
+  ],
+  "config": {},
+  "extra": {
+    "workflow_info": {
+      "version": "1.0",
+      "author": "Dakangtu",
+      "description": "11-parallel IndexTTS2Simple nodes. ONE LoadAudio feeds all 11. Each Simple node has its own text (ami's 11 lines) and its own IndexTTS2SaveAudio (saves ami_01..ami_11). One ComfyUI run produces 11 wav files in output/. emotion_control_weight = 0.65 (slight emotion). Requires IndexTTS-2 model in models/IndexTTS-2/."
+    }
+  },
+  "version": 1
+}

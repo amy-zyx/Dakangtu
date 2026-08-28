@@ -1,126 +1,401 @@
 {
-  "3": {
-    "inputs": {
-      "seed": 1140514,
-      "steps": 25,
-      "cfg": 7.0,
-      "sampler_name": "euler_ancestral",
-      "scheduler": "karras",
-      "denoise": 1,
-      "model": [
-        "12",
+  "last_node_id": 12,
+  "last_link_id": 0,
+  "nodes": [
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": [
+        0,
         0
       ],
-      "positive": [
-        "6",
-        0
+      "size": [
+        320,
+        100
       ],
-      "negative": [
-        "7",
-        0
+      "inputs": [
+        {
+          "name": "seed",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "steps",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        },
+        {
+          "name": "cfg",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 2
+        },
+        {
+          "name": "sampler_name",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 3
+        },
+        {
+          "name": "scheduler",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 4
+        },
+        {
+          "name": "denoise",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 5
+        },
+        {
+          "name": "model",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 6
+        },
+        {
+          "name": "positive",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 7
+        },
+        {
+          "name": "negative",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 8
+        },
+        {
+          "name": "latent_image",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 9
+        }
       ],
-      "latent_image": [
-        "8",
-        0
-      ]
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        1140514,
+        25,
+        7.0,
+        "euler_ancestral",
+        "karras",
+        1,
+        [
+          "12",
+          0
+        ],
+        [
+          "6",
+          0
+        ],
+        [
+          "7",
+          0
+        ],
+        [
+          "8",
+          0
+        ]
+      ],
+      "class_type": "KSampler"
     },
-    "class_type": "KSampler",
-    "_meta": {
-      "title": "KSampler (SDXL + pixel-art-xl, 25 step cfg=7)"
-    }
-  },
-  "1": {
-    "inputs": {
-      "ckpt_name": "waiIllustriousSDXL_v170.safetensors"
-    },
-    "class_type": "CheckpointLoaderSimple",
-    "_meta": {
-      "title": "Checkpoint waiIllustriousSDXL v170"
-    }
-  },
-  "12": {
-    "inputs": {
-      "model": [
-        "1",
+    {
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        0,
         0
       ],
-      "clip": [
-        "1",
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "ckpt_name",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "waiIllustriousSDXL_v170.safetensors"
+      ],
+      "class_type": "CheckpointLoaderSimple"
+    },
+    {
+      "id": 12,
+      "type": "LoraLoader",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "model",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "clip",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        },
+        {
+          "name": "lora_name",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 2
+        },
+        {
+          "name": "strength_model",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 3
+        },
+        {
+          "name": "strength_clip",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 4
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "LoraLoader"
+      },
+      "widgets_values": [
+        [
+          "1",
+          0
+        ],
+        [
+          "1",
+          1
+        ],
+        "pixel-art-xl-v1.1.safetensors",
+        0.9,
+        0.9
+      ],
+      "class_type": "LoraLoader"
+    },
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "text",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "clip",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "masterpiece, best quality, pixel art, sharp pixel edges, limited color palette, crisp dithering, clean sprite shading, no anti-aliasing, no blur, no smooth gradients, two-story modern restaurant exterior, October 2009 beijing, simple light gray concrete facade, tall wide doorway, warm amber light spilling onto dry sidewalk, wall-mounted lamp, distant blurred car tail lights, deep blue night sky, mild film grain, no people, no signs with text, no letters, no red lanterns, 1920x1080",
+        [
+          "12",
+          1
+        ]
+      ],
+      "class_type": "CLIPTextEncode"
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "text",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "clip",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "photorealistic, photograph, 3d render, smooth gradient, anti-aliased, blurry, soft shading, painterly, person, people, human, character, figure, vehicle in foreground, modern smartphone, LED billboard, text, words, letters, alphabet, chinese characters, japanese characters, signs, banners, logos, watermarks, signatures, lowres, bad anatomy, worst quality, modern glass building, skyscraper, neon lights, wooden architecture, traditional chinese wooden building, wooden door, dark tile roof, red paper lantern, red lantern, chinese lantern, oriental lantern, pagoda, upturned eaves, refiner",
+        [
+          "12",
+          1
+        ]
+      ],
+      "class_type": "CLIPTextEncode"
+    },
+    {
+      "id": 8,
+      "type": "EmptyLatentImage",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "width",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "height",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        },
+        {
+          "name": "batch_size",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 2
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1920,
+        1080,
         1
       ],
-      "lora_name": "pixel-art-xl-v1.1.safetensors",
-      "strength_model": 0.9,
-      "strength_clip": 0.9
+      "class_type": "EmptyLatentImage"
     },
-    "class_type": "LoraLoader",
-    "_meta": {
-      "title": "LoRA pixel-art-xl-v1.1 (0.9)"
-    }
-  },
-  "6": {
-    "inputs": {
-      "text": "masterpiece, best quality, pixel art, sharp pixel edges, limited color palette, crisp dithering, clean sprite shading, no anti-aliasing, no blur, no smooth gradients, two-story modern restaurant exterior, October 2009 beijing, simple light gray concrete facade, tall wide doorway, warm amber light spilling onto dry sidewalk, wall-mounted lamp, distant blurred car tail lights, deep blue night sky, mild film grain, no people, no signs with text, no letters, no red lanterns, 1920x1080",
-      "clip": [
-        "12",
-        1
-      ]
-    },
-    "class_type": "CLIPTextEncode",
-    "_meta": {
-      "title": "Positive - Scene 1 Pixel Art (SDXL)"
-    }
-  },
-  "7": {
-    "inputs": {
-      "text": "photorealistic, photograph, 3d render, smooth gradient, anti-aliased, blurry, soft shading, painterly, person, people, human, character, figure, vehicle in foreground, modern smartphone, LED billboard, text, words, letters, alphabet, chinese characters, japanese characters, signs, banners, logos, watermarks, signatures, lowres, bad anatomy, worst quality, modern glass building, skyscraper, neon lights, wooden architecture, traditional chinese wooden building, wooden door, dark tile roof, red paper lantern, red lantern, chinese lantern, oriental lantern, pagoda, upturned eaves, refiner",
-      "clip": [
-        "12",
-        1
-      ]
-    },
-    "class_type": "CLIPTextEncode",
-    "_meta": {
-      "title": "Negative (anti-realistic + no refiner)"
-    }
-  },
-  "8": {
-    "inputs": {
-      "width": 1920,
-      "height": 1080,
-      "batch_size": 1
-    },
-    "class_type": "EmptyLatentImage",
-    "_meta": {
-      "title": "Empty Latent (1920x1080)"
-    }
-  },
-  "9": {
-    "inputs": {
-      "samples": [
-        "3",
+    {
+      "id": 9,
+      "type": "VAEDecode",
+      "pos": [
+        0,
         0
       ],
-      "vae": [
-        "1",
-        2
-      ]
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "vae",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [
+        [
+          "3",
+          0
+        ],
+        [
+          "1",
+          2
+        ]
+      ],
+      "class_type": "VAEDecode"
     },
-    "class_type": "VAEDecode",
-    "_meta": {
-      "title": "VAE Decode (SDXL built-in)"
-    }
-  },
-  "10": {
-    "inputs": {
-      "filename_prefix": "sdxl_pixelart_scene1",
-      "images": [
-        "9",
+    {
+      "id": 10,
+      "type": "SaveImage",
+      "pos": [
+        0,
         0
-      ]
-    },
-    "class_type": "SaveImage",
-    "_meta": {
-      "title": "Save Image"
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "filename_prefix",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "images",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "sdxl_pixelart_scene1",
+        [
+          "9",
+          0
+        ]
+      ],
+      "class_type": "SaveImage"
     }
-  }
+  ],
+  "links": [],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 1
 }

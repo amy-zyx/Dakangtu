@@ -1,0 +1,133 @@
+{
+  "last_node_id": 6,
+  "last_link_id": 5,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "IndexTTS2ModelLoader",
+      "pos": [-700, 0],
+      "size": [320, 180],
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "INDEXTTS2_MODEL",
+          "type": "INDEXTTS2_MODEL",
+          "links": [1]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IndexTTS2ModelLoader"
+      },
+      "widgets_values": [
+        "IndexTTS-2",
+        "auto",
+        false,
+        false,
+        false
+      ],
+      "class_type": "IndexTTS2ModelLoader"
+    },
+    {
+      "id": 2,
+      "type": "LoadAudio",
+      "pos": [-700, 240],
+      "size": [320, 100],
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [2]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadAudio"
+      },
+      "widgets_values": ["voice_sample.wav"],
+      "class_type": "LoadAudio"
+    },
+    {
+      "id": 3,
+      "type": "IndexTTS2VoiceClone",
+      "pos": [-300, 100],
+      "size": [380, 220],
+      "inputs": [
+        {
+          "name": "model",
+          "type": "INDEXTTS2_MODEL",
+          "link": 1,
+          "slot_index": 0
+        },
+        {
+          "name": "spk_audio_prompt",
+          "type": "AUDIO",
+          "link": 2,
+          "slot_index": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "AUDIO",
+          "type": "AUDIO",
+          "links": [3]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "IndexTTS2VoiceClone"
+      },
+      "widgets_values": [
+        "Jack，这个地方好像鬼屋哎。你确定这里没有阿飘么？",
+        1.0,
+        0,
+        1.0,
+        false
+      ],
+      "class_type": "IndexTTS2VoiceClone"
+    },
+    {
+      "id": 4,
+      "type": "IndexTTS2SaveAudio",
+      "pos": [200, 200],
+      "size": [320, 120],
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 3,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "IndexTTS2SaveAudio"
+      },
+      "widgets_values": [
+        "ami_voice",
+        "wav",
+        "pcm16"
+      ],
+      "class_type": "IndexTTS2SaveAudio"
+    }
+  ],
+  "links": [
+    [1, 1, 0, 3, 0, "INDEXTTS2_MODEL"],
+    [2, 2, 0, 3, 2, "AUDIO"],
+    [3, 3, 0, 4, 0, "AUDIO"]
+  ],
+  "groups": [
+    {
+      "title": "IndexTTS-2 Voice Clone (kaola) - spk_audio_prompt connected",
+      "bounding": [-750, -50, 1300, 500],
+      "color": "#a86f3f"
+    }
+  ],
+  "config": {},
+  "extra": {
+    "workflow_info": {
+      "version": "1.2",
+      "author": "Dakangtu",
+      "description": "IndexTTS-2 voice clone for kaola nodes. spk_audio_prompt (input slot 2) is now connected to LoadAudio. Use this for one-line synthesis. For batch SRT dubbing, see galgame_index_tts2_kaola_srt_v1.json."
+    }
+  },
+  "version": 1
+}

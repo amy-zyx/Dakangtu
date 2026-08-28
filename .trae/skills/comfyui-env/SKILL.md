@@ -136,6 +136,8 @@ python -c "import json, urllib.request; data = json.loads(urllib.request.urlopen
 | ComfyUI 节点未出现 | 重启 ComfyUI | Manager → Restart |
 | `comfyui-easy-sam3` 启动失败：`ModuleNotFoundError: No module named 'triton'` | Triton 无 Windows PyPI wheel | 已打补丁：`sam3/model/edt.py` 软导入 triton，缺失时用 OpenCV 走 CPU 路径。视频跟踪可用但慢，图像分割完全不受影响 |
 | VNCCS 报 `Required node 'LoadSam3Model/easy sam3ModelLoader' is not available` | `comfyui-easy-sam3` 因 triton 缺失启动崩溃，没注册任何节点 | 同上：打补丁 + 重启 ComfyUI |
+| `comfyui-kaola-indextts2` / `ComfyUI-IndexTTS2-main` / `comfyui-easy-indextts2` 报 `ImportError: cannot import name 'isin_mps_friendly'` / `OffloadedCache` 等 | 节点代码引用了 transformers 已移除的旧 API（transformers >= 4.40 / 5.x） | ⚠️ **三个 IndexTTS 包底层都用 vendored transformers 代码，逐一打补丁不可行**。<br>**推荐方案：直接 patch vendored 文件**：`python tools/patch_vendored_tts.py` 把所有 `transformers_generation_utils.py` 的 from-import 改为 try/except 并注入 fallback 函数（用 lazy torch import）。<br>**已弃用方案（会引起新问题）**：compat shim 会在 Python 启动时导入 torch，与 comfy-aimdo 的 CUDA allocator 初始化冲突，触发 `Allocator backend parsed at runtime != allocator backend parsed at load time, cudaMallocAsync != native` 错误。**如果之前装过 shim，务必先卸载**：`python tools/uninstall_compat_shim.py` |
+| ComfyUI 启动报 `Neither pip nor uv are available for package management`（来自 ComfyUI-Manager） | venv 的 pip 被破坏（常见原因：`pip uninstall transformers` 副作用 / venv pip 装得不完整） | 恢复方法：<br>1. `python -m ensurepip --upgrade`（优先）<br>2. 若失败：`Invoke-WebRequest https://bootstrap.pypa.io/get-pip.py \| python` 手动装 pip<br>3. `python -m pip install transformers` 重装 transformers（任意版本，shim 会处理兼容）<br>**注意：不要用 `pip uninstall transformers` 试探**，先确认 pip 自身能跑 |
 
 ### Triton 依赖说明
 
@@ -154,3 +156,13 @@ python -c "import json, urllib.request; data = json.loads(urllib.request.urlopen
 4. `edt_triton()` 函数：triton 缺失时用 OpenCV 走 CPU 路径
 
 ⚠️ 重启 ComfyUI 才会生效（custom_nodes 模块在启动时加载）。
+
+**已打补丁的文件 2**：`custom_nodes\comfyui-kaola-indextts2\kaola_indextts\gpt\transformers_generation_utils.py`（⚠️ 已弃用）
+
+补丁改动：
+1. `from transformers.pytorch_utils import isin_mps_friendly` → `try/except ImportError` 软导入
+2. 缺失时定义 fallback 函数，用 `torch.isin(elements, test_elements)` 替代
+
+⚠️ 重启 ComfyUI 才会生效。
+
+**为什么弃用 kaola**：该节点包携带的 vendored transformers 代码引用了大量旧 API，逐一打补丁不现实。Python 3.13 环境下无法降级 transformers（无预编译 wheel）。改用 `ComfyUI-IndexTTS2-main`（节点 `IndexTTS2Simple` / `IndexTTS2Advanced`）或 `comfyui-easy-indextts2`（节点 `easy indexTTSGenerate`）。

@@ -1,127 +1,409 @@
 {
-  "3": {
-    "inputs": {
-      "seed": 142031,
-      "steps": 10,
-      "cfg": 1.0,
-      "sampler_name": "euler",
-      "scheduler": "simple",
-      "denoise": 1,
-      "model": [
-        "1",
+  "last_node_id": 10,
+  "last_link_id": 0,
+  "nodes": [
+    {
+      "id": 3,
+      "type": "KSampler",
+      "pos": [
+        0,
         0
       ],
-      "positive": [
-        "6",
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "seed",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "steps",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        },
+        {
+          "name": "cfg",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 2
+        },
+        {
+          "name": "sampler_name",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 3
+        },
+        {
+          "name": "scheduler",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 4
+        },
+        {
+          "name": "denoise",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 5
+        },
+        {
+          "name": "model",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 6
+        },
+        {
+          "name": "positive",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 7
+        },
+        {
+          "name": "negative",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 8
+        },
+        {
+          "name": "latent_image",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 9
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "KSampler"
+      },
+      "widgets_values": [
+        142031,
+        10,
+        1.0,
+        "euler",
+        "simple",
+        1,
+        [
+          "1",
+          0
+        ],
+        [
+          "6",
+          0
+        ],
+        [
+          "7",
+          0
+        ],
+        [
+          "8",
+          0
+        ]
+      ],
+      "class_type": "KSampler"
+    },
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "pos": [
+        0,
         0
       ],
-      "negative": [
-        "7",
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "unet_name",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "weight_dtype",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "UNETLoader"
+      },
+      "widgets_values": [
+        "z_image_turbo_bf16.safetensors",
+        "default"
+      ],
+      "class_type": "UNETLoader"
+    },
+    {
+      "id": 5,
+      "type": "CLIPLoader",
+      "pos": [
+        0,
         0
       ],
-      "latent_image": [
-        "8",
-        0
-      ]
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "clip_name",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "type",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "CLIPLoader"
+      },
+      "widgets_values": [
+        "qwen_3_4b.safetensors",
+        "qwen_image"
+      ],
+      "class_type": "CLIPLoader"
     },
-    "class_type": "KSampler",
-    "_meta": {
-      "title": "KSampler (Z-Image-Turbo, 10 step cfg=1, real photo)"
-    }
-  },
-  "1": {
-    "inputs": {
-      "unet_name": "z_image_turbo_bf16.safetensors",
-      "weight_dtype": "default"
-    },
-    "class_type": "UNETLoader",
-    "_meta": {
-      "title": "UNET Z-Image-Turbo bf16 (merged base+distill)"
-    }
-  },
-  "5": {
-    "inputs": {
-      "clip_name": "qwen_3_4b.safetensors",
-      "type": "qwen_image"
-    },
-    "class_type": "CLIPLoader",
-    "_meta": {
-      "title": "CLIPLoader Qwen3 4B (z-image default)"
-    }
-  },
-  "4": {
-    "inputs": {
-      "vae_name": "ae.safetensors"
-    },
-    "class_type": "VAELoader",
-    "_meta": {
-      "title": "VAE ae (z-image default)"
-    }
-  },
-  "6": {
-    "inputs": {
-      "text": "masterpiece, best quality, photorealistic, real photograph, shot on 35mm film, exterior night view of a modern two-story restaurant building entrance, October 2009, tall wide doorway with warm amber light spilling onto dry sidewalk, simple plastered light gray concrete facade, two-story building with modest upper floor windows, soft wall-mounted lamp glowing at entrance, warm yellow glow against deep blue night sky, distant street with blurred car tail lights bokeh, mild film grain, slightly desaturated 2009 beijing color palette, nostalgic atmosphere, no people, no signs with letters, no text, no characters, no red lanterns, 1920x1080 wallpaper",
-      "clip": [
-        "5",
-        0
-      ]
-    },
-    "class_type": "CLIPTextEncode",
-    "_meta": {
-      "title": "Positive - Scene 1 (real photo style)"
-    }
-  },
-  "7": {
-    "inputs": {
-      "text": "anime, cartoon, illustration, drawing, painted, person, people, human, character, figure, crowd, vehicle in foreground, modern smartphone, LED billboard, text, words, letters, alphabet, chinese characters, japanese characters, signs, banners, logos, watermarks, signatures, lowres, bad anatomy, worst quality, blurry, modern glass building, skyscraper, neon lights, wooden architecture, traditional chinese wooden building, wooden door, dark tile roof, red paper lantern, red lantern, chinese lantern, oriental lantern, exterior chinese style, pagoda, upturned eaves, hanfu, qipao",
-      "clip": [
-        "5",
-        0
-      ]
-    },
-    "class_type": "CLIPTextEncode",
-    "_meta": {
-      "title": "Negative (anti-cartoon + anti-asia-cues)"
-    }
-  },
-  "8": {
-    "inputs": {
-      "width": 1920,
-      "height": 1080,
-      "batch_size": 1
-    },
-    "class_type": "EmptyLatentImage",
-    "_meta": {
-      "title": "Empty Latent (1920x1080)"
-    }
-  },
-  "9": {
-    "inputs": {
-      "samples": [
-        "3",
+    {
+      "id": 4,
+      "type": "VAELoader",
+      "pos": [
+        0,
         0
       ],
-      "vae": [
-        "4",
-        0
-      ]
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "vae_name",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "VAELoader"
+      },
+      "widgets_values": [
+        "ae.safetensors"
+      ],
+      "class_type": "VAELoader"
     },
-    "class_type": "VAEDecode",
-    "_meta": {
-      "title": "VAE Decode"
-    }
-  },
-  "10": {
-    "inputs": {
-      "filename_prefix": "zimage_bg_scene1_test",
-      "images": [
-        "9",
+    {
+      "id": 6,
+      "type": "CLIPTextEncode",
+      "pos": [
+        0,
         0
-      ]
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "text",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "clip",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "masterpiece, best quality, photorealistic, real photograph, shot on 35mm film, exterior night view of a modern two-story restaurant building entrance, October 2009, tall wide doorway with warm amber light spilling onto dry sidewalk, simple plastered light gray concrete facade, two-story building with modest upper floor windows, soft wall-mounted lamp glowing at entrance, warm yellow glow against deep blue night sky, distant street with blurred car tail lights bokeh, mild film grain, slightly desaturated 2009 beijing color palette, nostalgic atmosphere, no people, no signs with letters, no text, no characters, no red lanterns, 1920x1080 wallpaper",
+        [
+          "5",
+          0
+        ]
+      ],
+      "class_type": "CLIPTextEncode"
     },
-    "class_type": "SaveImage",
-    "_meta": {
-      "title": "Save Image"
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "text",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "clip",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "anime, cartoon, illustration, drawing, painted, person, people, human, character, figure, crowd, vehicle in foreground, modern smartphone, LED billboard, text, words, letters, alphabet, chinese characters, japanese characters, signs, banners, logos, watermarks, signatures, lowres, bad anatomy, worst quality, blurry, modern glass building, skyscraper, neon lights, wooden architecture, traditional chinese wooden building, wooden door, dark tile roof, red paper lantern, red lantern, chinese lantern, oriental lantern, exterior chinese style, pagoda, upturned eaves, hanfu, qipao",
+        [
+          "5",
+          0
+        ]
+      ],
+      "class_type": "CLIPTextEncode"
+    },
+    {
+      "id": 8,
+      "type": "EmptyLatentImage",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "width",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "height",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        },
+        {
+          "name": "batch_size",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 2
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        1920,
+        1080,
+        1
+      ],
+      "class_type": "EmptyLatentImage"
+    },
+    {
+      "id": 9,
+      "type": "VAEDecode",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "vae",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": [
+        [
+          "3",
+          0
+        ],
+        [
+          "4",
+          0
+        ]
+      ],
+      "class_type": "VAEDecode"
+    },
+    {
+      "id": 10,
+      "type": "SaveImage",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        320,
+        100
+      ],
+      "inputs": [
+        {
+          "name": "filename_prefix",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 0
+        },
+        {
+          "name": "images",
+          "type": "WIDGET",
+          "link": null,
+          "slot_index": 1
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SaveImage"
+      },
+      "widgets_values": [
+        "zimage_bg_scene1_test",
+        [
+          "9",
+          0
+        ]
+      ],
+      "class_type": "SaveImage"
     }
-  }
+  ],
+  "links": [],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 1
 }
