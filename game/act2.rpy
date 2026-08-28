@@ -120,6 +120,7 @@ label act2:
     show ami_surprised at right_pos
     with dissolve
 
+    voice "audio/voice/ami_01.ogg"
     ami "Jack。这个地方好像鬼屋哎。你确定这里没有阿飘么？"
 
     "声音和电话里的不同，但是和我曾经的想象的一样。"
@@ -128,6 +129,7 @@ label act2:
 
     show ami_smile at right_pos
     with dissolve
+    voice "audio/voice/ami_02.ogg"
     ami "你到了多久了？"
 
     "Ami 在我对面拉开椅子，把包随手放在椅背上"
@@ -137,6 +139,7 @@ label act2:
     show ami_surprised at right_pos
     with dissolve
     "Ami 顺着我的视线看向窗外那棵树"
+    voice "audio/voice/ami_03.ogg"
     ami "你来过这个地方么？这里好有密室逃脱的风格啊，我最喜欢这类地方了。"
 
     "我咽下酒，想了想。"
@@ -145,6 +148,7 @@ label act2:
 
     hide ami_surprised
     show ami_smile at right_pos
+    voice "audio/voice/ami_04.ogg"
     ami "嗯，那么巧么？我也喜欢披萨，奥克兰有三个我最喜欢的披萨店，这里是其中之一！"
     with dissolve
 
@@ -158,6 +162,7 @@ label act2:
     show ami_nod at right_pos
     with dissolve
     "Ami 手肘撑在桌上，下巴微微抬起，眼睛里有一丝认真的光。"
+    voice "audio/voice/ami_05.ogg"
     ami "我也没有想到会有一天真的见到你，毕竟是10年都没有发过信息的人呢。"
 
     "我看着她的眼睛，发现她真的在听。"
@@ -167,6 +172,7 @@ label act2:
     show ami_smile at right_pos
     with dissolve
     "Ami 挑了挑眉，半信半疑地笑。"
+    voice "audio/voice/ami_06.ogg"
     ami "真的么？"
 
     jack "嗯。"
@@ -185,6 +191,7 @@ label act2:
     show ami_soft_smile at right_pos
     with dissolve
     "Ami 低头笑了一下，声音软下来。"
+    voice "audio/voice/ami_07.ogg"
     ami "你给我打电话我是很惊讶的，那天刚好有空，聊到了很晚呢。"
 
     "我用我的手举起酒杯作投降状。"
@@ -203,10 +210,12 @@ label act2:
     show ami_nod at right_pos
     with dissolve
     "Ami 摇摇头，指了指门口。"
+    voice "audio/voice/ami_08.ogg"
     ami "我是开车来的，就停在路边。"
 
     "我站起来拿外套。"
     jack "那就把你送到车边，你能开车吧？"
+    voice "audio/voice/ami_09.ogg"
     ami "没问题。"
     hide ami_nod
     with Pause(1.0)
@@ -227,6 +236,7 @@ label act2:
     "开门声空气里响了一下。"
     "她打开车门，从百宝袋里拿出了一个纸袋，袋子里放了一瓶白葡萄酒。真巧，在这么黑的街道里都能拿出白葡萄酒来，真是厉害的啊！我可是什么都看不到了呢。"
     "Ami 把纸袋递过来，眼神里带着一点小小的仪式感。"
+    voice "audio/voice/ami_10.ogg"
     ami "给你的。我喜欢的酒。"
 
     "我有点惊讶，赶忙接过来。看着她的脸。"
@@ -236,6 +246,7 @@ label act2:
     show ami_nod at right_pos
     with dissolve
     "Ami 点点头，笑得比刚才淡一点，眼睛却没离开我。"
+    voice "audio/voice/ami_11.ogg"
     ami "好的。"
 
     "车门关上的声音很轻。"
