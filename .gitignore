@@ -31,3 +31,6 @@ models/sam3_dl/checkpoints/sam3.1_multiplex_fp16.safetensors
 /logs
 /data
 /tools
+/downloads
+/input
+/references
