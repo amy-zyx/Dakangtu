@@ -27,6 +27,8 @@ image ami_curious = "images/characters/ami/ami_curious.png"
 image ami_soft_smile = "images/characters/ami/ami_soft_smile.png"
 image ami_nod = "images/characters/ami/ami_nod.png"
 image ami_surprised = "images/characters/ami/ami_surprised.png"
+image ami_shock = "images/characters/ami/ami_shock.png"
+image ami_shy = "images/characters/ami/ami_shy.png"
 
 # ============================================
 # 角色定位 transform
@@ -113,7 +115,7 @@ label act2:
 
     hide ami_smile
 
-    show ami_surprised at right_pos
+    show ami_shock at right_pos
     with dissolve
 
     voice "audio/voice/ami_01.ogg"
@@ -121,7 +123,7 @@ label act2:
 
     "声音和电话里的不同，但是和我曾经的想象的一样。"
 
-    hide ami_surprised
+    hide ami_shock
 
     show ami_smile at right_pos
     with dissolve
@@ -239,7 +241,7 @@ label act2:
     jack "你是怎么把车停到这么日式的街道来的，难道你会穿越么？认真的要说再见了呢，有机会再见。比如下一个12年的某天。不过，下次我一定在日本和你见面，或者宇宙里。绝对不能是新西兰的意大利餐厅这么难找的素材里。"
 
     hide ami_soft_smile
-    show ami_nod at right_pos
+    show ami_shy at right_pos
     with dissolve
     "Ami 点点头，笑得比刚才淡一点，眼睛却没离开我。"
     voice "audio/voice/ami_11.ogg"
@@ -249,7 +251,7 @@ label act2:
 
     "她钻进车里，车门关上，引擎低低地响了一声。我握着那瓶酒站在路边，看她倒车，调头，尾灯在街角亮了一下，然后拐弯消失了。"
 
-    hide ami_nod
+    hide ami_shy
     "我在原地站了一会儿，有点意犹未尽。从来没有见过长得像机器猫，还自带日本背景的人物。"
 
     "忽然有点伤感，我想，大概是不会再见到了，但是起码不再是一个从未谋面的陌生人。"
