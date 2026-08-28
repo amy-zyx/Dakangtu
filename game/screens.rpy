@@ -250,11 +250,27 @@ screen quick_menu():
 
 
 ## 此代码确保只要用户没有主动隐藏界面，就会在游戏中显示 quick_menu 屏幕。
-# 已禁用：项目不需要底部游戏菜单（保存/历史/快进等）
-# init python:
-#     config.overlay_screens.append("quick_menu")
+init python:
+    config.overlay_screens.append("quick_menu")
+    config.overlay_screens.append("voice_toggle")
 
 default quick_menu = True
+
+
+## 语音静音切换按钮（独立 overlay，不带其他 quick_menu 按钮，保持纯净界面）
+screen voice_toggle():
+    zorder 100
+
+    if quick_menu:
+        frame:
+            xalign 0.985
+            yalign 0.02
+            padding (10, 6, 10, 6)
+            background "#0008"
+            textbutton _("语音"):
+                action Preference("voice mute", "toggle")
+                style "mute_all_button"
+
 
 style quick_menu is hbox
 style quick_button is default
@@ -347,7 +363,7 @@ screen main_menu():
     tag menu
 
     ## 视频播完后自动停在最后一帧（不传 image 参数）
-    add Movie(play="videos/logo_1.mp4", loop=False, image="images/backgrounds/fire_woods_5.png") xalign 0.5 yalign 0.5 zoom 0.5
+    # add Movie(play="videos/logo_1.mp4", loop=False, image="images/backgrounds/fire_woods_5.png") xalign 0.5 yalign 0.5 zoom 0.5
 
     ## 简单 "开始游戏" 按钮 (只此一个) — 点击进入章节选择界面
     textbutton _("开始游戏"):
