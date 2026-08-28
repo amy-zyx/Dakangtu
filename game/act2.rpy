@@ -9,11 +9,7 @@
 # - AMI 立绘：ami_xxx
 #
 # 入口：在 script.rpy 中加 `jump act2` 即可从主菜单跳转过来。
-
-# 角色定义
-define jack = Character("Jack", color="#d4d4d4")
-define ami = Character("AMI", color="#88cc88")
-define narrator = Character(None, what_color="#cccccc")
+# 注意：角色定义 (jack, ami, narrator) 已移至 characters.rpy，避免重复 define 报错。
 
 # ============================================
 # 图像占位符声明
@@ -253,12 +249,16 @@ label act2:
 
     "她钻进车里，车门关上，引擎低低地响了一声。我握着那瓶酒站在路边，看她倒车，调头，尾灯在街角亮了一下，然后拐弯消失了。"
 
+    hide ami_nod
     "我在原地站了一会儿，有点意犹未尽。从来没有见过长得像机器猫，还自带日本背景的人物。"
 
     "忽然有点伤感，我想，大概是不会再见到了，但是起码不再是一个从未谋面的陌生人。"
 
     "一片云从海那边漂过来, 给刚刚晴朗的天就填上了一抹阴霾。"
 
+
+    scene black
+    with dissolve
     centered "{size=+10}一见如故旧，丝麟酌流霞。{/size}"
     with Pause(2.0)
 
@@ -266,4 +266,5 @@ label act2:
     with Pause(1.5)
 
     # 结束: 回到章节选择界面
-    jump chapter_select
+    # jump chapter_select
+    return

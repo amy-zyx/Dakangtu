@@ -8,4 +8,11 @@ define lx = Character("LX",
     voice_tag="lx"          # voice 文件命名: audio/voice/lx{1,2,3,...}.ogg
 )
 
-# 旁白使用 Ren'Py 内置 narrator, 不需要显式定义
+# Jack - 主角
+define jack = Character("Jack", color="#d4d4d4")
+
+# AMI - Act 2 女主角
+define ami = Character("AMI", color="#88cc88")
+
+# 旁白 (使用 Ren'Py 内置 narrator 时显式 define 以便统一管理)
+define narrator = Character(None, what_color="#cccccc")

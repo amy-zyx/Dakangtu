@@ -19,18 +19,9 @@ label start:
     scene black
     with Pause(1.0)
 
-    "2009年北京的初冬"
+    "希望你喜欢这个故事。"
     with Pause(2.0)
 
     # 跳转到第一幕
-    jump act1
+    jump act2
 
-
-# ====== 调试用：快速跳转到第一幕 ======
-label debug_act1:
-    jump act1
-
-# ====== 调试用：跳转到第一幕末尾 ======
-label debug_act1_end:
-    $ act1_complete = True
-    jump act1
