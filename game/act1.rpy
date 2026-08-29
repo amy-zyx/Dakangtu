@@ -57,6 +57,9 @@ label act1:
     $ current_location = "restaurant"
     $ current_time = "night"
 
+    # BGM: 进入 act1 开始循环播放
+    play music "audio/bgm/bgm.ogg" fadein 2.0
+
     # ----------------- 标题 -----------------
     scene black
     with Pause(1.0)
@@ -254,6 +257,9 @@ label act1:
 
     "[[END OF ACT 1]]"
     with Pause(1.5)
-    
+
+    # BGM: act1 结束淡出
+    stop music fadeout 2.0
+
     # 结束: 回到章节选择界面
     jump chapter_select

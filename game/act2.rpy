@@ -42,6 +42,9 @@ transform right_pos:
 # ============================================
 label act2:
 
+    # BGM: 进入 act2 开始循环播放
+    play music "audio/bgm/bgm.ogg" fadein 2.0
+
     scene black
     with Pause(1.0)
 
@@ -266,5 +269,8 @@ label act2:
 
     "[[END OF ACT 2]]"
     with Pause(1.5)
+
+    # BGM: act2 结束淡出
+    stop music fadeout 2.0
 
     jump chapter_select
