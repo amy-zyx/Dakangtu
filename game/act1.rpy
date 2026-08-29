@@ -256,5 +256,4 @@ label act1:
     with Pause(1.5)
     
     # 结束: 回到章节选择界面
-    # jump chapter_select
-    return
+    jump chapter_select

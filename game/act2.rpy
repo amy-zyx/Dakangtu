@@ -267,6 +267,4 @@ label act2:
     "[[END OF ACT 2]]"
     with Pause(1.5)
 
-    # 结束: 回到章节选择界面
-    # jump chapter_select
-    return
+    jump chapter_select
