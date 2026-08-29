@@ -23,5 +23,5 @@ label start:
     with Pause(2.0)
 
     # 跳转到第一幕
-    jump act2
+    jump act1
 
