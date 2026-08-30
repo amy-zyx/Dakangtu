@@ -21,7 +21,7 @@ define gui.show_name = True
 
 ## 游戏版本号。
 
-define config.version = "1.2"
+define config.version = "1.3"
 
 
 ## 屏幕尺寸 - 强制 16:9 全屏 1920x1080

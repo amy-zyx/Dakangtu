@@ -175,6 +175,7 @@ label act1:
     with dissolve
 
     "她站在路旁，暖黄灯光落在她脸上。"
+    play sound "audio/sfx/wind.ogg"
     "风把大衣下摆吹动了一下，红色发卡滑了一下，碰到耳朵上方的发丝。"
     with Pause(1.0)
 
@@ -228,6 +229,7 @@ label act1:
 
     hide lx back_and_surprised
 
+    play sound "audio/sfx/car.ogg"
     "然后她钻进车里，车门关上。"
     "车尾灯在深蓝色夜色里拉成一条红线，慢慢弯过街角，消失了。"
     with Pause(1.0)
@@ -238,13 +240,14 @@ label act1:
     "「有缘就会再见面的」"
     with Pause(0.5)
 
-    # 视觉锚点：路灯雨丝 + 远处公交车
-    "路灯把雨丝照成斜线。远处一辆公交车慢慢驶来。"
-    with Pause(1.0)
-
     "我小声念了一句，然后转身，朝着公交的方向慢慢走去。"
     "初冬下起了小雨。"
     with Pause(2.0)
+
+    # 视觉锚点：路灯雨丝 + 远处公交车
+    # 雨声 SFX (loop) - 在场景结束时停止
+    play sound "audio/sfx/rain.ogg" loop
+    "路灯把雨丝照成斜线。远处一辆公交车慢慢驶来。"
 
     # ============================================================
     # 结束
@@ -260,6 +263,8 @@ label act1:
 
     # BGM: act1 结束淡出
     stop music fadeout 2.0
+    # 雨声 SFX: 同步淡出
+    stop sound fadeout 2.0
 
     # 结束: 回到章节选择界面
     jump chapter_select

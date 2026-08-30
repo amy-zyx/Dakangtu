@@ -230,6 +230,7 @@ label act2:
     "走出门去，外面天已经黑了，一副日本恐怖片的气氛。"
     "到了说再见的时候了，以后还会见面么？"
     "谁有几个12年呢。谁又能保证下一个12年不删除一个只有一面之缘的人呢。想到这里，一股伤感涌上心头。"
+    play sound "audio/sfx/wind.ogg"
     "虽然现在是秋天，但还是挺热的，风吹过，树叶沙沙的响起。"
 
     show ami_soft_smile at right_pos
@@ -250,8 +251,8 @@ label act2:
     voice "audio/voice/ami_11.ogg"
     ami "好的。"
 
-    "车门关上的声音很轻。"
 
+    play sound "audio/sfx/car.ogg"
     "她钻进车里，车门关上，引擎低低地响了一声。我握着那瓶酒站在路边，看她倒车，调头，尾灯在街角亮了一下，然后拐弯消失了。"
 
     hide ami_shy
@@ -273,4 +274,4 @@ label act2:
     # BGM: act2 结束淡出
     stop music fadeout 2.0
 
-    jump chapter_select
+    return

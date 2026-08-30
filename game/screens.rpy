@@ -353,7 +353,7 @@ screen main_menu():
     textbutton _("开始游戏"):
         xalign 0.5
         yalign 0.88
-        action Start("chapter_select")
+        action Start("act2")
 
 
 style main_menu_frame is empty
