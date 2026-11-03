@@ -38,3 +38,7 @@ models/sam3_dl/checkpoints/sam3.1_multiplex_fp16.safetensors
 /.vscode
 .DS_Store
 progressive_download.txt
+
+# Local Amy POV assets and mobile attachments
+/game/amy_private/
+/.codex-remote-attachments/

@@ -345,20 +345,55 @@ screen main_menu():
 
     ## 此语句可确保替换掉任何其他菜单屏幕。
     tag menu
+    default focused_pov = None
 
-    ## 视频播完后自动停在最后一帧（不传 image 参数）
-    add Movie(play="videos/logo_1.mp4", loop=False, image="images/backgrounds/fire_woods_5.png") xalign 0.5 yalign 0.5 zoom 0.5
+    add Movie(play="videos/logo_1.mp4", loop=False, image="images/backgrounds/fire_woods_5.png") xalign 0.5 yalign 0.12 zoom 0.5
+
+    add Transform("amy_jack_black_tshirt", ysize=560, fit="contain"):
+        xcenter 0.25
+        yanchor 1.0
+        ypos 0.72
+        matrixcolor BrightnessMatrix(0.16 if focused_pov == "jack" else -0.22 if focused_pov else 0.0)
+    add Transform("amy_ami smile", ysize=560, fit="contain"):
+        xcenter 0.75
+        yanchor 1.0
+        ypos 0.72
+        matrixcolor BrightnessMatrix(0.16 if focused_pov == "amy" else -0.22 if focused_pov else 0.0)
 
     vbox:
-        xalign 0.5
-        yalign 0.86
-        spacing 18
-        textbutton _("开始第一章"):
+        xcenter 0.25
+        ypos 0.75
+        spacing 12
+        text _("男生视角 Jack") xalign 0.5 size 42
+        textbutton _("第一章：穿越时空的见面"):
             xalign 0.5
             action Start("act2")
-        textbutton _("开始第二章（生日快乐🍰）"):
+            hovered SetScreenVariable("focused_pov", "jack")
+            unhovered SetScreenVariable("focused_pov", None)
+        textbutton _("第二章：生日快乐"):
             xalign 0.5
             action Start("act3")
+            hovered SetScreenVariable("focused_pov", "jack")
+            unhovered SetScreenVariable("focused_pov", None)
+
+    vbox:
+        xcenter 0.75
+        ypos 0.75
+        spacing 12
+        text _("女生视角 Amy") xalign 0.5 size 42
+        textbutton _("第一章：穿越时空的见面"):
+            xalign 0.5
+            action Start("amy_act2")
+            hovered SetScreenVariable("focused_pov", "amy")
+            unhovered SetScreenVariable("focused_pov", None)
+        if renpy.has_label("amy_act3"):
+            textbutton _("第二章：今晚的月色好美"):
+                xalign 0.5
+                action Start("amy_act3")
+                hovered SetScreenVariable("focused_pov", "amy")
+                unhovered SetScreenVariable("focused_pov", None)
+        else:
+            textbutton _("第二章：待开放") xalign 0.5 action None
 
 
 style main_menu_frame is empty
