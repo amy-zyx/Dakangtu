@@ -387,7 +387,7 @@ screen main_menu():
             hovered SetScreenVariable("focused_pov", "amy")
             unhovered SetScreenVariable("focused_pov", None)
         if renpy.has_label("amy_act3"):
-            textbutton _("第二章：今晚的月色好美"):
+            textbutton _("第二章：你眼中的宇宙"):
                 xalign 0.5
                 action Start("amy_act3")
                 hovered SetScreenVariable("focused_pov", "amy")
