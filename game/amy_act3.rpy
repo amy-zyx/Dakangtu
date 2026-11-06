@@ -6,7 +6,7 @@ image amy_autumn_booth = Transform("images/backgrounds/act3/amy_autumn_booth.png
 image amy_autumn_street = Transform("images/backgrounds/act3/amy_autumn_street.png", size=(1920, 1080))
 image amy_autumn_car = Transform("images/backgrounds/act3/amy_autumn_car.png", size=(1920, 1080))
 image amy_autumn_ami = Transform("images/characters/ami/amy_autumn_sweater.png", ysize=900, fit="contain")
-image amy_autumn_jack = Transform("images/characters/jack/amy_autumn_jacket.png", ysize=900, fit="contain")
+image amy_autumn_jack = Transform(amy_jack_with_cross("images/characters/jack/amy_autumn_jacket.png"), ysize=900, fit="contain")
 
 image amy_autumn_invite_chat = Transform(Composite(
     (576, 1280),
@@ -102,15 +102,15 @@ image amy_ch2_ami thoughtful = Composite(
 
 image amy_ch2_jack laugh = Composite(
     (900, 1080),
-    (149, 66), Transform("images/characters/jack/amy_ch2_laugh_extended.png", zoom=0.68),
+    (149, 66), Transform(amy_jack_with_cross("images/characters/jack/amy_ch2_laugh_extended.png"), zoom=0.68),
 )
 image amy_ch2_jack curious = Composite(
     (900, 1080),
-    (149, 66), Transform("images/characters/jack/amy_ch2_curious_extended.png", zoom=0.68),
+    (149, 66), Transform(amy_jack_with_cross("images/characters/jack/amy_ch2_curious_extended.png"), zoom=0.68),
 )
 image amy_ch2_jack thoughtful = Composite(
     (900, 1080),
-    (149, 66), Transform("images/characters/jack/amy_ch2_thoughtful_extended.png", zoom=0.68),
+    (149, 66), Transform(amy_jack_with_cross("images/characters/jack/amy_ch2_thoughtful_extended.png"), zoom=0.68),
 )
 
 label amy_act3:

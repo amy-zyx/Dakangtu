@@ -1,7 +1,7 @@
-# Shared Amy Chapter 2 state, persistent collection, and legacy-label compatibility.
+# Shared Amy Chapter 2 state, process-local collection, and legacy-label compatibility.
 define amy_ch2_jack_narrator = Character(None, what_color="#cccccc")
 define amy_ch2_system = Character("系统", color="#b7d9ff")
-default amy_ch2_stats = {"love": 50, "wisdom": 50, "luck": 50}
+default amy_ch2_stats = dict(amy_v12_base_stats)
 default amy_ch2_awarded_nodes = []
 default amy_ch2_choices = {}
 default amy_ch2_completed = []
@@ -40,10 +40,16 @@ image amy_ch2_school_ami = Composite(
 )
 image amy_ch2_school_jack = Composite(
     (900, 1080),
-    (89, 66), Transform("images/characters/jack/amy_time_school_jack.png", zoom=0.82),
+    (89, 66), Transform(amy_jack_with_cross("images/characters/jack/amy_time_school_jack.png"), zoom=0.82),
 )
 
 init python:
+    # Process-local collection: deliberately not restored from persistent or save slots.
+    renpy.amy_session_cards = []
+    renpy.amy_session_lottery_seen = False
+    persistent.amy_ch2_cards = []
+    persistent.amy_ch2_endings = []
+    persistent.amy_ch2_true_ending_completed = False
     def amy_ch2_award_once(node, stat, delta, notify=True):
         if node in store.amy_ch2_awarded_nodes:
             return
@@ -60,7 +66,7 @@ init python:
 
     def amy_ch2_sync_cards():
         routes = ("time", "space", "rules")
-        cards = [r for r in routes if r in (persistent.amy_ch2_cards or []) or r in (persistent.amy_ch2_endings or []) or r in store.amy_ch2_completed or r in store.amy_ch2_fragments]
+        cards = [r for r in routes if r in renpy.amy_session_cards]
         persistent.amy_ch2_cards = list(cards)
         persistent.amy_ch2_endings = list(cards)
         store.amy_ch2_completed = list(cards)
@@ -75,21 +81,23 @@ init python:
         book = {"solve": "together", "ask": "staff", "fail": "failed"}.get(store.amy_ch2_bookshelfChoice)
         if drink in ("surprise", "gin", "favorite"):
             store.amy_ch2_choices["cocktail"] = drink
-            amy_ch2_award_once("cocktail", {"surprise": "love", "gin": "wisdom", "favorite": "luck"}[drink], 10, False)
+            amy_ch2_award_once("cocktail", None, 0, False)
         if book:
             store.amy_ch2_choices["bookshelf"] = book
-            amy_ch2_award_once("bookshelf", {"together": "love", "staff": "wisdom", "failed": None}[book], 10, False)
+            amy_ch2_award_once("bookshelf", None, 0, False)
+        amy_v12_recalculate()
         store.amy_ch2_schema = 4
 
     def amy_ch2_finish_world(route):
         amy_ch2_sync_cards()
         is_new = route not in persistent.amy_ch2_cards
         if is_new:
-            persistent.amy_ch2_cards = list(persistent.amy_ch2_cards) + [route]
+            renpy.amy_session_cards = list(renpy.amy_session_cards) + [route]
         amy_ch2_sync_cards()
         renpy.save_persistent()
         return is_new
 
+    config.after_load_callbacks.append(amy_ch2_sync_cards)
 
 label amy_ch2_bookshelf:
     jump amy_v11_date4

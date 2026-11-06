@@ -395,6 +395,8 @@ screen main_menu():
         else:
             textbutton _("第二章：待开放") xalign 0.5 action None
 
+    use amy_v11_album_button
+
 
 style main_menu_frame is empty
 style main_menu_vbox is vbox

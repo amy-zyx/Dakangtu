@@ -41,8 +41,8 @@ image amy_after_dinner_chat = Transform(Composite(
 
 image amy_restaurant_interior = Transform("images/backgrounds/act2/amy_restaurant_interior.jpg", size=(1920, 1080))
 image amy_driving_sunset = Transform("images/backgrounds/act2/amy_driving_sunset.jpg", size=(1920, 1080))
-image amy_jack_black_tshirt = Transform("images/characters/jack/jack_black_tshirt.png", ysize=940, fit="contain")
-image amy_jack_black_tshirt thoughtful = Transform("images/characters/jack/jack_black_tshirt_thoughtful.png", ysize=940, fit="contain")
+image amy_jack_black_tshirt = Transform(amy_jack_with_cross("images/characters/jack/jack_black_tshirt.png"), ysize=940, fit="contain")
+image amy_jack_black_tshirt thoughtful = Transform(amy_jack_with_cross("images/characters/jack/jack_black_tshirt_thoughtful.png"), ysize=940, fit="contain")
 # Frame the full-body Ami artwork at the same portrait scale as Jack.
 image amy_ami smile = Transform("images/characters/ami/ami_smile.png", crop=(90, 0, 470, 680), zoom=1.4)
 image amy_ami surprised = Transform("images/characters/ami/ami_surprised.png", crop=(90, 0, 470, 680), zoom=1.4)
@@ -108,6 +108,7 @@ label amy_act2:
         with dissolve
         pause
 
+    $ amy_v11_ambience("bar")
     scene amy_restaurant_interior
     with dissolve
 
@@ -117,6 +118,7 @@ label amy_act2:
 
     narrator "那天公司庆祝 Saint Patrick’s Day，我穿了那条深绿色的裙子。领口有点低，趁 Jack 还没来，我特意往上拉了拉。毕竟都是中国人嘛。"
 
+    $ amy_v11_cue("step", .34)
     narrator "忽然有个男生从门口走进来，穿着黑色 T 恤和牛仔裤。我一眼就认出了他。"
     show amy_jack_black_tshirt at right
     with dissolve
@@ -182,6 +184,8 @@ label amy_act2:
 
     narrator "吃完饭，我还在想，聊这么开心，他会不会请我再喝一杯？可他好像赶着回去，很快就出了餐厅。"
 
+    $ amy_v11_ambience("street")
+    $ amy_v11_cue("step", .37)
     scene bg_street_evening
     show amy_ami soft_smile at amy_ami_foreground
     show amy_jack_black_tshirt at right
@@ -201,6 +205,8 @@ label amy_act2:
     hide amy_ami
     hide amy_jack_black_tshirt
     with dissolve
+    $ amy_v11_ambience()
+    $ amy_v11_cue("door", .38)
     narrator "我上了车，往北岸开。"
 
     narrator "我还会再见到他吗？"

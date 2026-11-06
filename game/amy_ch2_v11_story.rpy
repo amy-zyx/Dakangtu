@@ -4,7 +4,7 @@
 label amy_v11_start:
     $ amy_ch2_migrate()
     show screen amy_v11_status
-    play music "audio/bgm/bgm_act2_1.ogg" fadein 1.5
+    $ amy_v11_play_music("chapter")
     centered "第二章  你眼中的宇宙"
     jump amy_v11_date1
 
@@ -36,13 +36,13 @@ label amy_v11_date1:
     jack "至少得试着改变点什么吧。马克思不是说过么，哲学家们只是用不同方式解释世界，问题在于改变世界。"
     # source:47
     $ amy_v11_emote("ami", "curious")
-    amy_v11_amy "你这是准备在去酒吧的路上发动革命？"
+    amy_v11_amy "那今晚呢？你想先从哪件小事开始？"
     # source:48
     $ amy_v11_emote("jack", "laugh")
     jack "先从不接受一杯难喝的酒开始。"
     # source:49
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "革命目标还挺具体。"
+    amy_v11_amy "好。我们就从一杯喜欢的酒开始。"
     # source:51
     narrator "他讲这些话的时候，眼睛会突然亮起来。"
     # source:52
@@ -55,30 +55,30 @@ label amy_v11_date1:
     # source:56
     $ amy_v11_emote("ami", "smile")
     amy_v11_amy "你讲话像在给电影配旁白。"
-    # source:57
+    # adapted from source:57 (Jack’s confirmed wording: 神圣启示)
     $ amy_v11_emote("jack", "curious")
-    jack "你知道神圣骑士最荒谬的地方是什么吗？"
+    jack "你觉得，有些巧合会不会是一种神圣启示？"
     # source:58
     $ amy_v11_emote("ami", "curious")
     amy_v11_amy "什么？"
     # source:59
     $ amy_v11_emote("jack", "thoughtful")
-    jack "他明知道世界未必讲道理，还是要骑着马去讨一个说法。"
+    jack "有些事发生得太刚好，会让人想知道，那是不是在提醒自己什么。"
     # source:60
     $ amy_v11_emote("ami", "curious")
-    amy_v11_amy "你是在说你自己？"
+    amy_v11_amy "我也说不准。有些事是走过了，回头才看出意义。"
     # source:61
     $ amy_v11_emote("jack", "laugh")
-    jack "我只是觉得，西西弗斯至少应该有权利骂一骂那块石头。"
+    jack "我想起西西弗斯。石头不会给他答案，他却还是要过自己的日子。"
     # source:62
     $ amy_v11_emote("ami", "curious")
     amy_v11_amy "然后呢？"
     # source:63
     $ amy_v11_emote("jack", "smile")
-    jack "然后继续推。"
+    jack "然后他还是会推。至于为什么推，也许可以由他自己决定。"
     # source:64
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "你还挺有原则。"
+    amy_v11_amy "我喜欢这个想法。就算没得选，也还有一点是属于自己的。"
     # source:65
     $ amy_v11_emote("jack", "thoughtful")
     jack "我一直觉得，这世界像一部早就写完的戏。"
@@ -96,19 +96,19 @@ label amy_v11_date1:
     jack "演员至少还能挑剧本。我连剧本都看过了。"
     # source:70
     $ amy_v11_emote("ami", "curious")
-    amy_v11_amy "那不是挺省事？提前知道结局。"
+    amy_v11_amy "如果看见的那一页不如你所愿，一定也不好受吧。"
     # source:71
     $ amy_v11_emote("jack", "curious")
-    jack "省什么事？我就是不明白，他既然有那么大的本事，为什么偏偏给我写成这样。"
+    jack "是啊。我就是不明白，他既然有那么大的本事，为什么偏偏给我写成这样。"
     # source:72
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "所以你不是不信命。你是不满意编剧。"
+    amy_v11_amy "有些事发生了，连问一句为什么，都不知道该找谁。"
     # source:73
     $ amy_v11_emote("jack", "laugh")
     jack "对。我想找他谈谈，问问这到底是什么水平。"
     # source:74
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "那你最好先别把编剧得罪死。今晚我们还得找停车位。"
+    amy_v11_amy "如果真能见到他，我陪你问。今晚先让我陪你找个停车位吧。"
     # source:76
     narrator "他笑了。我又忍不住看他。"
     # source:77
@@ -118,6 +118,7 @@ label amy_v11_date1:
     jump amy_v11_date2
 
 label amy_v11_date2:
+    $ amy_v11_play_music("chapter")
     call amy_v11_stage("bar", "date", actors=True)
     show screen amy_v11_status
     # source:87
@@ -198,7 +199,7 @@ label amy_v11_date2:
             # source:122
             narrator "我明明知道他在故意留白，却喜欢看他把话说到一半的样子。"
             call screen amy_v11_drink_closeup(0, "莫拉之美")
-            $ amy_v11_choose("cocktail", "love", 10, "让 Jack 选一杯 Surprise Me")
+            $ amy_v11_choose("cocktail", "luck", 5, "让 Jack 选一杯 Surprise Me")
         "试试 Gin：Aviation":
             # source:126
             $ amy_v11_emote("ami", "curious")
@@ -250,7 +251,7 @@ label amy_v11_date2:
             # source:144
             narrator "有时候好运不是撞上未知，而是刚好知道自己喜欢什么。"
             call screen amy_v11_drink_closeup(2, "潘纳科塔")
-            $ amy_v11_choose("cocktail", "luck", 10, "点熟悉的 Creamy Panna Cotta")
+            $ amy_v11_choose("cocktail", "wisdom", 10, "点熟悉的 Creamy Panna Cotta")
     jump amy_v11_date3
 
 label amy_v11_date3:
@@ -406,6 +407,7 @@ label amy_v11_date4:
     jump amy_v11_date5
 
 label amy_v11_date5:
+    $ amy_v11_cue("latch", 0.5)
     call amy_v11_stage("secret", "date", actors=True)
     show screen amy_v11_status
     # source:231
@@ -430,25 +432,25 @@ label amy_v11_date5:
     jack "你今天穿得好保守啊。"
     # source:241
     $ amy_v11_emote("ami", "curious")
-    amy_v11_amy "有没有一种可能……今天很冷？"
+    amy_v11_amy "今天有点冷，我想穿得暖和些。"
     # source:242
     $ amy_v11_emote("jack", "smile")
     jack "第一次见你的时候，穿得特别性感，也特别漂亮。"
     # source:243
     $ amy_v11_emote("ami", "curious")
-    amy_v11_amy "四月的奥克兰已经很冷了。我穿毛衣有什么问题？"
+    amy_v11_amy "谢谢你还记得。四月的奥克兰，我还是舍不得放下这件毛衣。"
     # source:244
     $ amy_v11_emote("jack", "laugh")
     jack "没问题。"
     # source:245
     $ amy_v11_emote("ami", "thoughtful")
-    amy_v11_amy "那你还评价得这么认真。"
+    amy_v11_amy "原来你留意到了。"
     # source:246
     $ amy_v11_emote("jack", "smile")
     jack "观察力是美德。"
     # source:247
     $ amy_v11_emote("ami", "thoughtful")
-    amy_v11_amy "选择性观察吧。"
+    amy_v11_amy "那也看看别的呀。比如我现在很喜欢这里。"
     jump amy_v11_date6
 
 label amy_v11_date6:
@@ -510,6 +512,7 @@ label amy_v11_date6:
     jump amy_v11_date7
 
 label amy_v11_date7:
+    $ amy_v11_cue("step", 0.44)
     call amy_v11_stage("street", "date", actors=True)
     show screen amy_v11_status
     # source:282
@@ -547,6 +550,7 @@ label amy_v11_date7:
     jump amy_v11_date8
 
 label amy_v11_date8:
+    $ amy_v11_cue("door", 0.48)
     call amy_v11_stage("car", "date", actors=True)
     show screen amy_v11_status
     # source:303
@@ -566,7 +570,7 @@ label amy_v11_date8:
     jack "你有能力做到更多。但你对自己要求得还不够。You need to push yourself harder."
     # source:308
     $ amy_v11_emote("ami", "curious")
-    amy_v11_amy "你是在批评我？"
+    amy_v11_amy "你是觉得，我还可以再相信自己一点？"
     # source:309
     $ amy_v11_emote("jack", "smile")
     jack "我是在说，你不应该把自己活成一个缩水的版本。"
@@ -610,9 +614,10 @@ label amy_v11_date8:
     jump amy_v11_hub
 
 label amy_v11_time:
+    $ amy_v11_play_music("time")
     $ amy_ch2_selected_route = "time"
     show screen amy_v11_status
-    centered "幻想世界  十八岁的我们\nJack 20 岁 / Amy 18 岁"
+    centered "平行宇宙  十八岁的我们\nJack 20 岁 / Amy 18 岁"
     call amy_v11_stage("welcome", "campus", actors=True)
     # source:368
     amy_ch2_jack_narrator "二十岁。中山大学。医学院。"
@@ -665,7 +670,7 @@ label amy_v11_time:
     jack "滑板社。"
     # source:390
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "我知道是滑板社。我问谁起的名字。"
+    amy_v11_amy "我想听听这个名字是谁起的。"
     # source:391
     $ amy_v11_emote("jack", "smile")
     jack "我。"
@@ -719,7 +724,7 @@ label amy_v11_time:
     jack "今天先带你去看看。"
     # source:409
     $ amy_v11_emote("ami", "curious")
-    amy_v11_amy "社长擅离职守？"
+    amy_v11_amy "你走得开吗？我可以等你忙完。"
     # source:410
     $ amy_v11_emote("jack", "smile")
     jack "无聊寂寞帮第一条帮规：遇到更有意思的事，允许临时改道。"
@@ -778,6 +783,7 @@ label amy_v11_time:
     amy_v11_amy "怎么样？"
     # source:437
     $ amy_v11_emote("jack", "smile")
+    $ amy_v11_cue("guitar", 0.54)
     jack "你刚才那段，再弹一遍。"
     # source:438
     $ amy_v11_emote("ami", "curious")
@@ -787,7 +793,14 @@ label amy_v11_time:
     jack "想记住。"
     # source:440
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "那你得自己努力记。"
+    amy_v11_amy "那等你想听的时候，我再弹给你听。"
+    call amy_v11_stage("classroom_cg", "campus", actors=False)
+    amy_ch2_jack_narrator "后来我们选到了同一门课。她总坐窗边，我坐在她后面一排。"
+    amy_ch2_jack_narrator "那支备用铅笔已经借出去好几次了。这回她又把笔在纸上划了两下，没出墨，我就把铅笔推到她桌角。"
+    amy_v11_amy "谢谢。你怎么每次都多带一支？"
+    jack "第一次是碰巧。后来是想，万一你还坐在我前面呢。"
+    amy_v11_amy "那下次我也带一支。万一你的笔不出墨了呢。"
+    amy_ch2_jack_narrator "她转回去记笔记。我看见铅笔在她指间转了一圈，才落到纸上。"
     call amy_v11_stage("skateyard", "campus", actors=True)
     # source:444
     amy_v11_member "社长！你说的那个动作，自己先做一个！"
@@ -808,13 +821,14 @@ label amy_v11_time:
     jack "哲学家们解释世界，我们负责改变膝盖上的淤青。"
     # source:451
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "你这改变的方向不太对。"
+    amy_v11_amy "慢慢来呀，我还想看你下次滑呢。"
     # source:453
     $ amy_v11_emote("jack", "curious")
+    $ amy_v11_cue("landing", 0.43)
     jack "看见没有？"
     # source:454
     $ amy_v11_emote("ami", "laugh")
-    amy_v11_amy "看见了。恭喜神圣骑士打败了一块木板。"
+    amy_v11_amy "看见啦。刚才你落地站稳的那一下，我也跟着松了口气。"
     # source:455
     $ amy_v11_emote("jack", "smile")
     jack "不。是暂时与重力达成了停战协议。"
@@ -825,13 +839,13 @@ label amy_v11_time:
     call amy_v11_stage("rain_corridor", "campus", actors=True)
     # source:462
     $ amy_v11_emote("ami", "curious")
-    amy_v11_amy "你刚才说的“神圣骑士”，到底是什么意思？"
+    amy_v11_amy "刚才看你一次次站起来，我就在想，你遇到想不明白的事，也会这样一直找答案吗？"
     # source:463
     $ amy_v11_emote("jack", "thoughtful")
-    jack "大概就是，明知道世界不一定讲道理，还想向它讨个说法的人。"
+    jack "会吧。有些事过去了，我还是会想知道，它为什么会那样发生。"
     # source:464
     $ amy_v11_emote("ami", "curious")
-    amy_v11_amy "向谁讨？"
+    amy_v11_amy "那你会想向谁问这个问题？"
     # source:465
     $ amy_v11_emote("jack", "thoughtful")
     jack "如果有一个神把所有人的剧本都写好了，那就向他讨。"
@@ -858,7 +872,7 @@ label amy_v11_time:
     jack "但我有时候很生气。如果他真的什么都能安排，为什么要把有些事写成那样？"
     # source:474
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "所以你不是不相信编剧。你是觉得他写得不够好。"
+    amy_v11_amy "相信有个答案，却一直等不到它。换作我，也会觉得难过。"
     # source:475
     $ amy_v11_emote("jack", "angry")
     jack "对。甚至想问他，凭什么。"
@@ -867,13 +881,13 @@ label amy_v11_time:
     amy_v11_amy "那如果他把我写进你的剧本呢？"
     # source:477
     $ amy_v11_emote("jack", "smile")
-    jack "这一页，我还没打算投诉。"
+    jack "这一页，我想慢一点翻。"
     # source:478
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "要求还挺高。"
+    amy_v11_amy "好啊。那就等雨再小一点。"
     # source:479
     $ amy_v11_emote("jack", "thoughtful")
-    jack "神圣骑士也得有点审美。"
+    jack "有些事不用急着问缘由。能在这一页遇见你，就已经很好了。"
     call amy_v11_stage("rain_path", "campus", actors=True)
     # source:484
     $ amy_v11_emote("ami", "curious")
@@ -899,7 +913,6 @@ label amy_v11_time:
     # source:491
     $ amy_v11_emote("jack", "smile")
     jack "有些事情，不需要先论证完毕才敢开始。"
-    call amy_v11_memory("time")
     # source:494
     amy_ch2_jack_narrator "她在我身边走着。我忽然不想再提前知道下一页写了什么。"
     call amy_v11_stage("time_cg", "campus", actors=False)
@@ -917,7 +930,7 @@ label amy_v11_time:
     jack "西西弗斯推了那么多年石头，也没见他抱怨过。"
     # source:503
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "他没得选。你是自己找摔。"
+    amy_v11_amy "你还能选择什么时候再试，也能在累的时候歇一会儿。"
     # source:504
     $ amy_v11_emote("jack", "smile")
     jack "所以我比他幸运。"
@@ -950,13 +963,13 @@ label amy_v11_time:
     jack "写给谁的？"
     # source:516
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "写给我的骑士。"
+    amy_v11_amy "写给一个每次摔倒，都愿意再站起来的人。"
     # source:518
     $ amy_v11_emote("jack", "curious")
-    jack "那我有资格听完吗？"
+    jack "那我可以听完吗？"
     # source:519
-    $ amy_v11_emote("ami", "curious")
-    amy_v11_amy "你不是已经在听了吗？"
+    $ amy_v11_emote("ami", "blush")
+    amy_v11_amy "当然。你坐在这儿，我就想弹给你听。"
     # source:520
     $ amy_v11_emote("jack", "curious")
     jack "所以，是写给我的？"
@@ -977,9 +990,10 @@ label amy_v11_time:
     jump amy_v11_finish_time
 
 label amy_v11_space:
+    $ amy_v11_play_music("space")
     $ amy_ch2_selected_route = "space"
     show screen amy_v11_status
-    centered "幻想世界  一秒钟的距离"
+    centered "平行宇宙  一秒钟的距离"
     call amy_v11_stage("car", "date", actors=True)
     # source:540
     $ amy_v11_emote("jack", "curious")
@@ -996,6 +1010,7 @@ label amy_v11_space:
     # source:544
     $ amy_v11_emote("jack", "smile")
     jack "我说过。但我没说要让整个宇宙替我订机票。"
+    $ amy_v11_cue("portal", 0.43)
     call amy_v11_stage("paris", "date", actors=True)
     # source:549
     $ amy_v11_emote("jack", "smile")
@@ -1021,13 +1036,13 @@ label amy_v11_space:
     jack "我想确认它是真的。那些在聊天框里说过的地方，原来有一天真的能踩在脚下。"
     # source:557
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "那先吃早餐。浪漫主义者也得有血糖。"
+    amy_v11_amy "那我们慢慢走，找个地方吃早餐。今天还有很多时间。"
     # source:558
     $ amy_v11_emote("jack", "smile")
     jack "你知道吗，我甚至说过，死也要死在巴黎。"
     # source:559
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "那我申请修改一下计划。先在巴黎活得开心一点，死亡项目无限期延期。"
+    amy_v11_amy "我更想跟你在巴黎好好过一天。你看，天才刚刚亮呢。"
     # source:560
     $ amy_v11_emote("jack", "laugh")
     jack "你总能把悲壮史诗改成生活指南。"
@@ -1052,13 +1067,13 @@ label amy_v11_space:
     jack "萨特、波伏瓦、加缪……这地方适合吵一场关于自由的架。"
     # source:571
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "我不跟你吵。我想先看看你会挑哪本。"
+    amy_v11_amy "我想先看你会挑哪一本，再听听它为什么让你停下来。"
     # source:572
     $ amy_v11_emote("jack", "curious")
     jack "加缪吧。人知道世界荒诞，还要不要热烈地活？"
     # source:573
     $ amy_v11_emote("ami", "curious")
-    amy_v11_amy "你不是已经回答了吗？你都跑到巴黎来了。"
+    amy_v11_amy "我想，你愿意来巴黎，本身就算是一个回答。"
     # source:574
     $ amy_v11_emote("jack", "smile")
     jack "我只是觉得，一个人若连浪漫都要经过成本收益分析，那也太可怜。"
@@ -1067,7 +1082,7 @@ label amy_v11_space:
     amy_v11_amy "我会做成本收益分析，但我还是会陪你来巴黎。两件事不冲突。"
     # source:576
     $ amy_v11_emote("jack", "smile")
-    jack "你这个答案比哲学书还难反驳。"
+    jack "听你这么说，我觉得理性和浪漫真的能坐在一张桌上。"
     # source:578
     $ amy_v11_emote("ami", "smile")
     amy_v11_amy "去吧。我知道你想试。"
@@ -1090,7 +1105,14 @@ label amy_v11_space:
             amy_v11_amy "那挑一件你真的喜欢的，不要挑最贵的。"
             # source:587
             $ amy_v11_emote("jack", "smile")
-            jack "你这个要求比预算更难。"
+            jack "那你在这儿等我一下。"
+            call amy_v11_stage("paris_flowers_cg", actors=False)
+            narrator "他在街角的花摊前停下来，请店主包了一小束奶白和淡粉色的花。等我走近，他把花递到我面前。"
+            jack "刚才经过的时候，你多看了它们一眼。"
+            amy_v11_amy "你看见了呀。我还以为只有我自己知道。"
+            jack "本来想问你喜欢哪一束。后来想，今天也可以让我猜一次。"
+            amy_v11_amy "那你猜中了。等会儿找个能装水的杯子吧，我想让它们多开一会儿。"
+            narrator "我低头闻了闻花。包花的纸被风吹得轻轻响，我就这样抱着它，跟他沿着河边慢慢走。"
             $ amy_v11_choose("space_paris", "love", 5, "带 Amy 去挑一件巴黎的小礼物")
         "去左岸书店，各选一本书交换":
             # source:589
@@ -1102,6 +1124,11 @@ label amy_v11_space:
             # source:591
             $ amy_v11_emote("ami", "smile")
             amy_v11_amy "留点悬念。人生又不是每一页都要剧透。"
+            call amy_v11_stage("paris_books_cg", actors=False)
+            narrator "我们各自走进一排书架。再碰头时，他拿着一本蓝布封面的游记，我挑了一本红封面的短篇集。"
+            jack "数到三，一起换？"
+            amy_v11_amy "好。翻到喜欢的那页，就夹张书签。等读完，我们再交换一次。"
+            narrator "两本书在桌面上擦肩而过。他低头翻开第一页，我没有问他为什么挑这本。反正以后还有机会问。"
             $ amy_v11_choose("space_paris", "wisdom", 5, "去左岸书店，各选一本书交换")
         "跟着街头音乐随机拐进一条小巷":
             # source:593
@@ -1113,8 +1140,21 @@ label amy_v11_space:
             # source:595
             $ amy_v11_emote("jack", "smile")
             jack "好。今天把导航权交给命运。"
+            call amy_v11_stage("paris_music_cg", actors=False)
+            narrator "拐过第二个弯，我们才看见手风琴。乐手就坐在拱门底下，拉得很慢，像是不怕路过的人听不完。"
+            amy_v11_amy "我们在这儿坐一会儿吧。"
+            jack "等下一首？"
+            amy_v11_amy "嗯。今天难得走错路，还走到了这么好的地方。"
+            narrator "我闭着眼，用鞋尖跟着拍子。等最后一个音落下去，我们谁也没急着起身。"
             $ amy_v11_choose("space_paris", "luck", 5, "跟着街头音乐随机拐进一条小巷")
     call amy_v11_stage("seine", "date", actors=True)
+    if amy_ch2_choices.get("space_paris") == "带 Amy 去挑一件巴黎的小礼物":
+        narrator "傍晚坐到河边时，Jack 找来一个盛水的玻璃杯，把那束花放在我们中间。"
+    elif amy_ch2_choices.get("space_paris") == "去左岸书店，各选一本书交换":
+        jack "先说好，读得慢的人也可以约下一次见面。"
+        amy_v11_amy "可以呀。书是借口，我想见你又不用等到最后一页。"
+    elif amy_ch2_choices.get("space_paris") == "跟着街头音乐随机拐进一条小巷":
+        narrator "到了河边，他还在哼巷子里那支曲子。哼错了一拍，我顺着他错的那一拍往下接。"
     # source:600
     $ amy_v11_emote("ami", "curious")
     amy_v11_amy "白天你说，巴黎适合把生活过得像文学。现在呢？"
@@ -1135,6 +1175,7 @@ label amy_v11_space:
     jack "我是认真的。有些话写出来很俗，活出来却不一样。"
     # source:606
     $ amy_v11_emote("ami", "smile")
+    $ amy_v11_cue("glass", 0.55)
     amy_v11_amy "那就别解释了。碰杯。"
     # source:608
     $ amy_v11_emote("jack", "smile")
@@ -1148,6 +1189,7 @@ label amy_v11_space:
     # source:612
     $ amy_v11_emote("ami", "smile")
     amy_v11_amy "纽约。华尔街。"
+    $ amy_v11_cue("portal", 0.43)
     call amy_v11_stage("newyork", "date", actors=True)
     # source:616
     $ amy_v11_emote("jack", "smile")
@@ -1196,7 +1238,7 @@ label amy_v11_space:
     jack "这话听起来有点像宣战。"
     # source:631
     $ amy_v11_emote("ami", "laugh")
-    amy_v11_amy "不是对你宣战。是我对自己的人生负责。"
+    amy_v11_amy "我只是想有一天，我说愿意跟你在一起的时候，你知道那是因为我喜欢你。"
     # source:632
     $ amy_v11_emote("jack", "curious")
     jack "那如果那个人想照顾你呢？"
@@ -1208,7 +1250,7 @@ label amy_v11_space:
     jack "我突然明白了。你不是想赢过所有人。你想把自己的人生从别人手里赎回来。"
     # source:636
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "差不多。不过赎回来之前，先学会别在市场里乱花钱。"
+    amy_v11_amy "嗯。我想把做决定的自由留给自己，也想留给和我一起生活的人。"
     call amy_v11_stage("market", "date", actors=True)
     # source:640
     $ amy_v11_emote("jack", "curious")
@@ -1237,7 +1279,7 @@ label amy_v11_space:
     # source:648
     $ amy_v11_emote("jack", "smile")
     jack "这个答案有意思。赚钱不是终点，是为了把时间还给自己。"
-    call screen amy_v11_moment("模拟市场 / 非真实交易", "这是一场关于选择与风险的模拟决策。")
+    call amy_v11_moment("模拟市场 / 非真实交易", "这是一场关于选择与风险的模拟决策。")
     menu (screen="amy_v11_choice"):
         "先保护本金，再争取收益":
             # source:651
@@ -1245,7 +1287,7 @@ label amy_v11_space:
             amy_v11_amy "能长期留在市场里，比一次赢得漂亮重要。"
             # source:652
             $ amy_v11_emote("jack", "thoughtful")
-            jack "神圣骑士看来也需要一个风控官。"
+            jack "有道理。我们留得住下一次选择的机会，才谈得上自由。"
             $ amy_v11_choose("space_market", "wisdom", 5, "先保护本金，再争取收益")
         "为未来的自由设立目标":
             # source:654
@@ -1263,6 +1305,7 @@ label amy_v11_space:
             $ amy_v11_emote("jack", "smile")
             jack "终于允许一点冒险了。"
             $ amy_v11_choose("space_market", "luck", 5, "留一小部分资金尝试新机会")
+    $ amy_v11_cue("portal", 0.43)
     call amy_v11_stage("silicon", "date", actors=True)
     # source:663
     $ amy_v11_emote("jack", "curious")
@@ -1329,8 +1372,8 @@ label amy_v11_space:
     $ amy_v11_emote("jack", "curious")
     jack "你怎么总能这么冷静？"
     # source:691
-    $ amy_v11_emote("ami", "angry")
-    amy_v11_amy "因为生气不会让接口恢复正常啊。"
+    $ amy_v11_emote("ami", "thoughtful")
+    amy_v11_amy "我也会急。只是把问题拆成一小步，就知道接下来能做什么了。"
     # source:692
     $ amy_v11_emote("jack", "laugh")
     jack "这句话应该写在所有创业公司的墙上。"
@@ -1361,12 +1404,13 @@ label amy_v11_space:
     # source:702
     $ amy_v11_emote("ami", "thoughtful")
     amy_v11_amy "我会提醒你。但我也希望你一直保留那股想改变世界的劲。"
-    call amy_v11_stage("beach", "vacation", actors=True)
+    $ amy_v11_cue("portal", 0.43)
+    call amy_v11_stage("beach", "beach", actors=True)
     # source:707
     $ amy_v11_emote("jack", "thoughtful")
     jack "我们一天里去了巴黎、纽约、硅谷。这个世界突然小得像一张桌布。"
     # source:708
-    $ amy_v11_emote("ami", "smile")
+    $ amy_v11_emote("ami", "thoughtful")
     amy_v11_amy "可有些事情还是不能快进。比如一个产品从想法到成熟，比如信任。"
     # source:709
     $ amy_v11_emote("jack", "curious")
@@ -1378,7 +1422,7 @@ label amy_v11_space:
     $ amy_v11_emote("jack", "curious")
     jack "如果随时能见面，人还会期待下一次见面吗？"
     # source:712
-    $ amy_v11_emote("ami", "smile")
+    $ amy_v11_emote("ami", "thoughtful")
     amy_v11_amy "会吧。瞬移只能解决距离，不能替我们决定想不想靠近。"
     menu (screen="amy_v11_choice"):
         "每次出现前先问对方愿不愿意":
@@ -1405,7 +1449,8 @@ label amy_v11_space:
             $ amy_v11_emote("jack", "smile")
             jack "这听起来比随机坐标更危险。因为它会让人舍不得离开。"
             $ amy_v11_choose("space_boundary", "luck", 5, "把下一站交给彼此的共同记忆")
-    call amy_v11_stage("water_town", "vacation", actors=True)
+    $ amy_v11_cue("portal", 0.43)
+    call amy_v11_stage("water_town", "boat", actors=True)
     # source:728
     $ amy_v11_emote("ami", "curious")
     amy_v11_amy "你还记得吗？"
@@ -1418,18 +1463,18 @@ label amy_v11_space:
     call amy_v11_stage("hands", "date", actors=False)
     # source:732
     amy_v11_amy_memory "我们在一条小河上。坐着一只乌篷船。船慢慢往前走，抬头就是星星。"
-    call amy_v11_stage("boat", "vacation")
+    call amy_v11_stage("boat", "boat")
     # source:734
     $ amy_v11_emote("jack", "smile")
     jack "我记得。"
     # source:735
-    $ amy_v11_emote("ami", "smile")
+    $ amy_v11_emote("ami", "touched")
     amy_v11_amy "那时候我们哪里也没去。却好像真的到了这里。"
     # source:736
     $ amy_v11_emote("jack", "curious")
     jack "现在真的到了，反而不知道该说什么。"
     # source:737
-    $ amy_v11_emote("ami", "smile")
+    $ amy_v11_emote("ami", "touched")
     amy_v11_amy "那就不用说。"
     # source:739
     $ amy_v11_emote("jack", "curious")
@@ -1441,7 +1486,7 @@ label amy_v11_space:
     $ amy_v11_emote("jack", "smile")
     jack "还有你。"
     # source:743
-    $ amy_v11_emote("ami", "smile")
+    $ amy_v11_emote("ami", "touched")
     amy_v11_amy "我们数星星吧。"
     # source:744
     $ amy_v11_emote("jack", "smile")
@@ -1452,15 +1497,18 @@ label amy_v11_space:
     # source:750
     amy_ch2_jack_narrator "原来最远的距离，不是地图上的公里数。"
     # source:752
+    $ amy_v11_cue("send", 0.5)
     amy_v11_amy_message "月亮。"
     # source:753
     $ amy_v11_emote("jack", "laugh")
+    $ amy_v11_cue("message", 0.52)
     jack "现在方便见面吗？"
     # source:754
+    $ amy_v11_cue("send", 0.5)
     amy_v11_amy_message "方便。"
-    call amy_v11_stage("boat", "vacation", actors=True)
+    call amy_v11_stage("boat", "boat", actors=True)
     # source:1050
-    $ amy_v11_emote("ami", "smile")
+    $ amy_v11_emote("ami", "touched")
     amy_v11_amy "我们数星星吧。"
     # source:1051
     $ amy_v11_emote("jack", "smile")
@@ -1468,9 +1516,10 @@ label amy_v11_space:
     jump amy_v11_finish_space
 
 label amy_v11_rules:
+    $ amy_v11_play_music("rules")
     $ amy_ch2_selected_route = "rules"
     show screen amy_v11_status
-    centered "幻想世界  造物者"
+    centered "平行宇宙  造物者"
     call amy_v11_stage("unfinished", "creator", actors=True)
     # source:770
     amy_ch2_system "世界载入失败。正在等待造物者。"
@@ -1497,22 +1546,23 @@ label amy_v11_rules:
     jack "我先声明，我对这份工作没有敬畏之心。"
     # source:779
     $ amy_v11_emote("ami", "thoughtful")
-    amy_v11_amy "那你至少先读一读使用说明。上一个管理员可能就是这么把世界搞坏的。"
+    amy_v11_amy "我们先看看怎么用吧。这里有人住，动之前先想想他们会不会受影响。"
     # source:781
     amy_v11_child "我家呢？"
     # source:783
     $ amy_v11_emote("jack", "smile")
     jack "……我只是想把这里弄漂亮一点。"
     # source:784
-    $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "你改了地形，却没有看见住在地形里的人。"
+    $ amy_v11_emote("ami", "thoughtful")
+    amy_v11_amy "我知道你想把这里弄漂亮。可他还在找家，我们先看看能帮他做什么。"
     # source:785
     $ amy_v11_emote("jack", "curious")
     jack "神也是这么做的吗？"
     # source:786
     $ amy_v11_emote("ami", "thoughtful")
     amy_v11_amy "我不知道。但我们可以先把房子还给他。"
-    call screen amy_v11_moment("修复第一栋房屋", "Jack 负责建造，Amy 根据居民路径重排地块。房屋复原，孩子跑回门前。")
+    $ amy_v11_cue("repair", 0.5)
+    call amy_v11_moment("修复第一栋房屋", "Jack 负责建造，Amy 根据居民路径重排地块。房屋复原，孩子跑回门前。")
     # source:788
     $ amy_v11_emote("jack", "smile")
     jack "行。造物者第一课：别急着按 Delete。"
@@ -1529,9 +1579,11 @@ label amy_v11_rules:
     $ amy_v11_emote("jack", "angry")
     jack "如果所有感官都可能骗我，我凭什么相信眼前这个城市？"
     # source:796
-    $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "先别急着怀疑我。前面那座桥正在塌。"
-    call screen amy_v11_moment("镜中桥没有承重", "居民踏上去，桥消失。Amy 及时用临时支架接住桥面。")
+    $ amy_v11_emote("ami", "thoughtful")
+    amy_v11_amy "Jack，你看前面。桥要塌了，我们先帮桥上的人。"
+    $ amy_v11_cue("impact", 0.54)
+    with vpunch
+    call amy_v11_moment("镜中桥没有承重", "居民踏上去，桥消失。Amy 及时用临时支架接住桥面。")
     # source:798
     $ amy_v11_emote("ami", "curious")
     amy_v11_amy "你生成的是外观，不是结构。我们需要知道什么东西真的能承重。"
@@ -1540,23 +1592,23 @@ label amy_v11_rules:
     jack "连造物者都得做测试？"
     # source:800
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "尤其是造物者。你有权限，不代表你不会犯错。"
+    amy_v11_amy "嗯。别人要从这座桥上走过去，我们一起确认它撑得住吧。"
     menu (screen="amy_v11_choice"):
         "建立可重复的物理测试":
-            call screen amy_v11_moment("建立可重复的物理测试", "Amy 用数据面板测载荷，Jack 根据结果加固桥梁。")
+            call amy_v11_moment("建立可重复的物理测试", "Amy 用数据面板测载荷，Jack 根据结果加固桥梁。")
             $ amy_v11_choose("rules_bridge", "wisdom", 5, "建立可重复的物理测试")
         "先保护居民再试验":
-            call screen amy_v11_moment("先保护居民再试验", "Jack 将居民送至安全区，两人一起重建。")
+            call amy_v11_moment("先保护居民再试验", "Jack 将居民送至安全区，两人一起重建。")
             $ amy_v11_choose("rules_bridge", "love", 5, "先保护居民再试验")
         "用一次大胆的现场实验":
-            call screen amy_v11_moment("用一次大胆的现场实验", "Jack 亲自踏上桥，Amy 用应急方块救场；两人相视而笑。")
+            call amy_v11_moment("用一次大胆的现场实验", "Jack 亲自踏上桥，Amy 用应急方块救场；两人相视而笑。")
             $ amy_v11_choose("rules_bridge", "luck", 5, "用一次大胆的现场实验")
     # source:806
     $ amy_v11_emote("jack", "smile")
     jack "我能怀疑一切，唯独怀疑的时候，我还在思考。"
     # source:807
     $ amy_v11_emote("ami", "curious")
-    amy_v11_amy "然后呢？思考完，桥还是要修。"
+    amy_v11_amy "你慢慢想。我先把这边扶稳，等你一起修。"
     # source:808
     $ amy_v11_emote("jack", "laugh")
     jack "你把笛卡尔送进工程部了。"
@@ -1602,7 +1654,7 @@ label amy_v11_rules:
     # source:828
     $ amy_v11_emote("ami", "laugh")
     amy_v11_amy "欢迎创业。"
-    call screen amy_v11_moment("共同设计", "听取工坊师傅、学生和居民三方诉求；设计保留工坊历史、共享新学校空间的方案。")
+    call amy_v11_moment("共同设计", "听取工坊师傅、学生和居民三方诉求；设计保留工坊历史、共享新学校空间的方案。")
     # source:831
     $ amy_v11_emote("jack", "thoughtful")
     jack "我原来以为，好的世界就是没有矛盾。"
@@ -1716,15 +1768,15 @@ label amy_v11_rules:
     menu (screen="amy_v11_choice"):
         "移走石头，邀请他探索世界":
             call amy_v11_stage("mountain_rest", "creator")
-            call screen amy_v11_moment("移走石头，邀请他探索世界", "西西弗斯先走到山外，选择是否回来。")
+            call amy_v11_moment("移走石头，邀请他探索世界", "西西弗斯先走到山外，选择是否回来。")
             $ amy_v11_choose("rules_stone", "wisdom", 5, "移走石头，邀请他探索世界")
         "和他一起推一次":
             call amy_v11_stage("mountain_team", "creator")
-            call screen amy_v11_moment("和他一起推一次", "Jack、Amy 与西西弗斯并肩上山；Jack 体会共同承担并不等于替人决定。")
+            call amy_v11_moment("和他一起推一次", "Jack、Amy 与西西弗斯并肩上山；Jack 体会共同承担并不等于替人决定。")
             $ amy_v11_choose("rules_stone", "love", 5, "和他一起推一次")
         "把石头改造成会滚动的音乐舞台":
             call amy_v11_stage("mountain_music", "creator")
-            call screen amy_v11_moment("把石头改造成会滚动的音乐舞台", "山谷第一次传出笑声；西西弗斯决定是否继续。")
+            call amy_v11_moment("把石头改造成会滚动的音乐舞台", "山谷第一次传出笑声；西西弗斯决定是否继续。")
             $ amy_v11_choose("rules_stone", "luck", 5, "把石头改造成会滚动的音乐舞台")
     # source:887
     amy_v11_sisyphus "我今天想先坐一会儿。"
@@ -1784,7 +1836,7 @@ label amy_v11_rules:
     # source:913
     $ amy_v11_emote("ami", "smile")
     amy_v11_amy "会乱。但那才有机会出现你没写过的东西。"
-    call screen amy_v11_moment("角色可拒绝自己的台词", "一个演员第一次没有念台词，而是走下舞台去看海。")
+    call amy_v11_moment("角色可拒绝自己的台词", "一个演员第一次没有念台词，而是走下舞台去看海。")
     # source:915
     $ amy_v11_emote("jack", "laugh")
     jack "管理员的失业危机开始了。"
@@ -1840,30 +1892,30 @@ label amy_v11_rules:
     $ amy_v11_emote("jack", "curious")
     jack "万一我着急呢？"
     # source:938
-    $ amy_v11_emote("ami", "angry")
-    amy_v11_amy "那我先把报错日志打开。你生气不耽误我们修 Bug。"
+    $ amy_v11_emote("ami", "thoughtful")
+    amy_v11_amy "那就先把日志打开，我们一起看。着急的时候，有个人搭把手会好一点。"
     menu (screen="amy_v11_choice"):
         "平等权限，各自拥有独立项目":
-            call screen amy_v11_moment("平等权限，各自拥有独立项目", "两人共享世界资源但保留个人创作空间。")
+            call amy_v11_moment("平等权限，各自拥有独立项目", "两人共享世界资源但保留个人创作空间。")
             $ amy_v11_choose("rules_contract", "wisdom", 5, "平等权限，各自拥有独立项目")
         "共同建造一座可以自由进出的家":
-            call screen amy_v11_moment("共同建造一座可以自由进出的家", "家没有锁链，门从内外都能打开。")
+            call amy_v11_moment("共同建造一座可以自由进出的家", "家没有锁链，门从内外都能打开。")
             $ amy_v11_choose("rules_contract", "love", 5, "共同建造一座可以自由进出的家")
         "让所有居民都能提出修改世界的建议":
-            call screen amy_v11_moment("让所有居民都能提出修改世界的建议", "世界开启公开提案广场。")
+            call amy_v11_moment("让所有居民都能提出修改世界的建议", "世界开启公开提案广场。")
             $ amy_v11_choose("rules_contract", "luck", 5, "让所有居民都能提出修改世界的建议")
     # source:945
     $ amy_v11_emote("jack", "curious")
     jack "Amy，要不要跟我一起创造这个世界？"
     # source:946
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "好。但先说好，版本管理我来管。"
+    amy_v11_amy "好啊。我们给每一版留个备份，想试什么就放心去试。"
     # source:947
     $ amy_v11_emote("jack", "curious")
     jack "为什么？"
     # source:948
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "因为你刚刚差点把整个剧院删了。"
+    amy_v11_amy "这样就算走错了一步，我们也还有地方可以回来。"
     amy_ch2_system "双人共创已启用。管理员 JACK / AMY。两人权限平等，可独立退出。"
     call amy_v11_stage("chapel", "creator", actors=True)
     # source:953
@@ -1877,10 +1929,10 @@ label amy_v11_rules:
     jack "有时会。有时又觉得，如果真的有人在听，为什么不早一点回答我。"
     # source:957
     $ amy_v11_emote("jack", "thoughtful")
-    jack "神圣骑士听起来挺威风的。可骑士也会想问，自己到底在为谁打仗。"
+    jack "我有时分不清，我是在等一个启示，还是只想知道，那些说不出口的话，有没有人听见。"
     # source:958
-    $ amy_v11_emote("ami", "angry")
-    amy_v11_amy "你可以相信神，也可以对他生气。这两件事不一定冲突。"
+    $ amy_v11_emote("ami", "thoughtful")
+    amy_v11_amy "相信有人在听，却一直等不到回音，心里是会难过的。你可以慢慢说，我在听。"
     # source:959
     $ amy_v11_emote("jack", "curious")
     jack "那你呢？你怎么总能接受？"
@@ -1905,16 +1957,18 @@ label amy_v11_rules:
     jack "这也算剧情？"
     # source:967
     $ amy_v11_emote("ami", "curious")
-    amy_v11_amy "算。你终于允许自己什么都不做了。"
+    amy_v11_amy "算啊。能陪你安静坐一会儿，我就觉得这一页值得记住。"
     # source:969
     $ amy_v11_emote("jack", "thoughtful")
-    jack "神圣骑士的坐骑已经等不及了。"
+    jack "也许有些问题可以先留在这里。等我们走远一点，再回头想。"
     # source:970
     $ amy_v11_emote("ami", "thoughtful")
     amy_v11_amy "那就出发吧。我们还有世界没建完。"
+    $ amy_v11_cue("alert", 0.55)
     call amy_v11_stage("overload", "creator", actors=True)
     # source:974
     amy_ch2_system "检测到不可兼容的愿望。建议启用“统一幸福”协议：将所有居民的目标修改为相同。"
+    amy_ch2_system "预览方案：旧桥及相连街巷不再列入通行路线。"
     # source:975
     $ amy_v11_emote("jack", "curious")
     jack "又来？我都造了一个世界，连幸福都不能一次性解决？"
@@ -1926,20 +1980,31 @@ label amy_v11_rules:
     jack "我想给他们一个没有痛苦的世界。"
     # source:978
     $ amy_v11_emote("ami", "thoughtful")
-    amy_v11_amy "我知道。但你刚刚教会他们选择，不能现在因为选择太复杂，就把选择收回去。"
+    amy_v11_amy "我知道你想护着他们。可那座桥通往工坊，也通往他们的家。要不要先听听住在那里的人怎么说？"
+    amy_v11_worker "远一点的路也能走。但每天收工，我都会从这座桥上回家。以前桥不稳，大家就轮流提着灯，照给过桥的人看。"
+    $ amy_v11_emote("jack", "thoughtful")
+    jack "那护栏呢？我们还有木料。你们想把它加在哪一边？"
+    amy_v11_worker "靠水那边。那根旧木桩还在，我知道怎么绑牢。"
     # source:980
     $ amy_v11_emote("jack", "curious")
     jack "那我们到底创造了什么？"
     # source:981
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "不是完美。是一个人们可以自己生活、出错、修复、重新开始的地方。"
+    amy_v11_amy "我们给他们留了木料，也留了把桥修成他们想要的样子的机会。"
     # source:982
     $ amy_v11_emote("jack", "curious")
     jack "可我还是会问，为什么偏偏是我。为什么那些年要发生。"
     # source:983
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "那就继续问。只是别把问题变成你的全部。"
-    call screen amy_v11_moment("可修复、可退出、可共创", "两人关闭“统一幸福”协议。系统恢复稳定，但城市仍有不整齐的街道，天空仍有乌云。")
+    amy_v11_amy "想问就问吧。找不到答案的时候，我们也可以先过好眼前这一小段。"
+    $ amy_v11_cue("repair", 0.5)
+    amy_ch2_system "已关闭“统一幸福”协议。通行路线由居民恢复。"
+    call amy_v11_stage("bridge_repair_cg", "creator", actors=False)
+    narrator "Jack 扶住靠水的那根立柱。我在面板上确认桥面能承重。工匠沿着木桩缠紧绳结，旁边有人举着灯，照着他手里的活。"
+    amy_v11_worker "好了。我先过去。"
+    narrator "他在桥中间停了一下，试着把手放上新扶栏。木头轻轻响了一声，稳稳地撑住了。提灯的人跟了上来，照亮后面人的脚下。"
+    jack "我本来想把这座桥修得一点痕迹都没有。"
+    amy_v11_amy "留着吧。以后路过，他们会记得这是自己修的。"
     # source:985
     $ amy_v11_emote("jack", "thoughtful")
     jack "这世界还真不怎么样。"
@@ -1950,7 +2015,7 @@ label amy_v11_rules:
     $ amy_v11_emote("jack", "laugh")
     jack "你还笑？"
     # source:988
-    $ amy_v11_emote("ami", "smile")
+    $ amy_v11_emote("ami", "laugh")
     amy_v11_amy "因为我们能一起把它慢慢做好。"
     # source:989
     $ amy_v11_emote("jack", "smile")
@@ -2015,7 +2080,7 @@ label amy_v11_rules:
     jack "……这比我造的漂亮。"
     # source:1015
     $ amy_v11_emote("ami", "smile")
-    amy_v11_amy "因为它不需要你一直控制。"
+    amy_v11_amy "我们在这里坐一会儿吧。桥上已经有人提灯了。"
     # source:1017
     $ amy_v11_emote("jack", "smile")
     jack "走吧。"
@@ -2047,6 +2112,11 @@ label amy_v11_finish_time:
     hide amy_v11_ami
     hide amy_v11_jack
     $ renpy.say(amy_ch2_system, ("获得" + amy_v11_endings["time"][1] + "「" + amy_v11_endings["time"][2] + "」" if amy_ch2_card_new else "卡牌已收藏"))
+    $ amy_v11_ambience()
+    if amy_ch2_card_new:
+        $ amy_v11_cue("card", .55)
+    $ amy_v11_play_music("ending_time")
+    $ amy_v11_collect_cg(amy_v11_endings["time"][4])
     call screen amy_v11_ending_hold("time")
     jump amy_v11_ending
 
@@ -2056,6 +2126,11 @@ label amy_v11_finish_space:
     hide amy_v11_ami
     hide amy_v11_jack
     $ renpy.say(amy_ch2_system, ("获得" + amy_v11_endings["space"][1] + "「" + amy_v11_endings["space"][2] + "」" if amy_ch2_card_new else "卡牌已收藏"))
+    $ amy_v11_ambience()
+    if amy_ch2_card_new:
+        $ amy_v11_cue("card", .55)
+    $ amy_v11_play_music("space")
+    $ amy_v11_collect_cg(amy_v11_endings["space"][4])
     call screen amy_v11_ending_hold("space")
     jump amy_v11_ending
 
@@ -2065,6 +2140,11 @@ label amy_v11_finish_rules:
     hide amy_v11_ami
     hide amy_v11_jack
     $ renpy.say(amy_ch2_system, ("获得" + amy_v11_endings["rules"][1] + "「" + amy_v11_endings["rules"][2] + "」" if amy_ch2_card_new else "卡牌已收藏"))
+    $ amy_v11_ambience()
+    if amy_ch2_card_new:
+        $ amy_v11_cue("card", .55)
+    $ amy_v11_play_music("ending_rules")
+    $ amy_v11_collect_cg(amy_v11_endings["rules"][4])
     call screen amy_v11_ending_hold("rules")
     jump amy_v11_ending
 
@@ -2073,6 +2153,7 @@ label amy_v11_true:
     $ amy_v12_recalculate()
     if not amy_v12_true_ready():
         jump amy_v11_hub
+    $ amy_v11_play_music("ending_true")
     hide screen amy_v11_status
     scene expression Transform(amy_v11_endings["time"][4], size=(1920, 1080))
     with dissolve
@@ -2149,12 +2230,14 @@ label amy_v11_true:
     centered "时间没有倒流，距离没有消失，世界也没有变得完美。"
     call amy_v11_memory("poster", restore=False)
     call amy_v11_memory("ending", restore=False)
+    $ amy_v11_collect_cg("images/cg/amy_v11/ending_true_v2.png")
     call screen amy_v11_continue_story
     $ persistent.amy_ch2_true_ending_completed = True
     $ amy_ch2_true_ending_seen = True
     $ amy_ch2_sync_cards()
     $ renpy.save_persistent()
     $ amy_v11_clear()
+    $ amy_v11_ambience()
     hide screen amy_v11_status
     scene black
     with dissolve
