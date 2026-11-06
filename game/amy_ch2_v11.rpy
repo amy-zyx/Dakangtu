@@ -405,7 +405,10 @@ label amy_v11_memory(which, restore=True):
         $ amy_v11_ambience()
         scene black
         with dissolve
-        call screen amy_ch2_memory("现实记忆", "amy_ch2_memory_" + which, 1000)
+        if which == "poster":
+            call screen amy_ch2_fullscreen_poster
+        else:
+            call screen amy_ch2_memory("现实记忆", "amy_ch2_memory_" + which, 1000)
         if restore:
             call amy_v11_stage(amy_v11_scene, amy_v11_style, amy_v11_actors)
     return

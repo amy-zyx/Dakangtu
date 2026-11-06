@@ -1,4 +1,4 @@
-# A fixed catalogue of the CGs shown in Amy Chapter 2. Private chat images stay outside it.
+# A fixed catalogue of story CGs. Private chat images stay outside it.
 define amy_v11_album_catalogue = (
     ("夕阳下的车", "images/cg/act3/amy_ch2_tesla_sunset.png"),
     ("教室的前后排", "images/cg/amy_v11/time_classroom.png"),
@@ -17,6 +17,13 @@ define amy_v11_album_catalogue = (
     ("人间", "images/cg/amy_v11/ending_true_v2.png"),
     ("各自的世界", "images/cg/amy_v11/ending_friends.png"),
     ("下一站，世界", "images/cg/amy_v11/ending_lottery.png"),
+    ("雨夜跪地", "images/cg/act3/cg_kneel_rain.png"),
+    ("车内的吻", "images/cg/act3/cg_kiss_car_rain.png"),
+)
+
+define amy_v11_jack_album_images = (
+    ("cg act3 kneel", "images/cg/act3/cg_kneel_rain.png"),
+    ("cg act3 kiss", "images/cg/act3/cg_kiss_car_rain.png"),
 )
 
 init python:
@@ -28,6 +35,13 @@ init python:
         seen = renpy.amy_session_seen_cgs
         if path not in seen and any(path == cg for _, cg in amy_v11_album_catalogue) and renpy.loadable(path):
             renpy.amy_session_seen_cgs = seen + [path]
+
+    def amy_v11_collect_visible_jack_cgs():
+        for image_name, path in amy_v11_jack_album_images:
+            if renpy.showing(image_name, layer="master"):
+                amy_v11_collect_cg(path)
+
+    config.start_interact_callbacks.append(amy_v11_collect_visible_jack_cgs)
 
 
 screen amy_v11_album_button():

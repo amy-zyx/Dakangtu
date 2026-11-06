@@ -63,6 +63,20 @@ image amy_ch2_memory_rules = Transform(Composite(
 
 image amy_ch2_memory_poster = "amy_private/ch2_memory_poster.png"
 
+screen amy_ch2_fullscreen_poster():
+    modal True
+    zorder 110
+    add Transform("amy_ch2_memory_poster", xysize=(config.screen_width, config.screen_height), fit="cover", blur=28.0) align (0.5, 0.5)
+    add Solid("#070d1966")
+    add Transform("amy_ch2_memory_poster", ysize=config.screen_height, fit="contain") align (0.5, 0.5)
+    textbutton "继续":
+        align (0.96, 0.94)
+        text_size 38
+        text_outlines [(2, "#070d19", 0, 1)]
+        action Return()
+    key "game_menu" action Return()
+    key "K_RETURN" action Return()
+
 screen amy_ch2_memory(title, artwork, source_width, whole=False):
     modal True
     zorder 110
@@ -100,7 +114,7 @@ label amy_ch2_show_memory(which):
         elif which == "rules":
             call screen amy_ch2_memory("共创  和你一起冒险", "amy_ch2_memory_rules", 691)
         elif which == "poster":
-            call screen amy_ch2_memory("人间", "amy_ch2_memory_poster", 1152, whole=True)
+            call screen amy_ch2_fullscreen_poster
         else:
             call screen amy_ch2_memory("我会一直陪着你", "amy_ch2_memory_ending", 1536)
     return
