@@ -370,7 +370,7 @@ screen main_menu():
             action Start("act2")
             hovered SetScreenVariable("focused_pov", "jack")
             unhovered SetScreenVariable("focused_pov", None)
-        textbutton _("第二章：生日快乐"):
+        textbutton _("开始第二章"):
             xalign 0.5
             action Start("act3")
             hovered SetScreenVariable("focused_pov", "jack")
