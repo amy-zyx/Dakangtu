@@ -57,7 +57,7 @@ testsuite amy_ch2_v11:
             skip until screen "amy_v11_drinks"
         assert eval amy_ch2_wechat_unlocked == (mode == "correct")
         assert eval amy_ch2_memory_available("poster")
-        assert eval all(amy_ch2_memory_available(which) == (mode == "correct" and renpy.loadable("amy_private/ch2_memory_" + which + ".png")) for which in ("time", "space", "rules", "ending"))
+        assert eval all(amy_ch2_memory_available(which) == (mode == "correct") for which in ("time", "space", "rules", "ending"))
 
     testcase order_0:
         run Start("amy_v11_start")
@@ -826,10 +826,10 @@ testsuite amy_ch2_v11:
         assert "时间：如果我们十八岁就相遇【已收藏】"
 
     testcase full_memory:
-        parameter name = ["time", "space", "rules", "poster", "ending"]
+        parameter name = ["time", "space", "rules", "ending"]
         run Start("amy_v11_hub")
         skip until screen "amy_v11_choice"
-        if eval renpy.loadable("amy_private/ch2_memory_" + name + ".png"):
+        if eval renpy.loadable("images/cg/amy_v11/wechat/" + name + ".png"):
             run Show("amy_ch2_memory", title="现实记忆", artwork="amy_ch2_memory_" + name, source_width=1000)
             $ _test.screenshot_directory = ".codex-remote-attachments/_qa_v11"
             screenshot f"memory_{name}.png"
