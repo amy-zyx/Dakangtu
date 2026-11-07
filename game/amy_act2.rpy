@@ -13,31 +13,10 @@ image amy_chat_avatar_ami = Composite(
     (0, 0), Transform("images/characters/ami/ami_smile.png", crop=(185, 48, 265, 265)),
 )
 
-image amy_dinner_chat = Transform(Composite(
-    (725, 1280),
-    (0, 0), "amy_private/dinner.png",
-    (19, 84), Transform("amy_chat_avatar_jack", size=(80, 80)),
-    (19, 215), Transform("amy_chat_avatar_jack", size=(80, 80)),
-    (19, 788), Transform("amy_chat_avatar_jack", size=(80, 80)),
-    (628, 309), Transform("amy_chat_avatar_ami", size=(80, 80)),
-    (628, 404), Transform("amy_chat_avatar_ami", size=(80, 80)),
-    (628, 882), Transform("amy_chat_avatar_ami", size=(80, 80)),
-    (628, 976), Transform("amy_chat_avatar_ami", size=(80, 80)),
-    (628, 1150), Transform("amy_chat_avatar_ami", size=(80, 80)),
-), ysize=960, fit="contain")
-image amy_after_dinner_chat = Transform(Composite(
-    (576, 1030),
-    (0, 0), "amy_private/after_dinner.png",
-    (14, 76), Transform("amy_chat_avatar_jack", size=(65, 65)),
-    (14, 151), Transform("amy_chat_avatar_jack", size=(65, 65)),
-    (14, 255), Transform("amy_chat_avatar_jack", size=(65, 65)),
-    (14, 532), Transform("amy_chat_avatar_jack", size=(65, 65)),
-    (14, 608), Transform("amy_chat_avatar_jack", size=(65, 65)),
-    (14, 682), Transform("amy_chat_avatar_jack", size=(65, 65)),
-    (14, 757), Transform("amy_chat_avatar_jack", size=(65, 65)),
-    (498, 393), Transform("amy_chat_avatar_ami", size=(65, 65)),
-    (498, 895), Transform("amy_chat_avatar_ami", size=(65, 65)),
-), ysize=960, fit="contain")
+define amy_dinner_chat_path = "images/cg/act2/wechat/dinner.png"
+define amy_after_dinner_chat_path = "images/cg/act2/wechat/after_dinner.png"
+image amy_dinner_chat = amy_dinner_chat_path
+image amy_after_dinner_chat = amy_after_dinner_chat_path
 
 image amy_restaurant_interior = Transform("images/backgrounds/act2/amy_restaurant_interior.jpg", size=(1920, 1080))
 image amy_driving_sunset = Transform("images/backgrounds/act2/amy_driving_sunset.jpg", size=(1920, 1080))
@@ -103,7 +82,7 @@ label amy_act2:
 
     narrator "我从来没想过，我真的会见到他。"
 
-    if amy_ch2_wechat_unlocked and renpy.loadable("amy_private/dinner.png"):
+    if amy_ch2_wechat_unlocked and renpy.loadable(amy_dinner_chat_path):
         scene black
         show amy_dinner_chat at truecenter
         with dissolve
@@ -213,7 +192,7 @@ label amy_act2:
     narrator "我还会再见到他吗？"
     narrator "不知道。但至少下次见面，他就不再是个陌生人了。"
 
-    if amy_ch2_wechat_unlocked and renpy.loadable("amy_private/after_dinner.png"):
+    if amy_ch2_wechat_unlocked and renpy.loadable(amy_after_dinner_chat_path):
         scene black
         show amy_after_dinner_chat at truecenter
         with dissolve

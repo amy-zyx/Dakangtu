@@ -53,11 +53,26 @@ testsuite amy_ch2_v11:
                 assert "密码不正确。本章将跳过微信截图。"
         if eval chapter == "amy_act2":
             skip until "下了班，我开车从 City 出发。在路上，我一直在想等会儿要见的那个人。"
+            if eval mode == "correct":
+                skip until eval renpy.showing("amy_dinner_chat")
+                skip until eval renpy.showing("amy_after_dinner_chat")
         else:
             skip until screen "amy_v11_drinks"
         assert eval amy_ch2_wechat_unlocked == (mode == "correct")
         assert eval amy_ch2_memory_available("poster")
         assert eval all(amy_ch2_memory_available(which) == (mode == "correct") for which in ("time", "space", "rules", "ending"))
+
+    testcase soundtrack_release:
+        skip until screen "main_menu"
+        python:
+            for section, path in amy_v11_music_tracks.items():
+                assert renpy.loadable(path), (section, path)
+                stem = path.rsplit("/", 1)[-1].rsplit(".", 1)[0]
+                balanced = "audio/bgm/ami_custom/balanced/" + stem + ".ogg"
+                assert renpy.loadable(balanced), (section, balanced)
+                amy_v11_play_music(section)
+                assert renpy.music.get_playing(channel="music") == balanced, section
+        run renpy.music.stop(channel="music")
 
     testcase order_0:
         run Start("amy_v11_start")
