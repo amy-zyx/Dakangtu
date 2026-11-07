@@ -401,7 +401,7 @@ label amy_v11_stage(background, style="date", actors=True):
     return
 
 label amy_v11_memory(which, restore=True):
-    if renpy.loadable("amy_private/ch2_memory_" + which + ".png"):
+    if which == "poster" or renpy.loadable("amy_private/ch2_memory_" + which + ".png"):
         $ amy_v11_ambience()
         scene black
         with dissolve

@@ -61,7 +61,7 @@ image amy_ch2_memory_rules = Transform(Composite(
     (339, 1291), Solid("#d0d0d0", xysize=(105, 30)),
 ), crop=(0, 160, 691, 1243))
 
-image amy_ch2_memory_poster = "amy_private/ch2_memory_poster.png"
+image amy_ch2_memory_poster = "images/cg/amy_v11/reality_memory_poster.png"
 
 screen amy_ch2_fullscreen_poster():
     modal True
@@ -104,7 +104,7 @@ screen amy_ch2_memory(title, artwork, source_width, whole=False):
     key "K_RETURN" action Return()
 
 label amy_ch2_show_memory(which):
-    if renpy.loadable("amy_private/ch2_memory_" + which + ".png"):
+    if which == "poster" or renpy.loadable("amy_private/ch2_memory_" + which + ".png"):
         scene black
         with dissolve
         if which == "space":

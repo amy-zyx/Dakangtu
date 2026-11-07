@@ -126,9 +126,8 @@ testsuite amy_ch2_v11:
         pause 1.3
         screenshot "fusion_relationship_totals.png"
         click "继续"
-        if eval renpy.loadable("amy_private/ch2_memory_poster.png"):
-            skip until screen "amy_ch2_memory"
-            click "继续"
+        skip until screen "amy_ch2_fullscreen_poster"
+        click "继续"
         if eval renpy.loadable("amy_private/ch2_memory_ending.png"):
             skip until screen "amy_ch2_memory"
             click "继续"
@@ -231,9 +230,8 @@ testsuite amy_ch2_v11:
         click "C 真结局：人间"
         skip until screen "amy_v11_fusion"
         click "继续"
-        if eval renpy.loadable("amy_private/ch2_memory_poster.png"):
-            skip until screen "amy_ch2_memory"
-            click "继续"
+        skip until screen "amy_ch2_fullscreen_poster"
+        click "继续"
         if eval renpy.loadable("amy_private/ch2_memory_ending.png"):
             skip until screen "amy_ch2_memory"
             click "继续"
@@ -336,9 +334,8 @@ testsuite amy_ch2_v11:
         click "C 真结局：人间"
         skip until screen "amy_v11_fusion"
         click "继续"
-        if eval renpy.loadable("amy_private/ch2_memory_poster.png"):
-            skip until screen "amy_ch2_memory"
-            click "继续"
+        skip until screen "amy_ch2_fullscreen_poster"
+        click "继续"
         if eval renpy.loadable("amy_private/ch2_memory_ending.png"):
             skip until screen "amy_ch2_memory"
             click "继续"
@@ -441,9 +438,8 @@ testsuite amy_ch2_v11:
         click "C 真结局：人间"
         skip until screen "amy_v11_fusion"
         click "继续"
-        if eval renpy.loadable("amy_private/ch2_memory_poster.png"):
-            skip until screen "amy_ch2_memory"
-            click "继续"
+        skip until screen "amy_ch2_fullscreen_poster"
+        click "继续"
         if eval renpy.loadable("amy_private/ch2_memory_ending.png"):
             skip until screen "amy_ch2_memory"
             click "继续"
@@ -546,9 +542,8 @@ testsuite amy_ch2_v11:
         click "C 真结局：人间"
         skip until screen "amy_v11_fusion"
         click "继续"
-        if eval renpy.loadable("amy_private/ch2_memory_poster.png"):
-            skip until screen "amy_ch2_memory"
-            click "继续"
+        skip until screen "amy_ch2_fullscreen_poster"
+        click "继续"
         if eval renpy.loadable("amy_private/ch2_memory_ending.png"):
             skip until screen "amy_ch2_memory"
             click "继续"
@@ -651,9 +646,8 @@ testsuite amy_ch2_v11:
         click "C 真结局：人间"
         skip until screen "amy_v11_fusion"
         click "继续"
-        if eval renpy.loadable("amy_private/ch2_memory_poster.png"):
-            skip until screen "amy_ch2_memory"
-            click "继续"
+        skip until screen "amy_ch2_fullscreen_poster"
+        click "继续"
         if eval renpy.loadable("amy_private/ch2_memory_ending.png"):
             skip until screen "amy_ch2_memory"
             click "继续"
