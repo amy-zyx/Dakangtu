@@ -63,6 +63,29 @@ image amy_ch2_memory_rules = Transform(Composite(
 
 image amy_ch2_memory_poster = "images/cg/amy_v11/reality_memory_poster.png"
 
+default amy_ch2_wechat_unlocked = False
+
+label amy_wechat_unlock:
+    $ amy_ch2_wechat_unlocked = False
+    menu:
+        "输入你的四位数生日，解锁特殊截图。"
+
+        "输入解锁密码":
+            $ amy_ch2_wechat_unlocked = renpy.input("请输入四位数生日（月日），输入完按 Enter。", allow="0123456789", length=4, mask="*") == "1028"
+            if not amy_ch2_wechat_unlocked:
+                centered "密码不正确。本章将跳过微信截图。"
+
+        "跳过":
+            pass
+    return
+
+init python:
+    def amy_ch2_memory_available(which):
+        return which == "poster" or (
+            amy_ch2_wechat_unlocked
+            and renpy.loadable("amy_private/ch2_memory_" + which + ".png")
+        )
+
 screen amy_ch2_fullscreen_poster():
     modal True
     zorder 110
@@ -104,7 +127,7 @@ screen amy_ch2_memory(title, artwork, source_width, whole=False):
     key "K_RETURN" action Return()
 
 label amy_ch2_show_memory(which):
-    if which == "poster" or renpy.loadable("amy_private/ch2_memory_" + which + ".png"):
+    if amy_ch2_memory_available(which):
         scene black
         with dissolve
         if which == "space":

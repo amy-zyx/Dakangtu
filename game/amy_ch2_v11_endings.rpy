@@ -23,7 +23,7 @@ label amy_v11_friends:
     call screen amy_v11_fusion("三份记忆，各自的世界")
     call amy_v11_stage("car")
     $ amy_v11_emote("jack", "thoughtful")
-    jack "Amy，我想回北京。想了很久，今天终于能把这句话说出来。"
+    jack "Ami，我想回北京。想了很久，今天终于能把这句话说出来。"
     $ amy_v11_emote("ami", "thoughtful")
     amy_v11_amy "嗯。我会留在奥克兰。这里有我想继续过下去的生活。"
     narrator "车里安静了一会儿。我以为我会急着说点什么，后来发现，我们都只是在等对方把这句话说完。"

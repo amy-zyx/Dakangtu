@@ -380,7 +380,7 @@ screen main_menu():
         xcenter 0.75
         ypos 0.75
         spacing 12
-        text _("女生视角 Amy") xalign 0.5 size 42
+        text _("女生视角 Ami") xalign 0.5 size 42
         textbutton _("第一章：穿越时空的见面"):
             xalign 0.5
             action Start("amy_act2")

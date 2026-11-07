@@ -63,6 +63,7 @@ label amy_act2:
     with fade
 
     centered "第一章\n穿越时空的见面"
+    call amy_wechat_unlock
     centered "{size=+10}一见如故旧，丝麟酌流霞。{/size}"
 
     scene amy_driving_sunset
@@ -102,7 +103,7 @@ label amy_act2:
 
     narrator "我从来没想过，我真的会见到他。"
 
-    if renpy.loadable("amy_private/dinner.png"):
+    if amy_ch2_wechat_unlocked and renpy.loadable("amy_private/dinner.png"):
         scene black
         show amy_dinner_chat at truecenter
         with dissolve
@@ -212,7 +213,7 @@ label amy_act2:
     narrator "我还会再见到他吗？"
     narrator "不知道。但至少下次见面，他就不再是个陌生人了。"
 
-    if renpy.loadable("amy_private/after_dinner.png"):
+    if amy_ch2_wechat_unlocked and renpy.loadable("amy_private/after_dinner.png"):
         scene black
         show amy_after_dinner_chat at truecenter
         with dissolve

@@ -2,16 +2,16 @@
 image amy_v11_ami = "images/characters/ami/amy_ch2_smile_hd.png"
 image amy_v11_jack = amy_jack_with_cross("images/characters/jack/amy_ch2_curious_extended.png")
 
-define amy_v11_amy = Character("Amy", color="#a8d9c5")
+define amy_v11_amy = Character("Ami", color="#a8d9c5")
 define amy_v11_member = Character("社员", color="#d7d4ff")
 define amy_v11_guitar_senior = Character("吉他社学姐", color="#d7d4ff")
 define amy_v11_child = Character("小孩", color="#f5d9ad")
 define amy_v11_worker = Character("工人", color="#cfdae5")
 define amy_v11_sisyphus = Character("西西弗斯", color="#d6c1a0")
 
-define amy_v11_amy_message = Character("Amy  消息", color="#a8d9c5")
+define amy_v11_amy_message = Character("Ami  消息", color="#a8d9c5")
 define amy_v11_jack_message = Character("Jack  消息", color="#b7d9ff")
-define amy_v11_amy_memory = Character("Amy  回忆", color="#a8d9c5")
+define amy_v11_amy_memory = Character("Ami  回忆", color="#a8d9c5")
 
 default amy_v11_style = "date"
 default amy_v11_scene = "car"
@@ -401,7 +401,7 @@ label amy_v11_stage(background, style="date", actors=True):
     return
 
 label amy_v11_memory(which, restore=True):
-    if which == "poster" or renpy.loadable("amy_private/ch2_memory_" + which + ".png"):
+    if amy_ch2_memory_available(which):
         $ amy_v11_ambience()
         scene black
         with dissolve

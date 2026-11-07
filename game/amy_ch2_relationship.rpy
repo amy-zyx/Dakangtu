@@ -7,7 +7,7 @@ define amy_v12_rewards = {'cocktail': {'让 Jack 选一杯 Surprise Me': {'luck'
  'time_welcome': {'陪她去吉他社试听': {'love': 5},
                   '先带她办完新生手续': {'wisdom': 5, 'love': 3},
                   '带她走滑板社发现的校园近路': {'luck': 5}},
- 'space_paris': {'带 Amy 去挑一件巴黎的小礼物': {'love': 5},
+ 'space_paris': {'带 Ami 去挑一件巴黎的小礼物': {'love': 5},
                  '去左岸书店，各选一本书交换': {'wisdom': 5, 'love': 3},
                  '跟着街头音乐随机拐进一条小巷': {'luck': 5}},
  'space_market': {'先保护本金，再争取收益': {'wisdom': 5, 'love': 3},
@@ -34,7 +34,8 @@ define amy_v12_choice_aliases = {'cocktail': {'surprise': '让 Jack 选一杯 Su
                'failed': '自己试了半天没找到',
                'solve': '两个人一起寻找机关',
                'ask': '直接请工作人员打开',
-               'fail': '自己试了半天没找到'}}
+               'fail': '自己试了半天没找到'},
+ 'space_paris': {'带 Amy 去挑一件巴黎的小礼物': '带 Ami 去挑一件巴黎的小礼物'}}
 
 define amy_v12_true_love_min = 86
 define amy_v12_friends_wisdom_min = 81

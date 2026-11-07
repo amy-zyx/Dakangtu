@@ -31,8 +31,38 @@ testsuite amy_ch2_v11:
         $ renpy.save_persistent()
         exit
 
+    testcase wechat_unlock:
+        parameter mode = ["skip", "correct", "wrong"]
+        parameter chapter = ["amy_act2", "amy_act3"]
+        run Start(chapter)
+        skip until screen "choice"
+        if eval mode == "skip":
+            click "跳过"
+        else:
+            click "输入解锁密码"
+            skip until screen "input"
+            keysym "K_1"
+            keysym "K_0"
+            keysym "K_2"
+            if eval mode == "correct":
+                keysym "K_8"
+            else:
+                keysym "K_9"
+            keysym "K_RETURN"
+            if eval mode == "wrong":
+                assert "密码不正确。本章将跳过微信截图。"
+        if eval chapter == "amy_act2":
+            skip until "下了班，我开车从 City 出发。在路上，我一直在想等会儿要见的那个人。"
+        else:
+            skip until screen "amy_v11_drinks"
+        assert eval amy_ch2_wechat_unlocked == (mode == "correct")
+        assert eval amy_ch2_memory_available("poster")
+        assert eval all(amy_ch2_memory_available(which) == (mode == "correct" and renpy.loadable("amy_private/ch2_memory_" + which + ".png")) for which in ("time", "space", "rules", "ending"))
+
     testcase order_0:
         run Start("amy_v11_start")
+        skip until screen "choice"
+        click "跳过"
         skip until screen "amy_v11_drinks"
         click "看完酒单，选择酒款"
         skip until screen "amy_v11_choice"
@@ -45,7 +75,7 @@ testsuite amy_ch2_v11:
         click "时间：如果我们十八岁就相遇"
         skip until screen "amy_v11_choice"
         click "陪她去吉他社试听"
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -61,11 +91,11 @@ testsuite amy_ch2_v11:
         assert eval not renpy.get_screen("amy_ch2_world_stage", layer="screens")
         skip until screen "amy_v11_choice"
         click "空间：一秒到任何地方"
-        if eval renpy.loadable("amy_private/ch2_memory_space.png"):
+        if eval amy_ch2_memory_available("space"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_choice"
-        click "带 Amy 去挑一件巴黎的小礼物"
+        click "带 Ami 去挑一件巴黎的小礼物"
         skip until screen "amy_v11_choice"
         click "先保护本金，再争取收益"
         skip until screen "amy_v11_choice"
@@ -89,7 +119,7 @@ testsuite amy_ch2_v11:
         click "移走石头，邀请他探索世界"
         skip until screen "amy_v11_choice"
         click "平等权限，各自拥有独立项目"
-        if eval renpy.loadable("amy_private/ch2_memory_rules.png"):
+        if eval amy_ch2_memory_available("rules"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -108,7 +138,7 @@ testsuite amy_ch2_v11:
         click "时间：如果我们十八岁就相遇【已收藏】"
         skip until screen "amy_v11_choice"
         click "陪她去吉他社试听"
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -128,7 +158,7 @@ testsuite amy_ch2_v11:
         click "继续"
         skip until screen "amy_ch2_fullscreen_poster"
         click "继续"
-        if eval renpy.loadable("amy_private/ch2_memory_ending.png"):
+        if eval amy_ch2_memory_available("ending"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_continue_story"
@@ -141,6 +171,8 @@ testsuite amy_ch2_v11:
 
     testcase order_1:
         run Start("amy_v11_start")
+        skip until screen "choice"
+        click "跳过"
         skip until screen "amy_v11_drinks"
         click "看完酒单，选择酒款"
         skip until screen "amy_v11_choice"
@@ -153,7 +185,7 @@ testsuite amy_ch2_v11:
         click "时间：如果我们十八岁就相遇"
         skip until screen "amy_v11_choice"
         click "陪她去吉他社试听"
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -175,7 +207,7 @@ testsuite amy_ch2_v11:
         click "移走石头，邀请他探索世界"
         skip until screen "amy_v11_choice"
         click "平等权限，各自拥有独立项目"
-        if eval renpy.loadable("amy_private/ch2_memory_rules.png"):
+        if eval amy_ch2_memory_available("rules"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -191,11 +223,11 @@ testsuite amy_ch2_v11:
         assert eval not renpy.get_screen("amy_ch2_world_stage", layer="screens")
         skip until screen "amy_v11_choice"
         click "空间：一秒到任何地方"
-        if eval renpy.loadable("amy_private/ch2_memory_space.png"):
+        if eval amy_ch2_memory_available("space"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_choice"
-        click "带 Amy 去挑一件巴黎的小礼物"
+        click "带 Ami 去挑一件巴黎的小礼物"
         skip until screen "amy_v11_choice"
         click "先保护本金，再争取收益"
         skip until screen "amy_v11_choice"
@@ -216,7 +248,7 @@ testsuite amy_ch2_v11:
         click "时间：如果我们十八岁就相遇【已收藏】"
         skip until screen "amy_v11_choice"
         click "陪她去吉他社试听"
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -232,7 +264,7 @@ testsuite amy_ch2_v11:
         click "继续"
         skip until screen "amy_ch2_fullscreen_poster"
         click "继续"
-        if eval renpy.loadable("amy_private/ch2_memory_ending.png"):
+        if eval amy_ch2_memory_available("ending"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_continue_story"
@@ -245,6 +277,8 @@ testsuite amy_ch2_v11:
 
     testcase order_2:
         run Start("amy_v11_start")
+        skip until screen "choice"
+        click "跳过"
         skip until screen "amy_v11_drinks"
         click "看完酒单，选择酒款"
         skip until screen "amy_v11_choice"
@@ -255,11 +289,11 @@ testsuite amy_ch2_v11:
         click "两个人一起寻找机关"
         skip until screen "amy_v11_choice"
         click "空间：一秒到任何地方"
-        if eval renpy.loadable("amy_private/ch2_memory_space.png"):
+        if eval amy_ch2_memory_available("space"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_choice"
-        click "带 Amy 去挑一件巴黎的小礼物"
+        click "带 Ami 去挑一件巴黎的小礼物"
         skip until screen "amy_v11_choice"
         click "先保护本金，再争取收益"
         skip until screen "amy_v11_choice"
@@ -279,7 +313,7 @@ testsuite amy_ch2_v11:
         click "时间：如果我们十八岁就相遇"
         skip until screen "amy_v11_choice"
         click "陪她去吉他社试听"
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -301,7 +335,7 @@ testsuite amy_ch2_v11:
         click "移走石头，邀请他探索世界"
         skip until screen "amy_v11_choice"
         click "平等权限，各自拥有独立项目"
-        if eval renpy.loadable("amy_private/ch2_memory_rules.png"):
+        if eval amy_ch2_memory_available("rules"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -320,7 +354,7 @@ testsuite amy_ch2_v11:
         click "时间：如果我们十八岁就相遇【已收藏】"
         skip until screen "amy_v11_choice"
         click "陪她去吉他社试听"
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -336,7 +370,7 @@ testsuite amy_ch2_v11:
         click "继续"
         skip until screen "amy_ch2_fullscreen_poster"
         click "继续"
-        if eval renpy.loadable("amy_private/ch2_memory_ending.png"):
+        if eval amy_ch2_memory_available("ending"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_continue_story"
@@ -349,6 +383,8 @@ testsuite amy_ch2_v11:
 
     testcase order_3:
         run Start("amy_v11_start")
+        skip until screen "choice"
+        click "跳过"
         skip until screen "amy_v11_drinks"
         click "看完酒单，选择酒款"
         skip until screen "amy_v11_choice"
@@ -359,11 +395,11 @@ testsuite amy_ch2_v11:
         click "两个人一起寻找机关"
         skip until screen "amy_v11_choice"
         click "空间：一秒到任何地方"
-        if eval renpy.loadable("amy_private/ch2_memory_space.png"):
+        if eval amy_ch2_memory_available("space"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_choice"
-        click "带 Amy 去挑一件巴黎的小礼物"
+        click "带 Ami 去挑一件巴黎的小礼物"
         skip until screen "amy_v11_choice"
         click "先保护本金，再争取收益"
         skip until screen "amy_v11_choice"
@@ -387,7 +423,7 @@ testsuite amy_ch2_v11:
         click "移走石头，邀请他探索世界"
         skip until screen "amy_v11_choice"
         click "平等权限，各自拥有独立项目"
-        if eval renpy.loadable("amy_private/ch2_memory_rules.png"):
+        if eval amy_ch2_memory_available("rules"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -405,7 +441,7 @@ testsuite amy_ch2_v11:
         click "时间：如果我们十八岁就相遇"
         skip until screen "amy_v11_choice"
         click "陪她去吉他社试听"
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -424,7 +460,7 @@ testsuite amy_ch2_v11:
         click "时间：如果我们十八岁就相遇【已收藏】"
         skip until screen "amy_v11_choice"
         click "陪她去吉他社试听"
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -440,7 +476,7 @@ testsuite amy_ch2_v11:
         click "继续"
         skip until screen "amy_ch2_fullscreen_poster"
         click "继续"
-        if eval renpy.loadable("amy_private/ch2_memory_ending.png"):
+        if eval amy_ch2_memory_available("ending"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_continue_story"
@@ -453,6 +489,8 @@ testsuite amy_ch2_v11:
 
     testcase order_4:
         run Start("amy_v11_start")
+        skip until screen "choice"
+        click "跳过"
         skip until screen "amy_v11_drinks"
         click "看完酒单，选择酒款"
         skip until screen "amy_v11_choice"
@@ -469,7 +507,7 @@ testsuite amy_ch2_v11:
         click "移走石头，邀请他探索世界"
         skip until screen "amy_v11_choice"
         click "平等权限，各自拥有独立项目"
-        if eval renpy.loadable("amy_private/ch2_memory_rules.png"):
+        if eval amy_ch2_memory_available("rules"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -487,7 +525,7 @@ testsuite amy_ch2_v11:
         click "时间：如果我们十八岁就相遇"
         skip until screen "amy_v11_choice"
         click "陪她去吉他社试听"
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -503,11 +541,11 @@ testsuite amy_ch2_v11:
         assert eval not renpy.get_screen("amy_ch2_world_stage", layer="screens")
         skip until screen "amy_v11_choice"
         click "空间：一秒到任何地方"
-        if eval renpy.loadable("amy_private/ch2_memory_space.png"):
+        if eval amy_ch2_memory_available("space"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_choice"
-        click "带 Amy 去挑一件巴黎的小礼物"
+        click "带 Ami 去挑一件巴黎的小礼物"
         skip until screen "amy_v11_choice"
         click "先保护本金，再争取收益"
         skip until screen "amy_v11_choice"
@@ -528,7 +566,7 @@ testsuite amy_ch2_v11:
         click "时间：如果我们十八岁就相遇【已收藏】"
         skip until screen "amy_v11_choice"
         click "陪她去吉他社试听"
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -544,7 +582,7 @@ testsuite amy_ch2_v11:
         click "继续"
         skip until screen "amy_ch2_fullscreen_poster"
         click "继续"
-        if eval renpy.loadable("amy_private/ch2_memory_ending.png"):
+        if eval amy_ch2_memory_available("ending"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_continue_story"
@@ -557,6 +595,8 @@ testsuite amy_ch2_v11:
 
     testcase order_5:
         run Start("amy_v11_start")
+        skip until screen "choice"
+        click "跳过"
         skip until screen "amy_v11_drinks"
         click "看完酒单，选择酒款"
         skip until screen "amy_v11_choice"
@@ -573,7 +613,7 @@ testsuite amy_ch2_v11:
         click "移走石头，邀请他探索世界"
         skip until screen "amy_v11_choice"
         click "平等权限，各自拥有独立项目"
-        if eval renpy.loadable("amy_private/ch2_memory_rules.png"):
+        if eval amy_ch2_memory_available("rules"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -589,11 +629,11 @@ testsuite amy_ch2_v11:
         assert eval not renpy.get_screen("amy_ch2_world_stage", layer="screens")
         skip until screen "amy_v11_choice"
         click "空间：一秒到任何地方"
-        if eval renpy.loadable("amy_private/ch2_memory_space.png"):
+        if eval amy_ch2_memory_available("space"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_choice"
-        click "带 Amy 去挑一件巴黎的小礼物"
+        click "带 Ami 去挑一件巴黎的小礼物"
         skip until screen "amy_v11_choice"
         click "先保护本金，再争取收益"
         skip until screen "amy_v11_choice"
@@ -613,7 +653,7 @@ testsuite amy_ch2_v11:
         click "时间：如果我们十八岁就相遇"
         skip until screen "amy_v11_choice"
         click "陪她去吉他社试听"
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -632,7 +672,7 @@ testsuite amy_ch2_v11:
         click "时间：如果我们十八岁就相遇【已收藏】"
         skip until screen "amy_v11_choice"
         click "陪她去吉他社试听"
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -648,7 +688,7 @@ testsuite amy_ch2_v11:
         click "继续"
         skip until screen "amy_ch2_fullscreen_poster"
         click "继续"
-        if eval renpy.loadable("amy_private/ch2_memory_ending.png"):
+        if eval amy_ch2_memory_available("ending"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_continue_story"
@@ -664,7 +704,7 @@ testsuite amy_ch2_v11:
         run Start("amy_v11_time")
         skip until screen "amy_v11_choice"
         click expression (['陪她去吉他社试听', '先带她办完新生手续', '带她走滑板社发现的校园近路'][a])
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -677,11 +717,11 @@ testsuite amy_ch2_v11:
     testcase branches_space:
         parameter (a, b, c) = [(0, 0, 0), (0, 0, 1), (0, 0, 2), (0, 1, 0), (0, 1, 1), (0, 1, 2), (0, 2, 0), (0, 2, 1), (0, 2, 2), (1, 0, 0), (1, 0, 1), (1, 0, 2), (1, 1, 0), (1, 1, 1), (1, 1, 2), (1, 2, 0), (1, 2, 1), (1, 2, 2), (2, 0, 0), (2, 0, 1), (2, 0, 2), (2, 1, 0), (2, 1, 1), (2, 1, 2), (2, 2, 0), (2, 2, 1), (2, 2, 2)]
         run Start("amy_v11_space")
-        if eval renpy.loadable("amy_private/ch2_memory_space.png"):
+        if eval amy_ch2_memory_available("space"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_choice"
-        click expression (['带 Amy 去挑一件巴黎的小礼物', '去左岸书店，各选一本书交换', '跟着街头音乐随机拐进一条小巷'][a])
+        click expression (['带 Ami 去挑一件巴黎的小礼物', '去左岸书店，各选一本书交换', '跟着街头音乐随机拐进一条小巷'][a])
         $ amy_v11_paris_expected_scene = ("paris_flowers_cg", "paris_books_cg", "paris_music_cg")[a]
         skip until eval amy_v11_scene == amy_v11_paris_expected_scene
         assert eval not amy_v11_actors
@@ -705,7 +745,7 @@ testsuite amy_ch2_v11:
         click expression (['移走石头，邀请他探索世界', '和他一起推一次', '把石头改造成会滚动的音乐舞台'][b])
         skip until screen "amy_v11_choice"
         click expression (['平等权限，各自拥有独立项目', '共同建造一座可以自由进出的家', '让所有居民都能提出修改世界的建议'][c])
-        if eval renpy.loadable("amy_private/ch2_memory_rules.png"):
+        if eval amy_ch2_memory_available("rules"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -718,6 +758,8 @@ testsuite amy_ch2_v11:
     testcase date_choices:
         parameter (drink, book) = [(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2, 2)]
         run Start("amy_v11_start")
+        skip until screen "choice"
+        click "跳过"
         skip until screen "amy_v11_drinks"
         click "看完酒单，选择酒款"
         skip until screen "amy_v11_choice"
@@ -765,7 +807,7 @@ testsuite amy_ch2_v11:
         run Start("amy_v11_time")
         skip until screen "amy_v11_choice"
         click "陪她去吉他社试听"
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -834,7 +876,7 @@ testsuite amy_ch2_v11:
         run Start("amy_v11_time")
         skip until screen "amy_v11_choice"
         click "陪她去吉他社试听"
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -846,7 +888,7 @@ testsuite amy_ch2_v11:
         click "时间：如果我们十八岁就相遇【已收藏】"
         skip until screen "amy_v11_choice"
         click "先带她办完新生手续"
-        if eval renpy.loadable("amy_private/ch2_memory_time.png"):
+        if eval amy_ch2_memory_available("time"):
             skip until screen "amy_ch2_memory"
             click "继续"
         skip until screen "amy_v11_ending_hold"
@@ -975,7 +1017,7 @@ testsuite amy_ch2_v11:
     testcase capped_score_replacement:
         run Start("amy_v11_hub")
         skip until screen "amy_v11_choice"
-        $ amy_ch2_choices = {'cocktail': '让 Jack 选一杯 Surprise Me', 'bookshelf': '两个人一起寻找机关', 'time_welcome': '陪她去吉他社试听', 'space_paris': '带 Amy 去挑一件巴黎的小礼物', 'space_market': '先保护本金，再争取收益', 'space_boundary': '每次出现前先问对方愿不愿意', 'rules_bridge': '建立可重复的物理测试', 'rules_stone': '和他一起推一次', 'rules_contract': '平等权限，各自拥有独立项目'}
+        $ amy_ch2_choices = {'cocktail': '让 Jack 选一杯 Surprise Me', 'bookshelf': '两个人一起寻找机关', 'time_welcome': '陪她去吉他社试听', 'space_paris': '带 Ami 去挑一件巴黎的小礼物', 'space_market': '先保护本金，再争取收益', 'space_boundary': '每次出现前先问对方愿不愿意', 'rules_bridge': '建立可重复的物理测试', 'rules_stone': '和他一起推一次', 'rules_contract': '平等权限，各自拥有独立项目'}
         $ amy_v12_recalculate()
         assert eval amy_ch2_stats["love"] == 100
         $ renpy.test.amy_score_before = dict(amy_ch2_stats)

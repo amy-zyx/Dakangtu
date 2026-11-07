@@ -6,6 +6,7 @@ label amy_v11_start:
     show screen amy_v11_status
     $ amy_v11_play_music("chapter")
     centered "第二章  你眼中的宇宙"
+    call amy_wechat_unlock
     jump amy_v11_date1
 
 label amy_v11_date1:
@@ -617,7 +618,7 @@ label amy_v11_time:
     $ amy_v11_play_music("time")
     $ amy_ch2_selected_route = "time"
     show screen amy_v11_status
-    centered "平行宇宙  十八岁的我们\nJack 20 岁 / Amy 18 岁"
+    centered "平行宇宙  十八岁的我们\nJack 20 岁 / Ami 18 岁"
     call amy_v11_stage("welcome", "campus", actors=True)
     # source:368
     amy_ch2_jack_narrator "二十岁。中山大学。医学院。"
@@ -640,7 +641,7 @@ label amy_v11_time:
     jack "……你叫什么？"
     # source:377
     $ amy_v11_emote("ami", "curious")
-    amy_v11_amy "Amy。怎么了？"
+    amy_v11_amy "Ami。怎么了？"
     # source:378
     $ amy_v11_emote("jack", "curious")
     jack "没什么。就是觉得，我们应该认识。"
@@ -1096,7 +1097,7 @@ label amy_v11_space:
     $ amy_v11_emote("jack", "thoughtful")
     jack "说得好。自由的第一条：允许彼此有自己的十分钟。"
     menu (screen="amy_v11_choice"):
-        "带 Amy 去挑一件巴黎的小礼物":
+        "带 Ami 去挑一件巴黎的小礼物":
             # source:585
             $ amy_v11_emote("jack", "smile")
             jack "想送你一件东西，证明今天不是一场梦。"
@@ -1113,7 +1114,7 @@ label amy_v11_space:
             jack "本来想问你喜欢哪一束。后来想，今天也可以让我猜一次。"
             amy_v11_amy "那你猜中了。等会儿找个能装水的杯子吧，我想让它们多开一会儿。"
             narrator "我低头闻了闻花。包花的纸被风吹得轻轻响，我就这样抱着它，跟他沿着河边慢慢走。"
-            $ amy_v11_choose("space_paris", "love", 5, "带 Amy 去挑一件巴黎的小礼物")
+            $ amy_v11_choose("space_paris", "love", 5, "带 Ami 去挑一件巴黎的小礼物")
         "去左岸书店，各选一本书交换":
             # source:589
             $ amy_v11_emote("ami", "curious")
@@ -1148,7 +1149,7 @@ label amy_v11_space:
             narrator "我闭着眼，用鞋尖跟着拍子。等最后一个音落下去，我们谁也没急着起身。"
             $ amy_v11_choose("space_paris", "luck", 5, "跟着街头音乐随机拐进一条小巷")
     call amy_v11_stage("seine", "date", actors=True)
-    if amy_ch2_choices.get("space_paris") == "带 Amy 去挑一件巴黎的小礼物":
+    if amy_ch2_choices.get("space_paris") in ("带 Ami 去挑一件巴黎的小礼物", "带 Amy 去挑一件巴黎的小礼物"):
         narrator "傍晚坐到河边时，Jack 找来一个盛水的玻璃杯，把那束花放在我们中间。"
     elif amy_ch2_choices.get("space_paris") == "去左岸书店，各选一本书交换":
         jack "先说好，读得慢的人也可以约下一次见面。"
@@ -1562,7 +1563,7 @@ label amy_v11_rules:
     $ amy_v11_emote("ami", "thoughtful")
     amy_v11_amy "我不知道。但我们可以先把房子还给他。"
     $ amy_v11_cue("repair", 0.5)
-    call amy_v11_moment("修复第一栋房屋", "Jack 负责建造，Amy 根据居民路径重排地块。房屋复原，孩子跑回门前。")
+    call amy_v11_moment("修复第一栋房屋", "Jack 负责建造，Ami 根据居民路径重排地块。房屋复原，孩子跑回门前。")
     # source:788
     $ amy_v11_emote("jack", "smile")
     jack "行。造物者第一课：别急着按 Delete。"
@@ -1583,7 +1584,7 @@ label amy_v11_rules:
     amy_v11_amy "Jack，你看前面。桥要塌了，我们先帮桥上的人。"
     $ amy_v11_cue("impact", 0.54)
     with vpunch
-    call amy_v11_moment("镜中桥没有承重", "居民踏上去，桥消失。Amy 及时用临时支架接住桥面。")
+    call amy_v11_moment("镜中桥没有承重", "居民踏上去，桥消失。Ami 及时用临时支架接住桥面。")
     # source:798
     $ amy_v11_emote("ami", "curious")
     amy_v11_amy "你生成的是外观，不是结构。我们需要知道什么东西真的能承重。"
@@ -1595,13 +1596,13 @@ label amy_v11_rules:
     amy_v11_amy "嗯。别人要从这座桥上走过去，我们一起确认它撑得住吧。"
     menu (screen="amy_v11_choice"):
         "建立可重复的物理测试":
-            call amy_v11_moment("建立可重复的物理测试", "Amy 用数据面板测载荷，Jack 根据结果加固桥梁。")
+            call amy_v11_moment("建立可重复的物理测试", "Ami 用数据面板测载荷，Jack 根据结果加固桥梁。")
             $ amy_v11_choose("rules_bridge", "wisdom", 5, "建立可重复的物理测试")
         "先保护居民再试验":
             call amy_v11_moment("先保护居民再试验", "Jack 将居民送至安全区，两人一起重建。")
             $ amy_v11_choose("rules_bridge", "love", 5, "先保护居民再试验")
         "用一次大胆的现场实验":
-            call amy_v11_moment("用一次大胆的现场实验", "Jack 亲自踏上桥，Amy 用应急方块救场；两人相视而笑。")
+            call amy_v11_moment("用一次大胆的现场实验", "Jack 亲自踏上桥，Ami 用应急方块救场；两人相视而笑。")
             $ amy_v11_choose("rules_bridge", "luck", 5, "用一次大胆的现场实验")
     # source:806
     $ amy_v11_emote("jack", "smile")
@@ -1772,7 +1773,7 @@ label amy_v11_rules:
             $ amy_v11_choose("rules_stone", "wisdom", 5, "移走石头，邀请他探索世界")
         "和他一起推一次":
             call amy_v11_stage("mountain_team", "creator")
-            call amy_v11_moment("和他一起推一次", "Jack、Amy 与西西弗斯并肩上山；Jack 体会共同承担并不等于替人决定。")
+            call amy_v11_moment("和他一起推一次", "Jack、Ami 与西西弗斯并肩上山；Jack 体会共同承担并不等于替人决定。")
             $ amy_v11_choose("rules_stone", "love", 5, "和他一起推一次")
         "把石头改造成会滚动的音乐舞台":
             call amy_v11_stage("mountain_music", "creator")
@@ -1906,7 +1907,7 @@ label amy_v11_rules:
             $ amy_v11_choose("rules_contract", "luck", 5, "让所有居民都能提出修改世界的建议")
     # source:945
     $ amy_v11_emote("jack", "curious")
-    jack "Amy，要不要跟我一起创造这个世界？"
+    jack "Ami，要不要跟我一起创造这个世界？"
     # source:946
     $ amy_v11_emote("ami", "smile")
     amy_v11_amy "好啊。我们给每一版留个备份，想试什么就放心去试。"
@@ -2241,5 +2242,5 @@ label amy_v11_true:
     hide screen amy_v11_status
     scene black
     with dissolve
-    centered "下一章  Jack 写给 Amy 的生日快乐"
+    centered "下一章  Jack 写给 Ami 的生日快乐"
     jump act3
