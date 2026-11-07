@@ -2242,5 +2242,5 @@ label amy_v11_true:
     hide screen amy_v11_status
     scene black
     with dissolve
-    centered "下一章  Jack 写给 Ami 的生日快乐"
+    centered "Jack 视角"
     jump act3

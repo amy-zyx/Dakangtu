@@ -30,19 +30,18 @@ label amy_v11_friends:
     jack "那以后，我还能给你发消息吗？"
     $ amy_v11_emote("ami", "smile")
     amy_v11_amy "当然。你到北京的时候，记得跟我说一声。"
-    jack "以朋友的身份？"
-    amy_v11_amy "嗯。以后想起对方，也还是可以打个电话。"
     window hide
     scene expression Transform(amy_v11_friends_cg, size=(1920, 1080)) at amy_v11_slow_camera
     $ amy_v11_collect_cg(amy_v11_friends_cg)
     with dissolve
     pause .6
-    narrator "后来，Jack 回到了北京，我留在奥克兰。各自忙起来以后，我们偶尔才联系一次。"
+    narrator "后来，Jack 回了北京，我留在奥克兰。我把北京加进了手机的天气列表，早上看奥克兰会不会下雨，也顺手看一眼北京。"
+    narrator "有一天，北京预报要降温。我刚想提醒他多穿一点，手机就响了。"
     $ amy_v11_cue("message", .36)
-    amy_v11_jack_message "北京今天难得有这么好的天。你那边呢？"
+    amy_v11_jack_message "今天在北京买了云南小粒咖啡。看到的时候就想，你应该会想尝尝。"
     $ amy_v11_cue("send", .32)
-    amy_v11_amy_message "天快黑了。海港的灯刚亮起来，下次拍给你看。"
-    narrator "我把手机放回窗台。海港吹来一点风，我想，北京那边应该正是下午。"
+    amy_v11_amy_message "那你先替我尝一口。北京明天降温，出门记得带件外套。"
+    narrator "我把手机搁回窗台。奥克兰还在下雨，我给自己也冲了一杯咖啡。"
     window hide
     call screen amy_v11_alternate_ending("一般结局：各自的世界")
     return
